@@ -2,9 +2,9 @@
 
 $sub_transaction_details = mysqli_fetch_assoc($sub_transaction_result);
 // get details about the recipient
-$sql_query1 = "SELECT * FROM sub_transactions WHERE payer_id=\"$user_details[id]\" and status=\"pending\"";
+$sql_query1 = "SELECT * FROM users WHERE id=\"$sub_transaction_details[recipient_id]\" ";
 $recipient_result = mysqli_query($db_connection,$sql_query1);
-if (!$recipient_result) {
+if (!$recipient_result && sqli_num_rows() == 0) {
         log_alert(mysqli_error($db_connection),'error');
 }else{
         $recipient_details = mysqli_fetch_assoc($recipient_result);
@@ -82,17 +82,17 @@ if (!$recipient_result) {
                 <ul class="list-group list-group-flush">
                         <li class="list-group-item">User Details</li>
                         <!-- <li class="list-group-item">username <span> : </span> username</li> -->
-                        <li class="list-group-item">Full Name <span> : </span> <?php echo $user_details['name']. "\t" .$user_details['surname']; ?></li>
-                        <li class="list-group-item">Contact Cell No <span> : </span> <?php echo $user_details['contact_cell']; ?></li>
-                        <li class="list-group-item">Email <span> : </span> <?php echo $user_details['email']; ?></li>
+                        <li class="list-group-item">Full Name <span> : </span> <?php echo $recipient_details['name']. "\t" .$recipient_details['surname']; ?></li>
+                        <li class="list-group-item">Contact Cell No <span> : </span> <?php echo $recipient_details['contact_cell']; ?></li>
+                        <li class="list-group-item">Email <span> : </span> <?php echo $recipient_details['email']; ?></li>
                 </ul>
         </div>
         <div class="card">
                 <ul class="list-group list-group-flush">
                         <li class="list-group-item">Bank Details</li>
-                        <li class="list-group-item">Bank Name <span> : </span> <?php echo $user_details['bank_name']; ?></li>
-                        <li class="list-group-item">Lnked Cell No <span> : </span> <?php echo $user_details['linked_cell']; ?></li>
-                        <li class="list-group-item">Account No <span> : </span> <?php echo $user_details['account_no']; ?></li>
+                        <li class="list-group-item">Bank Name <span> : </span> <?php echo $recipient_details['bank_name']; ?></li>
+                        <li class="list-group-item">Lnked Cell No <span> : </span> <?php echo $recipient_details['linked_cell']; ?></li>
+                        <li class="list-group-item">Account No <span> : </span> <?php echo $recipient_details['account_no']; ?></li>
                 </ul>
         </div>
 

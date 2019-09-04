@@ -27,7 +27,7 @@
                         <div class="row ">
                                 <div class="progress w-100 bg-secondary">
                                 <?php
-                                        $percentage = $main_transaction1_details['completed_sub_transactions']  / $main_transaction1_details['total_sub_transactions'];
+                                        $percentage = $main_transaction1_details['completed_sub_transactions']  / $main_transaction1_details['total_sub_transactions'] * 100;
                                         // $percentage = 50;
                                       echo  "<div class=\"progress-bar text-white\" role=\"progressbar\" style=\"width: $percentage%;\" aria-valuenow=\"$percentage\" aria-valuemin=\"0\" aria-valuemax=\"100\">$percentage%</div>";
                                 ?>
