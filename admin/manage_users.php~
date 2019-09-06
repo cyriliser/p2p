@@ -1,0 +1,85 @@
+<?php
+require_once "../global_functions.php";
+connect_to_db();
+function displayError(){
+	if(isset($_GET['api'])) {
+		
+	}else {
+		echo "
+		<html>
+			<head>
+					<link rel=\"stylesheet\" href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css\" integrity=\"sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T\" crossorigin=\"anonymous\">
+					<script src=\"https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js\" integrity=\"sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM\" crossorigin=\"anonymous\"></script>
+			</head>			
+			<body style='height=100%'>
+				<div class='container'>
+					<div class=\"card text-white bg-info mb-3\" style='margin-top:25%'>
+						  <div class=\"card-header text-center\">Error</div>
+						  <div class=\"card-body\">
+						    <h5 class=\"card-title text-center \">Error processing request</h5>
+						    <p class=\"card-text text-center \">Something that wasnt supposed to happen happened... Ooops, please contact server admin</p>
+						  </div>
+					</div>
+					<div>
+						<a 'href=/admin'><button class='btn btn-danger w-100'>Back</button></a>
+					</div>
+				<div>
+			</body>
+		</html>
+		";
+	}
+}
+
+if(isset($_GET['activate_ref'])) {
+	$id = $_GET['user_id'];
+	$query = "select * from refs where id=$id";
+	$result = mysqli_query($db_connection,$query);
+	if($result){
+		$data = mysqli_fetch_row($result);
+		// Move user to users table
+		$query = $query = "INSERT into users (username, email, password, name, surname, date_of_birth, contact_cell, bank_name, account_no, linked_cell) 
+        				VALUES ('$data[1]', '$data[2]', '".$data[3]."', '$data[4]', '$data[5]', '$data[6]','$data[7]', '$data[8]', '$data[9]', '$data[10]')";
+		echo "<script>alert('$query')</script>";
+		if(mysqli_query($db_connection,$query)) {			
+			$query = "delete from refs where id = ".$data[0];
+			if(!mysqli_query($db_connection,$query)) {
+				echo "<script>alert('Error removing user from references, please delete user using delete button')</script>";
+			}
+		}else {
+			displayError();
+		}
+	}else {
+		displayError();
+	}
+
+}
+
+if(isset($_GET['delete_ref'])) {
+	$id = $_GET['user_id'];
+	$query = "delete from refs where id=$id";
+	$result = mysqli_query($db_connection,$query);
+	if(!$result){
+		displayError();
+	}
+
+
+}
+
+if(isset($_GET['verify_user'])){
+	displayError();
+}
+
+if(isset($_GET['delete_user'])){
+	$id = $_GET['user_id'];
+	$query = "delete from users where id=$id";
+	$result = mysqli_query($db_connection,$query);
+	if(!$result) {
+		displayError();
+	}
+
+}
+
+// If something weird happens
+
+//header("Location: /admin");
+?>

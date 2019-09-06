@@ -1,0 +1,11 @@
+<?php
+
+function connectdb() {
+	$server = 'localhost';
+	$username = 'nhlaluko'
+	$password = 'mysql_password';
+	$link = mysql_connect($server, $username, $password);
+	return $link;
+}
+
+?>

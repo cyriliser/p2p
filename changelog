@@ -1,0 +1,30 @@
+Changes Log
+
+*******Added files*********
+
+* bootstrap css and js
+/admin/
+- index.php
+- manage_users.php
+
+
+************Modified files*******
+
+/login
+- registration.php
+25 to 51
+118 to 124
+
+
+- login.php: line
+27 : fix mysql to mysqli
+34 to 38
+
+/dashboard: line
+
+40 to 49
+
+49 to 80 : optimised code - removed ifs and used a switch instead
+
+Added File: /dashboard/components/pay_reference.php
+
