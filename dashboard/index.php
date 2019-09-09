@@ -11,7 +11,7 @@ include("../login/auth.php");
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
-  <meta name="author" content="">
+  <meta name="author" content="Nhlaluko" >
 
   <title>Home Page</title>
 
@@ -63,7 +63,6 @@ include("../login/auth.php");
         </div>
         <div class="divider-custom-line"></div>
       </div>
-
     </div>
   </header>
 <div class="form">
