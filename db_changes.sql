@@ -44,7 +44,7 @@ create table inbox(
 	foreign key (user_sender) references users(id),
 	foreign key (ref_sender) references refs(id)
 );
-create table adminUserComplaints{
+create table adminUserComplaints(
 	id int not null auto_increment,
 	from_user int,
 	msg varchar(5000),
@@ -53,8 +53,8 @@ create table adminUserComplaints{
 	
 	primary key(id),
 	foreign key(from_user) references users(id)
-};
-create table adminRefsComplaints{
+);
+create table adminRefsComplaints(
 	id int not null auto_increment,
 	from_user int,
 	msg varchar(5000),
@@ -63,4 +63,4 @@ create table adminRefsComplaints{
 	
 	primary key(id),
 	foreign key(from_user) references refs(id)
-};
+);
