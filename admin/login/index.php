@@ -1,6 +1,6 @@
 <?php
 //include auth.php file on all secure pages
-include("auth.php");
+require_once("auth.php");
 ?>
 <!DOCTYPE html>
 <html>
