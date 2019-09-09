@@ -31,18 +31,17 @@ function displayError($msg){
 }
 
 if(isset($_GET['activate_ref'])) {
-	/*Check if person activating is admin or referer*/
-	
-	
-	
-	
-	
-	
-	$id = $_GET['user_id'];
+	/*Check if person activating is admin or referer*/	
+	$id = $_GET['user_id']; // The user to be activated
 	$query = "select * from refs where id=$id";
 	$result = mysqli_query($db_connection,$query);
 	if($result){
 		$data = mysqli_fetch_row($result);
+		/*We now have referer id (current logged in user and refered user id)*/
+		if($_SESSION['user_id'] != $data[11]) {
+			// They don't have autorisation to activate the user
+			header("Location: ".$base_url."/dashboard?inbox");
+		}
 		// Move user to users table
 		$query = "INSERT into users (username, email, password, name, surname, date_of_birth, contact_cell, bank_name, account_no, linked_cell) 
         				VALUES ('$data[1]', '$data[2]', '".$data[3]."', '$data[4]', '$data[5]', '$data[6]','$data[7]', '$data[8]', '$data[9]', '$data[10]')";

@@ -14,7 +14,7 @@ include("auth.php");
 <p>Welcome <?php echo $_SESSION['username']; ?>!</p>
 <p>user id is: <?php echo $_SESSION['user_id']; ?>!</p>
 <p>Thank you for joining us</p>
-<p><a href="/sites/p2p/dashboard">Dashboard</a></p>
+<p><a href="/dashboard">Dashboard</a></p>
 <a href="logout.php">Logout</a>
 </div>
 </body>
