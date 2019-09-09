@@ -1,7 +1,7 @@
 <?php
 include('admin_nav.php');
-include('db.php');
-
+require_once("../global_functions.php");
+connect_to_db();
     
 //process a transaction
 if (isset($_POST["submit"])) {
@@ -110,18 +110,18 @@ if (isset($_POST["submit"])) {
                                     <tbody>
 									<?php
 										$sql_query_pending_trans = "SELECT * FROM transactions WHERE status='pending' ";
-										$result_p_t = mysqli_query($con,$sql_query_pending_trans);
+										$result_p_t = mysqli_query($db_connection,$sql_query_pending_trans);
 										if (!$result_p_t) {
-										echo mysqli_error($con);
+										echo mysqli_error($db_connection);
 										} else {
 											while ($row = mysqli_fetch_assoc($result_p_t)){
 												
 												foreach($row as $x => $x_value) {
 													if($x == 'recipient_id'){
 														$sql_query_person = "SELECT * FROM users WHERE id ='".$x_value."' ";
-														$result_person = mysqli_query($con,$sql_query_person);
+														$result_person = mysqli_query($db_connection,$sql_query_person);
 														if (!$result_person) {
-															echo mysqli_error($con);
+															echo mysqli_error($db_connection);
 														} else {
 															$person = mysqli_fetch_assoc($result_person);
 															echo "<tr>
@@ -174,18 +174,18 @@ if (isset($_POST["submit"])) {
 									
                                         <?php
 										$sql_query_pending_trans = "SELECT * FROM transactions WHERE status='completed' ";
-										$result_p_t = mysqli_query($con,$sql_query_pending_trans);
+										$result_p_t = mysqli_query($db_connection,$sql_query_pending_trans);
 										if (!$result_p_t) {
-										echo mysqli_error($con);
+										echo mysqli_error($db_connection);
 										} else {
 											while ($row = mysqli_fetch_assoc($result_p_t)){
 												
 												foreach($row as $x => $x_value) {
 													if($x == 'recipient_id'){
 														$sql_query_person = "SELECT * FROM users WHERE id ='".$x_value."' ";
-														$result_person = mysqli_query($con,$sql_query_person);
+														$result_person = mysqli_query($db_connection,$sql_query_person);
 														if (!$result_person) {
-															echo mysqli_error($con);
+															echo mysqli_error($db_connection);
 														} else {
 															$person = mysqli_fetch_assoc($result_person);
 															echo "<tr>
