@@ -1,6 +1,5 @@
 <?php
-require_once("login/auth.php");
-require_once("../global_functions.php");
+include("auth.php");
 ?>
 <!DOCTYPE html>
 
@@ -13,34 +12,26 @@ require_once("../global_functions.php");
     <link href="assets/css/bootstrap.css" rel="stylesheet" />
     <!-- FONTAWESOME STYLES-->
     <link href="assets/css/font-awesome.css" rel="stylesheet" />
-    <!--CUSTOM BASIC STYLES-->
+       <!--CUSTOM BASIC STYLES-->
     <link href="assets/css/basic.css" rel="stylesheet" />
     <!--CUSTOM MAIN STYLES-->
     <link href="assets/css/custom.css" rel="stylesheet" />
     <!-- GOOGLE FONTS-->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
-    <!-- custome css -->
-    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
     <div id="wrapper">
-        <!-- top navbar -->
         <nav class="navbar navbar-default navbar-cls-top " role="navigation" style="margin-bottom: 0">
-            <!-- top navbar -->
             <div class="navbar-header">
-                <!-- button for toggling navvigation -->
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-
-                <!-- navbar brand / site name / links to homepage  -->
-                <a class="navbar-brand" href="<?php echo $admin_url; ?>">Cash Bankers</a>
+                <a class="navbar-brand" href="index.php">Cash Bankers</a>
             </div>
 
-            <!-- top right navbar -->
             <div class="header-right">
 
                 <a href="message-task.html" class="btn btn-info" title="New Message"><b>30 </b><i class="fa fa-envelope-o fa-2x"></i></a>
@@ -49,43 +40,21 @@ require_once("../global_functions.php");
 
             </div>
         </nav>
-        <!-- /. NAV TOP END  -->
-
-        <!-- SIDE NAVBAR -->
+        <!-- /. NAV TOP  -->
         <nav class="navbar-default navbar-side" role="navigation">
             <div class="sidebar-collapse">
-                <!-- SIDE NAVBAR ITEMS  -->
                 <ul class="nav" id="main-menu">
-                    <!-- LOGGED IN ADMIN NAME -->
 					<li>
                         <div class="user-img-div">
-                            <div class="user-img-div inner-text" style="display:flex !important;">
+                            <div class="user-img-div inner-text">
                                 <h4><i class="fa fa-sign-in "></i>   Administrator: <?php echo $_SESSION['username']; ?></h4>
-                                <a href="<?php echo $admin_url; ?>/login/logout.php" class="btn btn-primary btn-sm " style="margin-bottom:30px !important; margin-top:15px !important;" >LogOut</a>
                             </div>
                         </div>
+
                     </li>
-                    <!--DASHBOARD LINK  -->
                     <li>
-                        <a class="active-menu" href="<?php echo $admin_url; ?>"><i class="fa fa-dashboard "></i>Dashboard</a>
+                        <a class="active-menu" href="index.php"><i class="fa fa-dashboard "></i>Dashboard</a>
                     </li>
-                    <!--ASSIGN INFO USERS LINK  -->
-                    <li>
-                        <a class="" href="<?php echo $admin_url; ?>/assign_info.php"><i class="fa fa-dashboard "></i>Assign Info</a>
-                    </li>
-                    <!--ASSIGN  USERS LINK  -->
-                    <li>
-                        <a class="" href="<?php echo $admin_url; ?>/assign_select_reciever.php"><i class="fa fa-dashboard "></i>Assign Users</a>
-                    </li>
-                    <!--USERS LINK  -->
-                    <li>
-                        <a class="" href="<?php echo $admin_url; ?>/users.php"><i class="fa fa-dashboard "></i>Users</a>
-                    </li>
-                    <!--Transactions LINK  -->
-                    <li>
-                        <a class="" href="<?php echo $admin_url; ?>/transactions.php"><i class="fa fa-dashboard "></i>Transactions</a>
-                    </li>
-                    <!-- SETTINGS ITEMS OPENS UP INTO MORE ITEMS -->
                     <li>
                         <a href="#"><i class="fa fa-desktop "></i>Settings <span class="fa arrow"></span></a>
                          <ul class="nav nav-second-level">
@@ -112,11 +81,12 @@ require_once("../global_functions.php");
                             </li>
                              <li>
                                 <a href="grid.html"><i class="fa fa-eyedropper "></i>Grid</a>
-                            </li>    
+                            </li>
+                            
+                           
                         </ul>
                     </li>
-                    <!-- MANAGE USERS -->
-                    <li>
+                     <li>
                         <a href="#"><i class="fa fa-yelp "></i>Manage Users <span class="fa arrow"></span></a>
                          <ul class="nav nav-second-level">
                             <li>
@@ -137,6 +107,7 @@ require_once("../global_functions.php");
                         </ul>
                     </li>
                 </ul>
+
             </div>
 
         </nav>

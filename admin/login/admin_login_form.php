@@ -4,13 +4,13 @@
     <title>Admin Login</title>
 
     <!-- BOOTSTRAP STYLES-->
-    <link href="../assets/css/bootstrap.css" rel="stylesheet" />
+    <link href="assets/css/bootstrap.css" rel="stylesheet" />
     <!-- FONTAWESOME STYLES-->
-    <link href="../assets/css/font-awesome.css" rel="stylesheet" />
-    <!--CUSTOM BASIC STYLES-->
-    <link href="../assets/css/basic.css" rel="stylesheet" />
+    <link href="assets/css/font-awesome.css" rel="stylesheet" />
+       <!--CUSTOM BASIC STYLES-->
+    <link href="assets/css/basic.css" rel="stylesheet" />
     <!--CUSTOM MAIN STYLES-->
-    <link href="../assets/css/custom.css" rel="stylesheet" />
+    <link href="assets/css/custom.css" rel="stylesheet" />
     <!-- GOOGLE FONTS-->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
 </head>
@@ -24,14 +24,14 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="<?php echo $base_url; ?>">Cash Bankers</a>
+                <a class="navbar-brand" href="index.php">Cash Bankers</a>
             </div>
         </nav>
 	</div>
          <div class="row ">
                <div class="row">
                     <div class="col-md-12" align="center">
-                        <h1 class="page-head-line">ADMIN LOGIN</h1>
+                        <h1 class="page-head-line">LOGIN</h1>
 
                     </div>
                 </div>
@@ -67,5 +67,5 @@
                                      <input name="submit" type="submit" class="btn btn-primary" value="Login" />
                                     <hr />
                                     Not registered ? <a href="admin_registration.php" >click here </a> 
-                                </form>
-                            </div>
+                                    </form>
+									</div>

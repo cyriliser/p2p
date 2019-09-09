@@ -1,7 +1,6 @@
 <?php
 include('admin_nav.php');
-require_once("../global_functions.php");
-connect_to_db();
+include('db.php');
 ?>
         <div id="page-wrapper">
             <div id="page-inner">
@@ -53,9 +52,9 @@ connect_to_db();
 									
                                         <?php
 										$sql_query_pending_trans = "SELECT * FROM users";
-										$result_p_t = mysqli_query($db_connection,$sql_query_pending_trans);
+										$result_p_t = mysqli_query($con,$sql_query_pending_trans);
 										if (!$result_p_t) {
-										echo mysqli_error($db_connection);
+										echo mysqli_error($con);
 										} else {
 											while ($row = mysqli_fetch_assoc($result_p_t)){
 															echo "<tr>
