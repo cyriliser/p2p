@@ -84,8 +84,8 @@
                         $user_details_payer = mysqli_fetch_assoc($result_user);
 
                         // get package details
-                        $sql_query_package = "SELECT * FROM packages WHERE id=\"$user_details_payer[selected_package]\"";
-                        $result_package = mysqli_query($db_connection,$sql_query_package);
+                        $sql_query_payer_package = "SELECT * FROM packages WHERE id=\"$user_details_payer[selected_package]\"";
+                        $result_package = mysqli_query($db_connection,$sql_query_payer_package);
                         if (!$result_package) {
                             log_alert(mysqli_error($db_connection));
                         } else {
@@ -217,26 +217,37 @@
                                     $reciepient_details196 = mysqli_fetch_assoc($result196);
                                     // log_alert1($reciepient_details196['id']);
                                     //get package details of recipient
-                                    $sql_query16 = " SELECT * FROM packages WHERE id=\"$reciepient_details196[selected_package]\"";
-                                    $result16 = mysqli_query($db_connection,$sql_query16);
-                                    if (!$result16) {
-                                        log_alert(mysqli_error($db_connection),"error");
+                                    // TODO: get payer details
+                                    $query_query_payer = "SELECT * FROM users WHERE id=\"$sub_transaction8_details[payer_id]\" ";
+                                    $result_payer = mysqli_query($db_connection,$query_query_payer);
+                                    if (!$result_payer) {
+                                        log_alert(mysqli_error($db_connection));
                                     } else {
-                                        $package_details = mysqli_fetch_assoc($result16);
-                                        
-                                        // make insert query
-                                        // add main transaction for user
-                                        $sql_query14 = "INSERT INTO transactions (recipient_id, transaction_package_id, recieved_amount, total_return_amount, completed_sub_transactions, status) VALUES ( \"$sub_transaction8_details[payer_id]\", \"$package_details[id]\", \"0\", \"$package_details[return_amount]\", \"0\", \"pending\" )";
-                                        log_alert($sql_query14);
-                                        $result14 = mysqli_query($db_connection,$sql_query14);
-                                        if (!$result14) {
-                                            log_alert(mysqli_error($db_connection));
-                                        } else {
-                                            log_alert("successfully added","success");
-                                        }
-                                        
+                                        $payer_details = mysqli_fetch_assoc($result_payer); 
 
+                                        $sql_query16 = " SELECT * FROM packages WHERE id=\"$payer_details[selected_package]\"";
+                                        $result16 = mysqli_query($db_connection,$sql_query16);
+                                        if (!$result16) {
+                                            log_alert(mysqli_error($db_connection),"error");
+                                        } else {
+                                            $package_details = mysqli_fetch_assoc($result16);
+                                            
+                                            // make insert query
+                                            // add main transaction for user
+                                            $sql_query14 = "INSERT INTO transactions (recipient_id, transaction_package_id, recieved_amount, total_return_amount, completed_sub_transactions, status) VALUES ( \"$sub_transaction8_details[payer_id]\", \"$package_details[id]\", \"0\", \"$package_details[return_amount]\", \"0\", \"pending\" )";
+                                            log_alert($sql_query14);
+                                            $result14 = mysqli_query($db_connection,$sql_query14);
+                                            if (!$result14) {
+                                                log_alert(mysqli_error($db_connection));
+                                            } else {
+                                                log_alert("successfully added","success");
+                                            }
+                                            
+
+                                        }
                                     }
+                                    
+                                    
                                 } 
                             }
                             

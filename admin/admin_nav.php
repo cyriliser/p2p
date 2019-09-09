@@ -1,6 +1,6 @@
 <nav class="navbar fixed-bottom nav-pills nav-fill nav-justified navbar-dark bg-dark text-white">
     <li class="nav-item">
-        <a class="nav-link active mx-2" href="assign.php">Assign</a>
+        <a class="nav-link active mx-2" href="assign_info.php">Assign Info</a>
     </li>
     <li class="nav-item">
         <a class="nav-link active mx-2" href="transactions.php">Transactions</a>
