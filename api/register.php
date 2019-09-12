@@ -72,9 +72,10 @@ if (isset($_REQUEST['username'])){
     $email = mysqli_real_escape_string($db_connection,$email);
     $valid = validate_data($email,$username);
     if($valid != "") {
-		$_SESSION['taken'] = $valid;
-		header("Location: $base_url/login/registration.php");
- 	 }
+      $_SESSION['taken'] = $valid;
+      header("Location: $base_url/login/registration.php");
+    }
+
     $password = stripslashes($_REQUEST['password']);
     $password = mysqli_real_escape_string($db_connection,$password);
     $name = stripslashes($_REQUEST['name']);
@@ -92,14 +93,20 @@ if (isset($_REQUEST['username'])){
     $cellno2 = stripslashes($_REQUEST['cellphone2']);
     $cellno2 = mysqli_real_escape_string($db_connection,$cellno2);
     $trn_date = date("Y-m-d H:i:s");
-            $query = "INSERT into `users` (username, email, password, name, surname, date_of_birth, contact_cell, bank_name, account_no, linked_cell)
-    VALUES ('$username', '$email', '".md5($password)."', '$name', '$surname', '$date','$cellno', '$bank_name', '$account_no', '$cellno2')";
+    $query = "INSERT into `users` (username, email, password, name, surname, date_of_birth, contact_cell, bank_name, account_no, linked_cell)
+      VALUES ('$username', '$email', '".md5($password)."', '$name', '$surname', '$date','$cellno', '$bank_name', '$account_no', '$cellno2')";
   }
 
   $result = mysqli_query($db_connection,$query);
-  if($result){
+  if(!$result){
+    if (mysqli_errno($db_connection) == 1062){
+      echo "user already exists";
+    }else {
+      echo mysqli_error($db_connection);
+    }
+  }else{
     $_SESSION['registration_successfull'] = true;
-    header("Location: /login/login.php");
+    header("Location: $base_url/login/login.php");
   }
 }
 

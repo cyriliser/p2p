@@ -7,14 +7,14 @@ $username = $_SESSION['username'];
 
 function sendMsg($receiver,$sender) {
 	global $user_id,$username,$db_connection;
-	$msg = addslashes("<a href='/api/reference_manager.php?confirm=$sender'>Confirm payment for $username</a>");
+	$msg = addslashes("<a href='$base_url/api/reference_manager.php?confirm=$sender'>Confirm payment for $username</a>");
 	$date = date("Y-m-d H:i:s");
 	$query = "insert into inbox (owner,ref_sender,msg,opened,date_received) values ('".$receiver."' , '".$user_id."' , '".$msg."',0,'".$date."')";
 	if(!mysqli_query($db_connection,$query)) {
 		echo "$query";
 		//header("Location: /dashboard?msgError");
 	}else {
-		header("Location: /dashboard?msgSent");
+		header("Location: ../dashboard?msgSent");
 	}
 }
 

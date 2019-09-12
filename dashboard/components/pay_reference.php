@@ -9,13 +9,13 @@
 		 </div>
 	 </div>
 	 <div class="col text-center my-5">
-	 	<form action="/api/reference_manager.php" class="btn form-control w-25" method="post">
+	 	<form action="../api/reference_manager.php" class="btn form-control w-25" method="post">
 	 		<input type="submit" class="btn btn-info" name="action" value="Request activation from user" />
 	 		<input type="hidden" value="<?php echo $_SESSION['ref_user_id'];?>" name="to" />
 	 		<input type="hidden" name="send_user_msg"/>
 	 	</form>
 	 	
-	 	<form action="/api/reference_manager.php" method="post" class="btn form-control w-25">
+	 	<form action="../api/reference_manager.php" method="post" class="btn form-control w-25">
 	 		<input type="submit" class="btn btn-danger" name="action" value="Request activation from admin" />
 	 		<input type="hidden" value="<?php echo $_SESSION['ref_user_id'];?>" name="to" />
 	 		<input type="hidden" name="send_admin_msg"/>

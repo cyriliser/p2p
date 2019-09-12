@@ -1,7 +1,9 @@
 <?php
-session_start();
+// session_start(); session is started on auth.php
 //include auth.php file on all secure pages
 include("auth.php");
+require_once("../config/config.php");
+require_once("../global_functions.php");
 ?>
 <!DOCTYPE html>
 <html>
@@ -18,7 +20,7 @@ include("auth.php");
 					echo "user id is:".$_SESSION['user_id']; 
 		?>!</p>
 		<p>Thank you for joining us</p>
-		<p><a href="/dashboard">Dashboard</a></p>
+		<p><a href="<?php echo $base_url; ?>/dashboard">Dashboard</a></p>
 		<a href="logout.php">Logout</a>
 	</div>
 	</body>

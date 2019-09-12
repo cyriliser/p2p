@@ -131,7 +131,7 @@ connect_to_db();
         <div class="col-lg-8 mx-auto">
 			<!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
 			<h1>Personal Details</h1>
-			<form name="sentMessage" method="post" action="/api/register.php" id="contactForm" novalidate="novalidate">
+			<form name="sentMessage" method="post" action="../api/register.php" id="contactForm" novalidate="novalidate">
 				<div class="control-group">
 				<div class="form-group floating-label-form-group controls mb-0 pb-2">
 					<label>Username</label>

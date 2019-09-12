@@ -30,7 +30,7 @@ if(isset($_SESSION['username']))
 		?>
 		<div class="form">
 			<h1>Log In</h1>
-			<form action="/api/login.php" method="post" name="login">
+			<form action="../api/login.php" method="post" name="login">
 				<input type="text" name="username" placeholder="Username" required />
 				<input type="password" name="password" placeholder="Password" required />
 				<input name="submit" type="submit" value="Login" />
