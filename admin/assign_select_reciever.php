@@ -42,7 +42,7 @@
                                     <tbody>
                                             <?php 
                                                 // get all pending main transactions
-                                                $query_info_main = "SELECT * FROM transactions WHERE status='pending'";
+                                                $query_info_main = "SELECT * FROM transactions WHERE status='pending' and total_sub_transactions='0' ";
                                                 $result_info_main = mysqli_query($db_connection,$query_info_main);
                                                 if (!$result_info_main) {
                                                     echo log_alert($db_connection,"error");
