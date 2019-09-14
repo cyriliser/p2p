@@ -129,20 +129,59 @@
         }
 
         // payers to others
+        function payers_to_others(){
+            global $message;
+            // check if submit value is payers_to_others
+            if ($_POST['submit'] == "payers_to_others") {
+                $selected_payers = $_POST['selected_payers'];
+                // $receive_amount = $_POST['new_package_amount'];
+
+                // check if there is any selected payers
+                if (count($selected_payers) >=1 ) {
+                    // loop through selected payers
+                    foreach ($selected_payers as $index => $payer_id) {
+                        // get user details
+                        $payer_details = get_assoc_user_details($payer_id);
+                        if (change_user_status($payer_id,0)) {
+                            array_push($message,"successfully moved to others");
+                        }                        
+                    }
+                } else {
+                    array_push($message,"Please select 1 or more payers");
+                }
+                
+                // array_push($message,"payers to recievers");
+
+                
+            } else {
+                array_push($message,"not payers to recievers");
+            }
+             
+        }
 
 
     // recievers functions
         // move to payers 
+        function recievers_to_payers(){
+
+        }
 
         // move to others
+        function recievers_to_others(){
+            
+        }
 
 
 
     // others functions
         // move to recievers
+        function others_to_payers(){
 
+        }
         // move to payers
+        function others_to_recievers(){
 
+        }
 
 
     // select function to excecute
@@ -155,21 +194,21 @@
                 payers_to_recievers();
                 break;
             case 'payers_to_others':
-                # code...
+                payers_to_others();
                 break;
 
             case 'recievers_to_payers':
-                # code...
+                recievers_to_payers();
                 break;
             case 'recievers_to_others':
-                # code...
+                recievers_to_others();
                 break;
             
             case 'others_to_payers':
-                # code...
+                others_to_payers();
                 break;
             case 'others_to_recievers':
-                # code...
+                others_to_recievers();
                 break;
             
             default:
@@ -209,6 +248,8 @@
             </ul>
 
         </section> -->
+
+        <!-- message -->
         <div class="row">
             <div class="col-md-6">
                 <div class="alert alert-info text-center" role="alert">
