@@ -405,17 +405,23 @@
         </section> -->
 
         <!-- message -->
-        <div class="row">
-            <div class="col-md-6">
-                <div class="alert alert-info text-center" role="alert">
-                    <?php 
-                        foreach ($message as $msg) {
-                            echo "<p>$msg</p>";
-                        }
-                    ?>
+        <?php
+            if (count($message) >= 1) {
+                // close php ?> 
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="alert alert-info text-center" role="alert">
+                            <?php 
+                                foreach ($message as $msg) {
+                                    echo "<p>$msg</p>";
+                                }
+                            ?>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
+                <?php //open php
+            }
+        ?>
 
         <!-- payers -->
         <div class="row">
