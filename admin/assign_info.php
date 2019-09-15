@@ -65,7 +65,12 @@
 
     function get_assoc_package_details_amount($package_amount){
         global $message, $db_connection;
-        $sql_query = "SELECT * FROM packages WHERE return_amount=\"$package_amount\" ";
+        if ($package_amount <= 500) {
+            $sql_query = "SELECT * FROM packages WHERE id='1' ";
+        } else {
+            $sql_query = "SELECT * FROM packages WHERE return_amount=\"$package_amount\" ";
+        }
+        
         $result = mysqli_query($db_connection,$sql_query);
         if (!$result) {
             array_push($message,mysqli_error($db_connection));
@@ -84,6 +89,62 @@
             return mysqli_fetch_assoc($result);
         }
         
+    }
+
+    function get_assoc_pending_transaction_details_rec($recipient_id){
+        global $message, $db_connection;
+        $sql_query = "SELECT * FROM transactions WHERE recipient_id=\"$recipient_id\" AND status='pending'  ";
+        $result = mysqli_query($db_connection,$sql_query);
+        if (!$result) {
+            array_push($message,mysqli_error($db_connection));
+        } else {
+            return mysqli_fetch_assoc($result);
+        }
+    }
+
+    function cancel_sub_transaction($sub_transaction_id){
+        global $message, $db_connection;
+        $sql_query = "UPDATE sub_transactions SET status='canceled' WHERE id=\"$sub_transaction_id\" ";
+        $result = mysqli_query($db_connection,$sql_query);
+        if (!$result) {
+            array_push($message,mysqli_error($db_connection));
+        }else {
+            return true;
+        }
+    }
+
+    function cancel_all_pending_sub_transactions($main_trans_id){
+        global $message, $db_connection;
+        // $sql_query = "UPDATE sub_transactions SET status='canceled' WHERE main_transaction_id=\"$main_trans_id\" and status='pending'  ";
+        $sql_query = "SELECT * FROM sub_transactions WHERE main_transaction_id=\"$main_trans_id\" and status='pending'  ";
+        $result = mysqli_query($db_connection,$sql_query);
+        if (!$result) {
+            array_push($message,mysqli_error($db_connection));
+        } else {
+            while ($sub_transaction_details = mysqli_fetch_assoc($result)) {
+                if (cancel_sub_transaction($sub_transaction_details['id'])) {
+                    change_user_status($sub_transaction_details[payer_id]);
+                }
+            }
+        }
+    }
+
+    function cancel_transaction($recipient_id){
+        global $message, $db_connection;
+        // get transaction details using recipient id and status pending
+        $main_trans_details = get_assoc_pending_transaction_details_rec($recipient_id);
+        if ($main_trans_details['total_sub_transactions'] >= 1) {
+            // cancel all sub transactions
+            cancel_all_pending_sub_transactions($main_trans_details['id']);
+        }
+
+        $sql_query = "UPDATE transactions SET status='canceled' WHERE id=\"$main_trans_details[id]\" ";
+        $result = mysqli_query($db_connection,$sql_query);
+        if (!$result) {
+            array_push($message,mysqli_error($db_connection));
+        }else {
+            return true;
+        }
     }
 
 
@@ -166,25 +227,24 @@
             global $message;
             // check if submit value is recievers_to_payers
             if ($_POST['submit'] == "recievers_to_payers") {
-                // $receive_amount = $_POST['new_package_amount'];
+                
                 // check if there is any selected payers
                 if (isset($_POST['selected_recievers'])) {
                     $selected_receivers = $_POST['selected_recievers'];
+                    $receive_amount = $_POST['new_package_amount'];
+                    $new_package_details = get_assoc_package_details_amount($receive_amount);
                     // loop through selected payers
                     foreach ($selected_receivers as $index => $receiver_id) {
-                        // get user details
-                        // $payer_details = get_assoc_user_details($payer_id);
-                        // if (change_user_status($payer_id,0)) {
-                        //     array_push($message,"successfully moved to others");
-                        // }   
-                        array_push($message,$receivers_id);                     
+                        // get transaction details
+                        // need to cancel a transaction  
+                        cancel_transaction($receiver_id);
+                        // change user status and package 
+                        change_user_status($receiver_id,'1');
+                        change_user_package($receiver_id,$new_package_details['id']);
                     }
                 } else {
                     array_push($message,"Please select 1 or more receivers");
                 }
-                
-                // array_push($message,"payers to recievers");
-
                 
             } else {
                 array_push($message,"not payers to recievers");
@@ -194,7 +254,32 @@
 
         // move to others
         function recievers_to_others(){
-            
+            global $message;
+            // check if submit value is recievers_to_others
+            if ($_POST['submit'] == "recievers_to_others") {
+                
+                // check if there is any selected payers
+                if (isset($_POST['selected_recievers'])) {
+                    $selected_receivers = $_POST['selected_recievers'];
+                    // $receive_amount = $_POST['new_package_amount'];
+                    // $new_package_details = get_assoc_package_details_amount($receive_amount);
+                    // loop through selected payers
+                    foreach ($selected_receivers as $index => $receiver_id) {
+                        // get transaction details
+                        // need to cancel a transaction  
+                        cancel_transaction($receiver_id);
+                        // change user status and package 
+                        change_user_status($receiver_id,'0');
+                        // change_user_package($receiver_id,$new_package_details['id']);
+                    }
+                } else {
+                    array_push($message,"Please select 1 or more receivers");
+                }
+                
+            } else {
+                array_push($message,"not payers to recievers");
+            }
+           
         }
 
 
@@ -426,7 +511,11 @@
                                     </tbody>
                                 </table>
                                 <div class="buttons assign-info-btns" >
-                                    <button type="submit" name="submit"  value="recievers_to_payers"  class="btn btn-warning card-link">Move To Payers</button>
+                                    <div>
+                                        <label for="new_package_amount">Receiving Amount:</label>
+                                        <input class="input-sm" type="number" value="500" name="new_package_amount" min="500" max="10000" step="500">   
+                                        <button type="submit" name="submit"  value="recievers_to_payers"  class="btn btn-warning card-link">Move To Payers</button>
+                                    </div>
                                     <button type="submit" name="submit"  value="recievers_to_others" class="btn btn-warning card-link">Move To Others</button>
                                 </div>    
                             </form>
