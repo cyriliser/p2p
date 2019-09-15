@@ -286,17 +286,61 @@
 
     // others functions
         // move to recievers
-        function others_to_payers(){
-
+        function others_to_recievers(){
+            global $message;
+            // check if submit value is others_to_recievers
+            if ($_POST['submit'] == "others_to_recievers") {
+                
+                // check if there is any selected others
+                if (isset($_POST['selected_others'])) {
+                    $selected_others = $_POST['selected_others'];
+                    $receive_amount = $_POST['new_package_amount'];
+                    $new_package_details = get_assoc_package_details_amount($receive_amount);
+                    // loop through selected payers
+                    foreach ($selected_others as $index => $other_id) {
+                        // create a transaction (userid,packageid,totalreturn)
+                        if (create_transaction($other_id,$new_package_details['id'],$new_package_details['return_amount'])) {
+                            if (change_user_package($other_id,$new_package_details['id']) and change_user_status($other_id,'3') ) {
+                                array_push($message,"Successfully moved to recievers");
+                            }
+                        }
+                    }
+                } else {
+                    array_push($message,"Please select 1 or more receivers");
+                }
+            } else {
+                array_push($message,"not payers to recievers");
+            }
+           
         }
         // move to payers
-        function others_to_recievers(){
-
+        function others_to_payers(){
+            global $message;
+            // check if submit value is others_to_recievers
+            if ($_POST['submit'] == "others_to_payers") {
+                
+                // check if there is any selected others
+                if (isset($_POST['selected_others'])) {
+                    $selected_others = $_POST['selected_others'];
+                    $pay_amount = $_POST['new_package_amount'];
+                    $new_package_details = get_assoc_package_details_amount($pay_amount);
+                    // loop through selected payers
+                    foreach ($selected_others as $index => $other_id) {
+                        if (change_user_package($other_id,$new_package_details['id']) and change_user_status($other_id,'1') ) {
+                            array_push($message,"Successfully moved to payers");
+                        }
+                    }
+                } else {
+                    array_push($message,"Please select 1 or more others");
+                }
+            } else {
+                array_push($message,"not payers to recievers");
+            }
+           
         }
 
 
-    // select function to excecute
-
+    // select function to execute
     if(isset($_POST["submit"])){
         // array_push($message,"submit");
         switch ($_POST["submit"]) {
@@ -578,8 +622,16 @@
                                 </tbody>
                             </table>
                             <div class="buttons assign-info-btns" >
-                                <button type="submit" name="submit"  value="others_to_recievers"  class="btn btn-warning card-link">Move To Recievers</button>
-                                <button type="submit" name="submit"  value="others_to_payers" class="btn btn-warning card-link">Move To Payers</button>
+                                <div>
+                                    <label for="new_package_amount">Amount to receive:</label>
+                                    <input class="input-sm" type="number" value="500" name="new_package_amount" min="500" max="10000" step="500">
+                                    <button type="submit" name="submit"  value="others_to_recievers"  class="btn btn-warning card-link">Move To Recievers</button>
+                                </div>
+                                <div>
+                                    <label for="new_package_amount">Amount to pay:</label>
+                                    <input class="input-sm" type="number" value="500" name="new_package_amount" min="500" max="10000" step="500">
+                                    <button type="submit" name="submit"  value="others_to_payers" class="btn btn-warning card-link">Move To Payers</button>
+                                </div>
                             </div> 
                         </form>
                     </div>
