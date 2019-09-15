@@ -94,11 +94,11 @@
             global $message;
             // check if submit value is payers_to_recievers
             if ($_POST['submit'] == "payers_to_recievers") {
-                $selected_payers = $_POST['selected_payers'];
-                $receive_amount = $_POST['new_package_amount'];
-
+                
                 // check if there is any selected payers
-                if (count($selected_payers) >=1 ) {
+                if (isset($_POST['selected_payers'])) {
+                    $selected_payers = $_POST['selected_payers'];
+                    $receive_amount = $_POST['new_package_amount'];
                     // loop through selected payers
                     foreach ($selected_payers as $index => $payer_id) {
                         // get user details
@@ -133,11 +133,11 @@
             global $message;
             // check if submit value is payers_to_others
             if ($_POST['submit'] == "payers_to_others") {
-                $selected_payers = $_POST['selected_payers'];
-                // $receive_amount = $_POST['new_package_amount'];
-
+                
                 // check if there is any selected payers
-                if (count($selected_payers) >=1 ) {
+                if (isset($_POST['selected_payers'])) {
+                    $selected_payers = $_POST['selected_payers'];
+                    // $receive_amount = $_POST['new_package_amount'];
                     // loop through selected payers
                     foreach ($selected_payers as $index => $payer_id) {
                         // get user details
@@ -163,7 +163,33 @@
     // recievers functions
         // move to payers 
         function recievers_to_payers(){
+            global $message;
+            // check if submit value is recievers_to_payers
+            if ($_POST['submit'] == "recievers_to_payers") {
+                // $receive_amount = $_POST['new_package_amount'];
+                // check if there is any selected payers
+                if (isset($_POST['selected_recievers'])) {
+                    $selected_receivers = $_POST['selected_recievers'];
+                    // loop through selected payers
+                    foreach ($selected_receivers as $index => $receiver_id) {
+                        // get user details
+                        // $payer_details = get_assoc_user_details($payer_id);
+                        // if (change_user_status($payer_id,0)) {
+                        //     array_push($message,"successfully moved to others");
+                        // }   
+                        array_push($message,$receivers_id);                     
+                    }
+                } else {
+                    array_push($message,"Please select 1 or more receivers");
+                }
+                
+                // array_push($message,"payers to recievers");
 
+                
+            } else {
+                array_push($message,"not payers to recievers");
+            }
+           
         }
 
         // move to others
