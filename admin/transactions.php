@@ -85,13 +85,14 @@ if (isset($_POST["submit"])) {
                     </div>
                 </div>
                 <!-- /. ROW  -->
-              
+            
+            <!-- assigned transactions -->
             <div class="row">
                 <div class="col-md-6">
                      <!--    Hover Rows  -->
                     <div class="panel panel-default">
                         <div class="panel-heading" align="center">
-                            <h3><b>PENDING TRANSACTIONS</b></h3>
+                            <h3><b>PENDING TRANSACTIONS | ASSIGNED</b></h3>
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
@@ -109,7 +110,71 @@ if (isset($_POST["submit"])) {
                                     </thead>
                                     <tbody>
 									<?php
-										$sql_query_pending_trans = "SELECT * FROM transactions WHERE status='pending' ";
+										$sql_query_pending_trans = "SELECT * FROM transactions WHERE status='pending' AND total_sub_transactions>='1' ORDER BY id desc";
+										$result_p_t = mysqli_query($db_connection,$sql_query_pending_trans);
+										if (!$result_p_t) {
+										echo mysqli_error($db_connection);
+										} else {
+											while ($row = mysqli_fetch_assoc($result_p_t)){
+												
+												foreach($row as $x => $x_value) {
+													if($x == 'recipient_id'){
+														$sql_query_person = "SELECT * FROM users WHERE id ='".$x_value."' ";
+														$result_person = mysqli_query($db_connection,$sql_query_person);
+														if (!$result_person) {
+															echo mysqli_error($db_connection);
+														} else {
+															$person = mysqli_fetch_assoc($result_person);
+															echo "<tr>
+																<td>".$row['id']."</td>
+																<td>".$person['username']."</td>
+																<td>".$person['name']."</td>
+																<td>".$person['surname']."</td>
+																<td>".$row['completed_sub_transactions']."/".$row['total_sub_transactions']."</td>
+																<td>".$row['total_return_amount']."</td>
+																<td><button class=\"btn btn-info\">more info</button></td>
+																</tr>";
+														}
+													}
+												}
+											}
+										}
+									?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End  Hover Rows  -->
+                </div>
+				
+			</div>
+
+            <!-- Unassigned transactions -->
+            <div class="row">
+                <div class="col-md-6">
+                     <!--    Hover Rows  -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading" align="center">
+                            <h3><b>PENDING TRANSACTIONS | NOT ASSIGNED</b></h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Trans ID</th>
+                                            <th>Username</th>
+                                            <th>Name</th>
+											<th>Surname</th>
+											<th>Subtrans</th>
+											<th>Total R</th>
+											<th>More details</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+									<?php
+										$sql_query_pending_trans = "SELECT * FROM transactions WHERE status='pending' AND total_sub_transactions='0' ORDER BY id ASC";
 										$result_p_t = mysqli_query($db_connection,$sql_query_pending_trans);
 										if (!$result_p_t) {
 										echo mysqli_error($db_connection);
