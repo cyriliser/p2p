@@ -99,9 +99,9 @@
             $_POST[$key] =  $value;
         }
     }
-	 function countDown($time,$showClock) {
+	 function countDown($time,$hours,$showClock) {
 	 	  // This function return true or false. true if count down has run out
-	 	  $db_time = ($time + (12*3600)); // + 12 hours
+	 	  $db_time = ($time + ($hours*3600));
         $current_time = time();
         $time_left = $db_time - $current_time;  
 	     if($showClock) {
