@@ -3,6 +3,7 @@ session_start();
 require_once('../../config/config.php');
 require_once('../../global_functions.php');
 connect_to_db();
+security_check();
 ?>
 
 <html>

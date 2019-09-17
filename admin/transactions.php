@@ -4,6 +4,7 @@ require_once("../global_functions.php");
 connect_to_db();
     
 //process a transaction
+security_check();
 if (isset($_POST["submit"])) {
     if ($_POST["submit"]="finish_assign" and isset($_POST["selected_payers"])) {
         $reciever_id = $_POST['reciever_id'] ;

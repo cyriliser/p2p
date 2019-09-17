@@ -1,6 +1,7 @@
 <?php
 require_once "../global_functions.php";
 connect_to_db();
+security_check();
 function displayError($msg){
 	if(isset($_GET['api'])) {
 		

@@ -16,6 +16,8 @@
 <?php
 
 // If form submitted, insert values into the database.
+
+security_check();
 if (isset($_POST['username'])){
         // removes backslashes
  $username = stripslashes($_REQUEST['username']);

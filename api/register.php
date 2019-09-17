@@ -3,6 +3,7 @@ session_start();
 require_once('../global_functions.php');
 require_once('../config/config.php');
 connect_to_db();
+security_check();
 
 function validate_data($email,$username) {
 	// check if username is taken

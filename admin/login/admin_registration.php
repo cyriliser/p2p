@@ -19,6 +19,7 @@
 require_once("../../config/config.php");
 require_once("../../global_functions.php");
 connect_to_db();
+security_check();
 
 // If form submitted, insert values into the database.
 function test_input($data) {

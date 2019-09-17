@@ -4,6 +4,7 @@
     connect_to_db();
     // require_once("admin_header.php"); 
     require_once("admin_nav.php");
+    security_check();
     $message= array();
 ?>
 
