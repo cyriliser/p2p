@@ -4,13 +4,14 @@
 ?>
 
 <html>
-
 <head>
 
 </head>
 
 <body>
-	<p>Hey</p>
+	<div>
+	 	<?php include_once "../dashboard/components/sub_components/time.php";?>
+	 </div>
 </body>
 
 </html>
