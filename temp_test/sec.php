@@ -14,7 +14,9 @@
         }
     }
     print_r($_POST);
+    echo " = POST <br>>";
     print_r($_REQUEST);
+    echo " = REQUEST ";
 ?>
 
 <!DOCTYPE html>

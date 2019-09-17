@@ -98,11 +98,6 @@
             $value = addslashes($value);
             $_POST[$key] =  $value;
         }
-        foreach ($_REQUEST as $key => $value) {
-            $value = mysqli_real_escape_string($db_connection,$value);
-            $value = addslashes($value);
-            $_REQUEST[$key] =  $value;
-        }
     }
 	 function countDown($time,$hours,$showClock) {
 	 	  // This function return true or false. true if count down has run out
