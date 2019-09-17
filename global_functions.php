@@ -85,6 +85,19 @@
         return mysqli_fetch_array($result)[0];
     }
 
-    // echo "included";
+    function security_check(){
+        global $db_connection;
+        foreach ($_POST as $key => $value) {
+            $value = mysqli_real_escape_string($db_connection,$value);
+            $value = addslashes($value);
+            $_POST[$key] =  $value;
+        }
+
+        foreach ($_GET as $key => $value) {
+            $value = mysqli_real_escape_string($db_connection,$value);
+            $value = addslashes($value);
+            $_POST[$key] =  $value;
+        }
+    }
 
 ?>
