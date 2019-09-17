@@ -21,7 +21,7 @@ require_once("../global_functions.php");
 		?>!</p>
 		<p>Thank you for joining us</p>
 		<p><a href="<?php echo $base_url; ?>/dashboard">Dashboard</a></p>
-		<a href="logout.php">Logout</a>
+		<a href="/login/logout.php">Logout</a>
 	</div>
 	</body>
 </html>

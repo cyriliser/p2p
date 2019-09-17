@@ -99,5 +99,36 @@
             $_POST[$key] =  $value;
         }
     }
-
+	 function countDown($time,$hours,$showClock) {
+	 	  // This function return true or false. true if count down has run out
+	 	  $db_time = ($time + ($hours*3600));
+        $current_time = time();
+        $time_left = $db_time - $current_time;  
+	     if($showClock) {
+		echo '
+			<link rel="stylesheet" href="../assets/css/flipclock.css">
+			<div class="clock" style="margin:2em;"></div>
+			<link rel="stylesheet" href="/assets/css/flipclock.css">
+			<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+			<script src="/assets/js/flipclock.js"></script>	
+			<div id="x"></div>
+			<script type="text/javascript">
+				var clock;
+				$(document).ready(function() {
+					// Calculate the difference in seconds between the future and current date
+					var diff = '.$db_time.' - '.$current_time.';
+					// Instantiate a coutdown FlipClock
+					clock = $(\'.clock\').FlipClock(diff, {
+						clockFace: \'DailyCounter\',
+						countdown: true,
+						showSeconds: true
+					});
+				});
+			</script>';
+	     }
+		if($time_left <= 0)
+			return true;
+		else
+			return false;
+	 }
 ?>
