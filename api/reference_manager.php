@@ -18,6 +18,7 @@ function sendMsg($receiver,$sender) {
 	}
 }
 
+security_check();
 if(isset($_POST['send_user_msg'])){
 	sendMsg($_POST['to'],$_SESSION['user_id']);
 }
