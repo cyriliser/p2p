@@ -3,7 +3,7 @@ session_start();
 require_once('../global_functions.php');
 require_once('../config/config.php');
 connect_to_db();
-
+security_check();
 // If form submitted, insert values into the database.
 if (isset($_POST['username'])){
        // removes backslashes
