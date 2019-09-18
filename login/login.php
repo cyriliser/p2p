@@ -76,8 +76,9 @@ if(isset($_SESSION['username']))
 			unset($_SESSION['registration_successfull']);
 	?>
 			<div class='form'>
-			<h3>You are registered successfully.</h3>
-			<br>Please login to continue</div>"
+				<h3 class="text-center">You are registered successfully.</h3>
+				<p class="text-center">Please login to continue</p>
+			</div>
 	<?php 
 		}
 		if(isset($_SESSION['login_error'])) {
