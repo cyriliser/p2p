@@ -1,6 +1,15 @@
 <?php
+
+// This page is included in all admin pages
+
 require_once("login/auth.php");
 require_once("../global_functions.php");
+
+if(isset($_SESSION['username']) && !isset($_SESSION['admin'])) {
+	// Normal user detected
+	header("Location: $base_url/dashboard");
+	die(); // force redirect now
+}
 ?>
 <!DOCTYPE html>
 
@@ -10,17 +19,17 @@ require_once("../global_functions.php");
     <title>Cash Bankers</title>
 
     <!-- BOOTSTRAP STYLES-->
-    <link href="assets/css/bootstrap.css" rel="stylesheet" />
+    <link href="/admin/assets/css/bootstrap.css" rel="stylesheet" />
     <!-- FONTAWESOME STYLES-->
-    <link href="assets/css/font-awesome.css" rel="stylesheet" />
+    <link href="/admin/assets/css/font-awesome.css" rel="stylesheet" />
     <!--CUSTOM BASIC STYLES-->
-    <link href="assets/css/basic.css" rel="stylesheet" />
+    <link href="/admin/assets/css/basic.css" rel="stylesheet" />
     <!--CUSTOM MAIN STYLES-->
-    <link href="assets/css/custom.css" rel="stylesheet" />
+    <link href="/admin/assets/css/custom.css" rel="stylesheet" />
     <!-- GOOGLE FONTS-->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
     <!-- custome css -->
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="/admin/assets/css/style.css">
 </head>
 <body>
     <div id="wrapper">

@@ -1,6 +1,6 @@
 <?php
-require_once("special_auth.php");
-if($_SESSION["username"] == "master"){
+require_once("auth.php");
+if(!$_SESSION["username"] == "master"){
 ?><head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -18,52 +18,6 @@ if($_SESSION["username"] == "master"){
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
 </head>
 <body>
-<?php
-require_once("../../config/config.php");
-require_once("../../global_functions.php");
-connect_to_db();
-security_check();
-
-// If form submitted, insert values into the database.
-function test_input($data) {
-  $data = trim($data);
-  $data = stripslashes($data);
-  $data = htmlspecialchars($data);
-  return $data;
-}
-
-if (isset($_REQUEST['username'])){
-    // removes backslashes
-    $username = stripslashes($_REQUEST['username']);
-    $username = test_input($username);
-	if (!preg_match("/^[a-zA-Z ]*$/",$username)) {
-		$nameErr = "Only letters and white space allowed"; 
-    }
-    //escapes special characters in a string
-    $username = mysqli_real_escape_string($db_connection,$username); 
-    $email = stripslashes($_REQUEST['Email']);
-    $email = test_input($email);
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $emailErr = "Invalid email format"; 
-    }
-    $email = mysqli_real_escape_string($db_connection,$email);
-    $password = stripslashes($_REQUEST['password']);
-    $password = mysqli_real_escape_string($db_connection,$password);
-    $cellno = stripslashes($_REQUEST['cellno']);
-    $cellno = mysqli_real_escape_string($db_connection,$cellno);
-    $query = "INSERT into `admin_users` (username, password, email, phone)
-        VALUES ('$username', '".md5($password)."', '$email','$cellno')";
-    $result = mysqli_query($db_connection,$query);
-    if(!$result){
-        echo mysqli_error($db_connection);
-    }else{
-        echo "<div class='form'>
-                <h3>You are registered successfully.</h3>
-                <br/>Click here to <a href='admin_login.php'>Login</a></div>";
-    }
-}else{
-        ?>
-
     <div id="wrapper">
         <nav class="navbar navbar-default navbar-cls-top " role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
@@ -81,14 +35,19 @@ if (isset($_REQUEST['username'])){
                <div class="row">
                     <div class="col-md-12" align="center">
                         <h1 class="page-head-line">REGISTRATION</h1>
-
                     </div>
                 </div>
                 <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
                            
                             <div class="panel-body">
-                                <form role="form" method="post">
+                                <form role="form" action="process_registration.php" method="post">
                                     <div class="row">
+                                    
+               	 <?php if(isset($_GET['securityError'])) {?>
+               	 	<div class="form-group form">
+               	 		<p class="text-center btn-danger">Error processing request, please check your data and try again</p>
+               	 </div>
+               	 <?php }?>
 										<div class="col-md-12" align="center">
 											<h2>Enter Details</h2>
 
@@ -96,24 +55,32 @@ if (isset($_REQUEST['username'])){
 									</div>
 									<br>
 									<div class="row">
+										 <div class="form-group input-group">
+                                   <span class="input-group-addon"><i class="fa fa-tag"  ></i></span>
+                                   <input type="text" class="form-control" name = "username" placeholder="Your Username " />
+                               </div>
+                                <div class="form-group input-group">
+                                   <span class="input-group-addon"><i class="fa fa-lock"  ></i></span>
+                                   <input type="password" name = "password" class="form-control"  placeholder="Your Password" />
+                               </div>
+							
+                               <div class="form-group input-group">
+                                   <span class="input-group-addon"><i class="fa fa-lock"  ></i></span>
+                                   <input type="email" name = "email" class="form-control"  placeholder="Your Email" />
+                               </div>
+										 <div class="form-group input-group">
+                                   <span class="input-group-addon"><i class="fa fa-tag"  ></i></span>
+                                   <input type="text" class="form-control" name = "name" placeholder="Your Name " />
+                               </div>
+										 <div class="form-group input-group">
+                                   <span class="input-group-addon"><i class="fa fa-tag"  ></i></span>
+                                   <input type="text" class="form-control" name = "surname" placeholder="Your Surname " />
+                               </div>
 										<div class="form-group input-group">
-                                            <span class="input-group-addon"><i class="fa fa-tag"  ></i></span>
-                                            <input type="text" class="form-control" name = "username" placeholder="Your Username " />
-                                        </div>
-                                         <div class="form-group input-group">
-                                            <span class="input-group-addon"><i class="fa fa-lock"  ></i></span>
-                                            <input type="password" name = "password" class="form-control"  placeholder="Your Password" />
-                                        </div>
-										
-                                        <div class="form-group input-group">
-                                            <span class="input-group-addon"><i class="fa fa-lock"  ></i></span>
-                                            <input type="email" name = "Email" class="form-control"  placeholder="Your Email" />
-                                        </div>
-										<div class="form-group input-group">
-                                            <span class="input-group-addon"><i class="fa fa-lock"  ></i></span>
-                                            <input type="text" name = "cellno" class="form-control"  placeholder="Your  Cellphone Number" />
-                                        </div>
-										<input type="submit" class="btn btn-primary name="submit" value="Register" />
+                                   <span class="input-group-addon"><i class="fa fa-lock"  ></i></span>
+                                   <input type="text" name = "cellno" class="form-control"  placeholder="Your  Cellphone Number" />
+                               </div>
+										<input type="submit" class="btn btn-primary" name="submit" value="Register" />
 										<hr />
                                     Already registered ? <a href="admin_login.php" >click here to login </a>
                                      </div>
@@ -124,9 +91,7 @@ if (isset($_REQUEST['username'])){
 			</div>
 	</body>
 </html>
-	<?php }?>
 <?php
-
 }
 else {?>
 <div class="row">
