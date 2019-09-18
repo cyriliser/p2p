@@ -1,4 +1,9 @@
-<?php require_once("responses/assign_responses.php");?>
+<?php
+    require_once("../../global_functions.php");
+    security_check();
+    require_once("responses/assign_responses.php");
+?>
+
 <div class="h-100" >
     <div class="sec-1 h-20">
         

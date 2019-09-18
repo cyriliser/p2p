@@ -26,6 +26,7 @@
         <!-- responses -->
         <?php 
             // pages with forms or that submit data will have that data processed here
+            security_check();
             include('responses.php'); 
         ?>
         

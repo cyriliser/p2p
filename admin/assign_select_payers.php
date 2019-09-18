@@ -4,6 +4,7 @@
     connect_to_db();
 
     // check if payer has been selected if not redirect to selectpayer
+    security_check();
     if (!isset($_POST["submit"]) or $_POST["submit"] != "selected_reciever" or !isset($_POST["selected_reciever"])) {
         header("Location: $admin_url/assign_select_reciever.php");
     }

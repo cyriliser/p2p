@@ -1,4 +1,6 @@
 <?php 
+    require_once("../../../global_functions.php");
+    security_check();
     if (isset($_POST["submit"])) {
 
         if (isset($_POST['selected_payers']) and isset($_POST['selected_reciever_id'])){
