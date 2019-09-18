@@ -1,6 +1,6 @@
 <?php
     $message = array();
-    include("global_functions.php");
+    include("../global_functions.php");
     connect_to_db();
     if (isset($_POST['submit'])) {
         array_push($message,"before function");
@@ -13,6 +13,10 @@
             array_push($message,$value);
         }
     }
+    print_r($_POST);
+    echo " = POST <br>>";
+    print_r($_REQUEST);
+    echo " = REQUEST ";
 ?>
 
 <!DOCTYPE html>
@@ -21,7 +25,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="assets/css/bootstrap.css">
+    <link rel="stylesheet" href="/assets/css/bootstrap.css">
     <title>Document</title>
 </head>
 <body class="container pt-5">
