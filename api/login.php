@@ -3,7 +3,7 @@ session_start();
 require_once('../global_functions.php');
 require_once('../config/config.php');
 connect_to_db();
-// We are working with forms if we arrive at this page, might as well secure them
+security_check();
 if (isset($_POST['username'])){
        $username = $_REQUEST['username'];
        $password = $_REQUEST['password'];
