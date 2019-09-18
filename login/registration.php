@@ -6,6 +6,24 @@ if(isset($_SESSION['username']))
 	header("Location: $base_url/dashboard");
 connect_to_db();
 
+if(isset($_SESSION['form_data'])) {
+	if(!(strpos($_SESSION['form_data']['name'],"=") !== false)) { // Check if we've modified the form_data before
+		foreach($_SESSION['form_data'] as $key => $value)
+			$_SESSION['form_data'][$key] = "value=".$value; // This allows form to keep it's data if redirected back here
+	}
+}else {
+	$_SESSION['form_data']['username'] = "";
+	$_SESSION['form_data']['email'] = "";
+	$_SESSION['form_data']['password'] = "";
+	$_SESSION['form_data']['name'] = "";
+	$_SESSION['form_data']['surname'] = "";
+	$_SESSION['form_data']['dob'] = "";
+	$_SESSION['form_data']['cellphone'] = "";
+	$_SESSION['form_data']['cellphone2'] = "";
+	$_SESSION['form_data']['account_no'] = "";
+	$_SESSION['form_data']['bank_name'] = "";
+	
+}
 ?>
 <html lang="en">
 
@@ -122,69 +140,91 @@ connect_to_db();
     <?php
     	if(isset($_SESSION['taken'])) {
     		echo "<div class=\"form-group floating-label-form-group controls mb-0 pb-2\">
-					<label>".$_SESSION['taken']." already taken</label>
+						<p class='text-center'>".$_SESSION['taken']." already registered</p>
 					</div>";
 			unset($_SESSION['taken']);
+    	}
+    	if(isset($_SESSION['security_check'])) {
+    		unset($_SESSION['security_check']);
+    		echo "
+    		<div class='form-group floating-label-form-group controls mb-0 pb-2'>
+    			<p class='text-center btn-danger'>Security check failed, please check your information and try again</p>
+    		</div>
+    		";
+    	}
+    	if(isset($_SESSION['registration_failed'])) {
+    		unset($_SESSION['registration_failed']);
+    		echo "
+    		<div class='form-group floating-label-form-group controls mb-0 pb-2'>
+    			<p class='text-center btn-danger'>Error saving your information, please check and try again</p>
+    		</div>
+    		";
     	}
     ?>
       <div class="row">
         <div class="col-lg-8 mx-auto">
 			<!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
 			<h1>Personal Details</h1>
-			<form name="sentMessage" method="post" action="../api/register.php" id="contactForm" novalidate="novalidate">
+			<form name="sentMessage" onsubmit="return checkForm(this);" method="post" action="../api/register.php" id="contactForm">
 				<div class="control-group">
 				<div class="form-group floating-label-form-group controls mb-0 pb-2">
 					<label>Username</label>
-					<input class="form-control" id="name" name="username" type="text" placeholder="Username" required="required" data-validation-required-message="Please enter your name.">
+					<?php echo '<input class="form-control" id="name" name="username" type="text" placeholder="Username" required="required" data-validation-required-message="Please enter your name." '.$_SESSION['form_data']['username'].'>'; ?>
 					<p class="help-block text-danger"></p>
 				</div>
 				</div>
 				<div class="control-group">
 				<div class="form-group floating-label-form-group controls mb-0 pb-2">
 					<label>Email Address</label>
-					<input class="form-control" id="email" name="email"type="email" placeholder="Email Address" required="required" data-validation-required-message="Please enter your email address.">
+					<?php echo '<input class="form-control" id="email" name="email"type="email" placeholder="Email Address" required="required" data-validation-required-message="Please enter your email address." '.$_SESSION['form_data']['email'].'>'; ?>
+					
 					<p class="help-block text-danger"></p>
 				</div>
 				</div>
 				<div class="control-group">
 				<div class="form-group floating-label-form-group controls mb-0 pb-2">
 					<label>Password</label>
-					<input class="form-control" id="password" name= "password"type="password" placeholder="Password" required="required" data-validation-required-message="Please enter your name.">
+					<?php echo '<input class="form-control" id="password" name= "password" type="password" placeholder="Password" required="required" data-validation-required-message="Please enter your name." '.$_SESSION['form_data']['password'].'>'; ?>
+					
 					<p class="help-block text-danger"></p>
 				</div>
 				</div>
 				<div class="control-group">
 				<div class="form-group floating-label-form-group controls mb-0 pb-2">
-					<label>Phone Number</label>
-					<input class="form-control" id="phone" type="tel" placeholder="Phone Number" required="required" data-validation-required-message="Please enter your phone number.">
+					<label>Password</label>
+					<?php echo '<input class="form-control" id="password2" name= "password2" type="password" placeholder="Verify Password" required="required" data-validation-required-message="Please enter your name." '.$_SESSION['form_data']['password'].'>'; ?>					
 					<p class="help-block text-danger"></p>
 				</div>
 				</div>
 				<div class="control-group">
 				<div class="form-group floating-label-form-group controls mb-0 pb-2">
 					<label>Name</label>
-					<input class="form-control" id="name" name ="name" type="text" placeholder="Name" required="required" data-validation-required-message="Please enter your name.">
+					<?php echo '<input class="form-control" id="name" name ="name" type="text" placeholder="Name" required="required" data-validation-required-message="Please enter your name." '.$_SESSION['form_data']['name'].'>'; ?>
+					
 					<p class="help-block text-danger"></p>
 				</div>
 				</div>
 				<div class="control-group">
 				<div class="form-group floating-label-form-group controls mb-0 pb-2">
 					<label>Surname</label>
-					<input class="form-control" id="name" name="surname" type="text" placeholder="Surname" required="required" data-validation-required-message="Please enter your name.">
+					<?php echo '<input class="form-control" id="name" name="surname" type="text" placeholder="Surname" required="required" data-validation-required-message="Please enter your name." '.$_SESSION['form_data']['surname'].'>'; ?>
+					
 					<p class="help-block text-danger"></p>
 				</div>
 				</div>
 				<div class="control-group">
 				<div class="form-group floating-label-form-group controls mb-0 pb-2">
 					<label>Date of Birth</label>
-					<input class="form-control" id="name" name = "dob" type="text" placeholder="Date of Birth" required="required" data-validation-required-message="Please enter your name.">
+					<?php echo '<input class="form-control" id="name" name = "dob" type="text" placeholder="Date of Birth" required="required" data-validation-required-message="Please enter your name." '.$_SESSION['form_data']['dob'].'>'; ?>
+					
 					<p class="help-block text-danger"></p>
 				</div>
 				</div>
 				<div class="control-group">
 				<div class="form-group floating-label-form-group controls mb-0 pb-2">
 					<label>Phone Number</label>
-					<input class="form-control" id="name" name = "cellphone" type="text" placeholder="Cellphone Number" required="required" data-validation-required-message="Please enter your name.">
+					<?php echo '<input class="form-control" id="name" name = "cellphone" type="text" placeholder="Cellphone Number" required="required" data-validation-required-message="Please enter your name." '.$_SESSION['form_data']['cellphone'].'>'; ?>
+					
 					<p class="help-block text-danger"></p>
 				</div>
 				</div>
@@ -200,14 +240,16 @@ connect_to_db();
 				<div class="control-group">
 					<div class="form-group floating-label-form-group controls mb-0 pb-2">
 						<label>Account Number</label>
-						<input class="form-control" id="name" type="text" name="account_no" placeholder="Account number" required="required" data-validation-required-message="Please enter your name.">
+						<?php echo '<input class="form-control" id="name" type="text" name="account_no" placeholder="Account number" required="required" data-validation-required-message="Please enter your name." '.$_SESSION['form_data']['account_no'].'>'; ?>
+						
 						<p class="help-block text-danger"></p>
 					</div>
 					</div>
 					<div class="control-group">
 					<div class="form-group floating-label-form-group controls mb-0 pb-2">
 						<label>Linked Cellphone Number</label>
-						<input class="form-control" id="name"  type="text" name="cellphone2" placeholder="Linked Cellphone Number" required="required" data-validation-required-message="Please enter your name.">
+						<?php echo '<input class="form-control" id="name"  type="text" name="cellphone2" placeholder="Linked Cellphone Number" required="required" data-validation-required-message="Please enter your name." '.$_SESSION['form_data']['cellphone2'].'>'; ?>
+						
 						<p class="help-block text-danger"></p>
 					</div>
 					</div>
@@ -506,7 +548,7 @@ connect_to_db();
   <!-- Bootstrap core JavaScript -->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
+  <script src="/assets/js/password.js" ></script>
   <!-- Plugin JavaScript -->
   <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
@@ -516,6 +558,57 @@ connect_to_db();
 
   <!-- Custom scripts for this template -->
   <script src="js/freelancer.min.js"></script>
+  <script type="text/javascript" >
+  	  function checkForm(form){
+    if(form.username.value == "") {
+      alert("Error: Username cannot be blank!");
+      form.username.focus();
+      return false;
+    }
+    re = /^\w+$/;
+    if(!re.test(form.username.value)) {
+      alert("Error: Username must contain only letters, numbers and underscores!");
+      form.username.focus();
+      return false;
+    }
+	 
+    if(form.password.value != "" && form.password.value == form.password2.value) {
+      if(form.password.value.length < 6) {
+        alert("Error: Password must contain at least six characters!");
+        form.password.focus();
+        return false;
+      }
+      if(form.password.value == form.username.value) {
+        alert("Error: Password must be different from Username!");
+        form.password.focus();
+        return false;
+      }
+      re = /[0-9]/;
+      if(!re.test(form.password.value)) {
+        alert("Error: password must contain at least one number (0-9)!");
+        form.password.focus();
+        return false;
+      }
+      re = /[a-z]/;
+      if(!re.test(form.password.value)) {
+        alert("Error: password must contain at least one lowercase letter (a-z)!");
+        form.password.focus();
+        return false;
+      }
+      re = /[A-Z]/;
+      if(!re.test(form.password.value)) {
+        alert("Error: password must contain at least one uppercase letter (A-Z)!");
+        form.password.focus();
+        return false;
+      }
+    } else {
+      alert("Error: Please check that you've entered and confirmed your password!");
+      form.password.focus();
+      return false;
+    }
+    return true;
+  }
+  </script>
 </body>
 
 </html>

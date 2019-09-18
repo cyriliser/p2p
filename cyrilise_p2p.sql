@@ -263,11 +263,11 @@ INSERT INTO `transactions` (`id`, `recipient_id`, `transaction_package_id`, `rec
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
-  `username` varchar(10) NOT NULL,
+  `username` varchar(15) NOT NULL,
   `email` varchar(30) NOT NULL,
   `password` varchar(100) NOT NULL,
-  `name` varchar(10) NOT NULL,
-  `surname` varchar(10) NOT NULL,
+  `name` varchar(25) NOT NULL,
+  `surname` varchar(25) NOT NULL,
   `date_of_birth` date NOT NULL,
   `contact_cell` varchar(10) NOT NULL,
   `bank_name` varchar(20) NOT NULL,
@@ -275,14 +275,14 @@ CREATE TABLE `users` (
   `linked_cell` varchar(10) NOT NULL,
   `selected_package` int(11) DEFAULT NULL,
   `status` int(11) NOT NULL DEFAULT 0,
-  `verification_time` int(11) NOT NULL
+  `reg_time` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `email`, `password`, `name`, `surname`, `date_of_birth`, `contact_cell`, `bank_name`, `account_no`, `linked_cell`, `selected_package`, `status`, `verification_time`) VALUES
+INSERT INTO `users` (`id`, `username`, `email`, `password`, `name`, `surname`, `date_of_birth`, `contact_cell`, `bank_name`, `account_no`, `linked_cell`, `selected_package`, `status`, `reg_time`) VALUES
 (1, 'username1', 'username1@gmail.com', '92877af70a45fd6a2ed7fe81e1236b78', 'user1', 'user1', '1997-12-04', '123469874', 'capitec', '123467896', '0123469874', 2, 0, 1566673990),
 (2, 'username2', 'username2@gmail.com', 'password', 'user2', 'user2', '1997-12-04', '123469874', 'capitec', '123467896', '0123469874', 4, 0, 1566679320),
 (3, 'username3', 'username3@gmail.com', '92877af70a45fd6a2ed7fe81e1236b78', 'user3', 'user3', '1997-12-04', '123469874', 'capitec', '123467896', '0123469874', 8, 0, 1566679684),
