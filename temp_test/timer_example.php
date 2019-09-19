@@ -17,6 +17,7 @@
 			echo "Timer still running";
 		}
 
+		echo "</br>".time();
 	?>
 
 	<script src="../assets/js/flipclock.js"></script>
