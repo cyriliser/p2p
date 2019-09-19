@@ -87,29 +87,29 @@
 
     function security_check(){
         global $db_connection;
-        foreach ($_POST as $key => $value) {
-        		if(empty($value))
-        			return false;
-            $value = mysqli_real_escape_string($db_connection,$value);
-            $value = addslashes($value);
-            $_POST[$key] =  $value;
-        }
+        // foreach ($_POST as $key => $value) {
+        // 		if(empty($value))
+        // 			return false;
+        //     $value = mysqli_real_escape_string($db_connection,$value);
+        //     $value = addslashes($value);
+        //     $_POST[$key] =  $value;
+        // }
 
-        foreach ($_GET as $key => $value) {
-        		if(empty($value))
-        			return false;
-            $value = mysqli_real_escape_string($db_connection,$value);
-            $value = addslashes($value);
-            $_POST[$key] =  $value;
-        }
-        foreach ($_REQUEST as $key => $value) {
-        		if(empty($value))
-        			return false;
-            $value = mysqli_real_escape_string($db_connection,$value);
-            $value = addslashes($value);
-            $_REQUEST[$key] =  $value;
-        }
-        return true;
+        // foreach ($_GET as $key => $value) {
+        // 		if(empty($value))
+        // 			return false;
+        //     $value = mysqli_real_escape_string($db_connection,$value);
+        //     $value = addslashes($value);
+        //     $_POST[$key] =  $value;
+        // }
+        // foreach ($_REQUEST as $key => $value) {
+        // 		if(empty($value))
+        // 			return false;
+        //     $value = mysqli_real_escape_string($db_connection,$value);
+        //     $value = addslashes($value);
+        //     $_REQUEST[$key] =  $value;
+        // }
+        // return true;
     }
 
     function countDown($time,$hours,$showClock) {
