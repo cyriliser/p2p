@@ -74,11 +74,11 @@
                                                                                                 <Strong class=\"mx-auto\">Marked As Paid</Strong>
                                                                                                 <i class=\"fas fa-check-square $check_payed fa-2x mr-5\"></i>
                                                                                         </div>";
-                                                                                                      
+                                                                                //form start     
                                                                                 echo "<!-- form start -->";
                                                                                         if ($sub_transaction_details['marked_as_recieved'] == 1) {
-                                                                                                echo "  <div style=\"border: solid #a49797 1px;\" class=\"my-1 w-100 \" >
-                                                                                                                <Strong>Marked As Recieved</Strong>
+                                                                                                echo "  <div style=\"border: solid #a49797 1px;\" class=\"my-1  d-flex justify-content-between  w-100 \" >
+                                                                                                                <Strong class=\"mx-auto\">Marked As Recieved</Strong>
                                                                                                                 <i class=\"fas fa-check-square text-primary fa-2x mr-5\"></i>
                                                                                                         </div>";
                                                                                         } else {
@@ -99,7 +99,7 @@
                                                                                                 echo "</div>";
                                                                                         }
                                                                                 echo "<!-- form end -->";
-                                                                        
+                                                                                // form end
                 
                 
                                                                                 echo "  <div style=\"border: solid #a49797 1px;\" class=\"my-1 d-flex justify-content-between w-100 \" >
