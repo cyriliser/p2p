@@ -3,6 +3,7 @@
 
     // package selection responses
     if(isset($_POST['selected_package'])){
+        log_alert($_POST['selected_package']);
         $selected_package_id = $_POST['selected_package'];
         $user_id1 = $_POST['user_id'];
         $verification_time = time();//to be used for the 12hr verification
