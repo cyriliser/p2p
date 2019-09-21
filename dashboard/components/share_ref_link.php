@@ -10,8 +10,20 @@
             <div class="input-group-prepend">
                 <span class="input-group-text" id="inputGroup-sizing-lg">Share Link</span>
             </div>
-                <input type="text" readonly class="form-control " value="<?php echo "http:localhost/$base_url/login/registration.php?ref=$user_details[id] "; ?>" placeholder="<?php echo "http:localhost/$base_url/login/registration.php?ref=$user_details[id] "; ?>" aria-label="Large" aria-describedby="inputGroup-sizing-sm">
+                <input id="share_url" type="text" readonly class="form-control " value="<?php echo "http:localhost/$base_url/login/registration.php?ref=$user_details[id] "; ?>" placeholder="<?php echo "http:localhost/$base_url/login/registration.php?ref=$user_details[id] "; ?>" aria-label="Large" aria-describedby="inputGroup-sizing-sm">
             </div>
         </div>
+
+        <div class="share_area">
+            <button class="btn btn-primary" id="web-share-btn">Share</button>
+        </div>
+    </div>
+    
+    <div class="overlay"></div>
+    <div class="share">
+        <h2>Share now fallback</h2>
+        <button>facebook</button>
+        <button>twitter</button>
+        <button>whatsapp</button>
     </div>
 </section>

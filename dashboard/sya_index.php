@@ -19,7 +19,9 @@
         <link rel="stylesheet" href="../assets/css/flipclock.css">
         <!-- main style sheet -->
         <link rel="stylesheet" href="../assets/css/style.css">
-        <title>P2P | Dashboard</title>
+        <link href="../assets/css/share.css" rel="stylesheet">
+
+        <title>Dashboard</title>
     </head>
 
     <body>
@@ -59,6 +61,10 @@
                         $user_details = mysqli_fetch_assoc($user_result);
                         $username = $user_details['username'];
 
+                        // including section containing ref link
+                        echo "<div class=\"share-spacer\"></div>";
+                        require_once('./components/share_ref_link.php');
+
                         //including dashboard components based on user status
                         switch($user_details['status']) {
                             case 0://if user needs to select package
@@ -80,8 +86,7 @@
                             
                         }
 
-                        // including section containing ref link
-                        require_once('./components/share_ref_link.php');
+                        
                         //past transactions
                         include('./components/past_transactions.php');
                     }
@@ -99,6 +104,7 @@
         <script src="../assets/js/flipclock.min.js"></script>
         <script src="../assets/js/clock.js"></script>
         <!-- main js -->
+        <script src="../assets/js/share.js"></script>
         <script src="../assets/js/main.js"></script>
     </body>
 </html>

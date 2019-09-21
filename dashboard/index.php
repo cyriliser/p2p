@@ -22,6 +22,7 @@ include("../login/auth.php");
 
   <!-- Theme CSS -->
   <link href="../assets/css/freelancer.min.css" rel="stylesheet">
+  <link href="../assets/css/share.css" rel="stylesheet">
 
 </head>
 <body>
@@ -68,5 +69,18 @@ include("../login/auth.php");
 <div class="form">
 <p><a href="<?php echo $dashboard_url; ?>/sya_index.php">Dashboard</a></p>
 </div>
+
+<!-- java script goes here -->
+<!-- jquery -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<!-- bootstrap -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<!-- flip clock -->
+<script src="../assets/js/flipclock.min.js"></script>
+<script src="../assets/js/clock.js"></script>
+<!-- main js -->
+<script src="../assets/js/share.js"></script>
+<script src="../assets/js/main.js"></script>
+
 </body>
 </html>
