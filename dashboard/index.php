@@ -16,6 +16,8 @@ include("../login/auth.php");
   <meta name="description" content="">
   <meta name="author" content="Nhlaluko" >
 
+  
+
   <title>Home Page</title>
  
   <!..........................................................................................................>
@@ -46,8 +48,14 @@ include("../login/auth.php");
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
 
-  <!-- Theme CSS -->
+    <!-- Theme CSS -->
   <link href="../assets/css/freelancer.css" rel="stylesheet">
+  <!-- flip clock -->
+  <link rel="stylesheet" href="../assets/css/flipclock.css">
+  <!-- main style sheet -->
+  <link rel="stylesheet" href="../assets/css/style.css">
+
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 
 </head>
 <body>
@@ -201,5 +209,16 @@ include("../login/auth.php");
 
 </section>
 
+
+<!-- java script goes here -->
+<!-- jquery -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<!-- bootstrap -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<!-- flip clock -->
+<script src="../assets/js/flipclock.min.js"></script>
+<script src="../assets/js/clock.js"></script>
+<!-- main js -->
+<script src="../assets/js/main.js"></script>
 </body>
 </html>
