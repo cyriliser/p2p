@@ -36,6 +36,9 @@
         <link rel="stylesheet" href="../assets/css/flipclock.css">
         <!-- main style sheet -->
         <link rel="stylesheet" href="../assets/css/style.css">
+
+    	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        
         <title>P2P | Dashboard</title>
     </head>
 
@@ -43,6 +46,7 @@
         <!-- responses -->
         <?php 
             // pages with forms or that submit data will have that data processed here
+            security_check();
             include('responses.php'); 
         ?>
         

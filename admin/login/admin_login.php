@@ -3,7 +3,7 @@ session_start();
 require_once("../../config/config.php");
 require_once("../../global_functions.php");
 connect_to_db();
-
+security_check();
 
 
 // If form submitted, check if user exists in the database.

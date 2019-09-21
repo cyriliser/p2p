@@ -65,7 +65,5 @@
                                         </div>
                                      
                                      <input name="submit" type="submit" class="btn btn-primary" value="Login" />
-                                    <hr />
-                                    Not registered ? <a href="admin_registration.php" >click here </a> 
                                 </form>
                             </div>

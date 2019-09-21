@@ -1,4 +1,7 @@
-<head>
+<?php
+require_once("special_auth.php");
+if($_SESSION["username"] == "master"){
+?><head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Admin Registration</title>
@@ -19,6 +22,7 @@
 require_once("../../config/config.php");
 require_once("../../global_functions.php");
 connect_to_db();
+security_check();
 
 // If form submitted, insert values into the database.
 function test_input($data) {
@@ -47,7 +51,7 @@ if (isset($_REQUEST['username'])){
     $password = mysqli_real_escape_string($db_connection,$password);
     $cellno = stripslashes($_REQUEST['cellno']);
     $cellno = mysqli_real_escape_string($db_connection,$cellno);
-    $query = "INSERT into `admin` (username, password, email, phone)
+    $query = "INSERT into `admin_users` (username, password, email, phone)
         VALUES ('$username', '".md5($password)."', '$email','$cellno')";
     $result = mysqli_query($db_connection,$query);
     if(!$result){
@@ -121,3 +125,16 @@ if (isset($_REQUEST['username'])){
 	</body>
 </html>
 	<?php }?>
+<?php
+
+}
+else {?>
+<div class="row">
+    <div class="col-md-12">
+        <h3 class="page-head-line">OOOps! You do not have access to this site</h3>
+    </div>
+</div>
+
+<?php
+}
+?>
