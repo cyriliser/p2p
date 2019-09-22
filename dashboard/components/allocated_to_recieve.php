@@ -45,58 +45,92 @@
                                                 while ($sub_transaction_details = mysqli_fetch_assoc($subs1_result)) {
                                                         echo "<!-- payer 1 -->";
                                                         echo "<div class=\"payer-details my-1 bg-light my-3\" style=\"border: solid black 2px; padding: 3px;\">";
-                                                        echo "<div class=\"details d-flex justify-content-around\" >
+                                                        echo "<div class=\"details\" >
                                                                 <!-- details -->";
 
-                                                        // get payer details   
-                                                        $sql_query_payer = "SELECT * FROM users WHERE id=\"$sub_transaction_details[payer_id]\"";
-                                                        $payer_result = mysqli_query($db_connection,$sql_query_payer);
-                                                        if (!$payer_result) {
-                                                                log_alert(mysqli_error(),"error");
-                                                        } else {
-                                                                $payer_details = mysqli_fetch_assoc($payer_result);
-                                                                        echo "<div style=\"border: solid #a49797 3px;\" class=\"w-100\" >$payer_details[username]</div>";
-                                                                        echo "<div style=\"border: solid #a49797 3px;\" class=\"w-100\" >$payer_details[name]</div>";
-                                                                        echo "<div style=\"border: solid #a49797 3px;\" class=\"w-100\" >$payer_details[surname]</div>";
-                                                                        echo "<div style=\"border: solid #a49797 3px;\" class=\"w-100\" >$payer_details[contact_cell]</div>";
-                                                                        echo "<div style=\"border: solid #a49797 3px;\" class=\"w-100\" >$payer_details[email]</div>";
-                                                                        echo "<div style=\"border: solid #a49797 3px;\" class=\"w-100\" >$payer_details[bank_name]</div>";
-                                                                echo "</div>";
-
-                                                                echo "<!-- status -->";
-                                                                echo "<div class=\"status d-flex justify-content-around\">";
-                                                                        echo "<div style=\"border: solid #a49797 3px;\" class=\"w-100 \" ><Strong>Status</Strong></div>";
-                                                                        echo "<div style=\"border: solid #a49797 3px;\" class=\"w-100 \" ><Strong>Pending</Strong></div>";
-                                                                        echo "<div style=\"border: solid #a49797 3px;\" class=\"w-100 \" ><Strong>Marked As Paid</Strong></div>";
-
-                                                                echo "<!-- form start -->";
-
-                                                                if ($sub_transaction_details['marked_as_recieved'] == 1) {
-                                                                        echo "<div style=\"border: solid #a49797 3px;\" class=\"w-100 \" ><Strong>Marked As Recieved</Strong></div>";
+                                                                // get payer details   
+                                                                $sql_query_payer = "SELECT * FROM users WHERE id=\"$sub_transaction_details[payer_id]\"";
+                                                                $payer_result = mysqli_query($db_connection,$sql_query_payer);
+                                                                if (!$payer_result) {
+                                                                        log_alert(mysqli_error(),"error");
                                                                 } else {
-                                                                        echo "<div style=\"border: solid #a49797 3px;\" class=\"w-100 cell\">";
-                                                                                echo "<form action=\"\" method=\"post\" class=\"d-flex\">";
+                                                                        $payer_details = mysqli_fetch_assoc($payer_result);
 
-                                                                                        echo "<div class=\"custom-control custom-switch\">";
-                                                                                                echo "<input type=\"hidden\" name=\"user_id\" value=\"$user_details[id]\">";
-                                                                                                echo "<input type=\"hidden\" name=\"sub_transaction_id\" value=\"$sub_transaction_details[id]\">";
-                                                                                                echo "<input type=\"checkbox\" class=\"custom-control-input\" name=\"mark_recieved\" value=\"1\" id=\"customSwitch1\">";
-                                                                                                echo "<label class=\"custom-control-label\" for=\"customSwitch1\">Mark As Recieved</label>";
-                                                                                        echo "</div>";
-
-                                                                                        echo "<button type=\"submit\" class=\"btn btn-primary btn-sm\">Submit</button>";
+                                                                        // status start
+                                                                        echo "<!-- status -->";
+                                                                        echo "<div class=\"status border\">";
+                                                                                echo "<div style=\"border: solid #a49797 1px;\" class=\"my-1 d-flex justify-content-between w-100 bg-primary \" >
+                                                                                        <h5 class=\"mx-auto\">Status</h5>
+                                                                                </div>";
+                                                                                echo "  <div style=\"border: solid #a49797 1px;\" class=\"my-1 d-flex justify-content-between  w-100 \" >
+                                                                                                <Strong class=\"mx-auto\">Pending</Strong>
+                                                                                                <i class=\"fas fa-check-square text-primary fa-2x mr-5\"></i>
+                                                                                        </div>";
+                                                                                $check_payed = "" ;
+                                                                                if ($sub_transaction_details['marked_as_paid'] == 1) {
+                                                                                        $check_payed = "text-primary";
+                                                                                }
+                                                                                echo " <div style=\"border: solid #a49797 1px;\" class=\"my-1 d-flex justify-content-between  w-100 \" >
+                                                                                                <Strong class=\"mx-auto\">Marked As Paid</Strong>
+                                                                                                <i class=\"fas fa-check-square $check_payed fa-2x mr-5\"></i>
+                                                                                        </div>";
+                                                                                //form start     
+                                                                                echo "<!-- form start -->";
+                                                                                        if ($sub_transaction_details['marked_as_recieved'] == 1) {
+                                                                                                echo "  <div style=\"border: solid #a49797 1px;\" class=\"my-1  d-flex justify-content-between  w-100 \" >
+                                                                                                                <Strong class=\"mx-auto\">Marked As Recieved</Strong>
+                                                                                                                <i class=\"fas fa-check-square text-primary fa-2x mr-5\"></i>
+                                                                                                        </div>";
+                                                                                        } else {
+                                                                                                echo "<div style=\"border: solid #a49797 1px;\" class=\"my-1 w-100 cell\">";
+                                                                                                        echo "<form action=\"\" method=\"post\" class=\"d-flex justify-content-around\">";
+                                
+                                                                                                                echo "<div class=\"custom-control custom-switch pt-1\">";
+                                                                                                                        echo "<input type=\"hidden\" name=\"user_id\" value=\"$user_details[id]\">";
+                                                                                                                        echo "<input type=\"hidden\" name=\"sub_transaction_id\" value=\"$sub_transaction_details[id]\">";
+                                                                                                                        echo "<input type=\"checkbox\" class=\"custom-control-input\" name=\"mark_recieved\" value=\"1\" id=\"customSwitch1\">";
+                                                                                                                        echo "<label class=\"custom-control-label\" for=\"customSwitch1\">Mark As Recieved</label>";
+                                                                                                                echo "</div>";
+                                
+                                                                                                                echo "<button type=\"submit\" class=\"btn btn-primary btn-sm py-0 my-1\">Submit</button>";
+                                                                                                
+                                                                                                        echo "</form>";
+                                
+                                                                                                echo "</div>";
+                                                                                        }
+                                                                                echo "<!-- form end -->";
+                                                                                // form end
+                
+                
+                                                                                echo "  <div style=\"border: solid #a49797 1px;\" class=\"my-1 d-flex justify-content-between w-100 \" >
+                                                                                                <Strong class=\"mx-auto\">Completed</Strong>
+                                                                                                <i class=\"fas fa-check-square fa-2x mr-5\"></i>
+                                                                                        </div>";
+                                                                                echo "  <div style=\"border: solid #a49797 1px; display:none !important;\" class=\"my-1 d-flex justify-content-between w-100 \" >
+                                                                                                <Strong class=\"mx-auto\">Cancelled</Strong>
+                                                                                                <i class=\"fas fa-check-square fa-2x mr-5\"></i>
+                                                                                        </div>";
+                                                                                echo "</div>";
+                                                                                // status stop
                                                                         
-                                                                                echo "</form>";
-
+                                                                        
+                                                                        // payer details start
+                                                                        echo "<div class=\" my-3 border\">";
+                                                                        echo "<div style=\"border: solid #a49797 1px;\" class=\"my-1 w-100 bg-primary\" ><h5>Contact Details</h5></div>";
+                                                                        echo "<div style=\"border: solid #a49797 1px;\" class=\"my-1 w-100\" >$payer_details[username]</div>";
+                                                                        echo "<div style=\"border: solid #a49797 1px;\" class=\"my-1 w-100\" >$payer_details[name]</div>";
+                                                                                echo "<div style=\"border: solid #a49797 1px;\" class=\"my-1 w-100\" >$payer_details[surname]</div>";
+                                                                                echo "<div style=\"border: solid #a49797 1px;\" class=\"my-1 w-100\" >$payer_details[contact_cell]</div>";
+                                                                                echo "<div style=\"border: solid #a49797 1px;\" class=\"my-1 w-100\" >$payer_details[email]</div>";
+                                                                                echo "<div style=\"border: solid #a49797 1px;\" class=\"my-1 w-100\" >$payer_details[bank_name]</div>";
                                                                         echo "</div>";
-                                                                }
-                                                                
+                                                                        echo "</div>";
+                                                                        // payer details end
 
-                                                                echo "<!-- form end -->";
-
-                                                                echo "<div style=\"border: solid #a49797 3px;\" class=\"w-100 \" ><Strong>Completed</Strong></div>";
-                                                                echo "<div style=\"border: solid #a49797 3px;\" class=\"w-100 \" ><Strong>Cancelled</Strong></div>";
-                                                                echo "</div>";
+                                                                        // time start
+                                                                        echo "<!-- time -->";
+                                                                        echo "<div class=\"time\">";
+                                                                                echo "<div>Time Left: </div>";
 
                                                                 echo "<!-- time -->";
                                                                 echo "<div class=\"time\">";
@@ -110,11 +144,9 @@
                                                                                 else{
                                                                                         echo "Timer still running";
                                                                                 }
-                                                        
-                                                                        echo "</div>";
 
-                                                                echo "</div>";
-                                                                echo "</div>";
+                                                                        echo "</div>";
+                                                        echo "</div>";
                                                         }
                                                         
                                                 }

@@ -2,7 +2,10 @@
 include('admin_nav.php');
 require_once("../global_functions.php");
 connect_to_db();
-    
+$user = "";
+$trans = ""; 
+$id_array= array();
+$id_trans = array();
 //process a transaction
 security_check();
 if (isset($_POST["submit"])) {
@@ -36,6 +39,7 @@ if (isset($_POST["submit"])) {
 
                 // loop through the payers
                 $index = 0;
+				
                 foreach ($selected_payers as  $payer_id ) {
                     // create subtransactions
                     $time = time();
@@ -112,6 +116,7 @@ if (isset($_POST["submit"])) {
                                     </thead>
                                     <tbody>
 									<?php
+										$count = 0;
 										$sql_query_pending_trans = "SELECT * FROM transactions WHERE status='pending' AND total_sub_transactions>='1' ORDER BY id desc";
 										$result_p_t = mysqli_query($db_connection,$sql_query_pending_trans);
 										if (!$result_p_t) {
@@ -127,6 +132,10 @@ if (isset($_POST["submit"])) {
 															echo mysqli_error($db_connection);
 														} else {
 															$person = mysqli_fetch_assoc($result_person);
+															array_push($id_array,$person['id']);
+															array_push($id_trans, $row['id']);
+															$user = $person['id'];
+															$trans = $row['id'];
 															echo "<tr>
 																<td>".$row['id']."</td>
 																<td>".$person['username']."</td>
@@ -134,8 +143,10 @@ if (isset($_POST["submit"])) {
 																<td>".$person['surname']."</td>
 																<td>".$row['completed_sub_transactions']."/".$row['total_sub_transactions']."</td>
 																<td>".$row['total_return_amount']."</td>
-																<td><button class=\"btn btn-info\">more info</button></td>
+																<td><a class=\"btn btn-primary btn-sm\" href=\"more_info.php?user=".$id_array[$count]."&trans=".$id_trans[$count]."\">More Details</a></td>
+																
 																</tr>";
+																$count++;
 														}
 													}
 												}
@@ -191,6 +202,9 @@ if (isset($_POST["submit"])) {
 															echo mysqli_error($db_connection);
 														} else {
 															$person = mysqli_fetch_assoc($result_person);
+															array_push($id_array,$person['id']);
+															array_push($id_trans, $row['id']);
+												
 															echo "<tr>
 																<td>".$row['id']."</td>
 																<td>".$person['username']."</td>
@@ -198,8 +212,10 @@ if (isset($_POST["submit"])) {
 																<td>".$person['surname']."</td>
 																<td>".$row['completed_sub_transactions']."/".$row['total_sub_transactions']."</td>
 																<td>".$row['total_return_amount']."</td>
-																<td><button class=\"btn btn-info\">more info</button></td>
+																<td><a class=\"btn btn-primary btn-sm\" href=\"more_info.php?user=".$id_array[$count]."&trans=".$id_trans[$count]."\">More Details</a></td>
 																</tr>";
+																
+														array_pop($id_array);
 														}
 													}
 												}
@@ -255,6 +271,9 @@ if (isset($_POST["submit"])) {
 															echo mysqli_error($db_connection);
 														} else {
 															$person = mysqli_fetch_assoc($result_person);
+															array_push($id_array,$person['id']);
+															array_push($id_trans, $row['id']);
+
 															echo "<tr>
 																<td>".$row['id']."</td>
 																<td>".$person['username']."</td>
@@ -262,8 +281,10 @@ if (isset($_POST["submit"])) {
 																<td>".$person['surname']."</td>
 																<td>".$row['completed_sub_transactions']."/".$row['total_sub_transactions']."</td>
 																<td>".$row['total_return_amount']."</td>
-																<td>more info</td>
+																<td><a class=\"btn btn-primary btn-sm\" href=\"more_info.php?user=".$id_array[$count]."&trans=".$id_trans[$count]."\">More Details</a></td>
 																</tr>";
+																
+															array_pop($id_array);
 														}
 													}
 												}
