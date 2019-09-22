@@ -5,11 +5,17 @@
     if (isset($_POST['submit'])) {
         array_push($message,"before function");
         foreach ($_POST as $key => $value) {
+            if (gettype($value) == "array") {
+                $value = implode(" ",$value);
+            }
             array_push($message,$value);
         }
         array_push($message,"after function");
         security_check();
         foreach ($_POST as $key => $value) {
+            if (gettype($value) == "array") {
+                $value = implode(" ",$value);
+            }
             array_push($message,$value);
         }
     }
@@ -28,12 +34,38 @@
     <div class="alert alert-primary" role="alert">
         <?php
             foreach ($message as $key => $value) {
-                echo $value."</br>";
+                if (gettype($value) == "array") {
+                    print_r($value);
+                } else {
+                    echo $value."</br>";
+                }
+                
             }
         ?>
     </div>
 
     <form action="" method="post">
+        <div class="checkboxes">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="checked[]" value="1" id="defaultCheck1">
+                <label class="form-check-label" for="defaultCheck1">
+                    checkbox 1
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="checked[]" value="2" id="defaultCheck2">
+                <label class="form-check-label" for="defaultCheck3">
+                    checkbox 2
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="checked[]" value="3" id="defaultCheck3">
+                <label class="form-check-label" for="defaultCheck3">
+                    checkbox 3
+                </label>
+            </div>
+        </div>
+
         <input type="text" name="text" id="">
         <button name="submit" class="btn btn-primary">submit</button>
     </form>

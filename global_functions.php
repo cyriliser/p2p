@@ -87,29 +87,72 @@
 
     function security_check(){
         global $db_connection;
-        // foreach ($_POST as $key => $value) {
-        // 		if(empty($value))
-        // 			return false;
-        //     $value = mysqli_real_escape_string($db_connection,$value);
-        //     $value = addslashes($value);
-        //     $_POST[$key] =  $value;
-        // }
 
-        // foreach ($_GET as $key => $value) {
-        // 		if(empty($value))
-        // 			return false;
-        //     $value = mysqli_real_escape_string($db_connection,$value);
-        //     $value = addslashes($value);
-        //     $_POST[$key] =  $value;
-        // }
-        // foreach ($_REQUEST as $key => $value) {
-        // 		if(empty($value))
-        // 			return false;
-        //     $value = mysqli_real_escape_string($db_connection,$value);
-        //     $value = addslashes($value);
-        //     $_REQUEST[$key] =  $value;
-        // }
-        // return true;
+        foreach ($_POST as $key => $value) {
+            if (gettype($value) == "array") {
+                // is an array
+                echo "array";
+                foreach ($value as $sub_key => $sub_value) {
+                    $sub_value = mysqli_real_escape_string($db_connection,$sub_value);
+                    $sub_value = addslashes($sub_value);
+                    $value[$sub_key] =  $sub_value;
+                    $_POST[$key] =  $value;
+                }
+            } else {
+                // not an array
+                if(empty($value)){
+                    return false;
+                }
+                $value = mysqli_real_escape_string($db_connection,$value);
+                $value = addslashes($value);
+                $_POST[$key] =  $value;
+            }
+            
+        }
+        
+        foreach ($_GET as $key => $value) {
+            if (gettype($value) == "array") {
+                // is an array
+                echo "array";
+                foreach ($value as $sub_key => $sub_value) {
+                    $sub_value = mysqli_real_escape_string($db_connection,$sub_value);
+                    $sub_value = addslashes($sub_value);
+                    $value[$sub_key] =  $sub_value;
+                    $_GET[$key] =  $value;
+                }
+            } else {
+                // not an array
+                if(empty($value)){
+                    return false;
+                }
+                $value = mysqli_real_escape_string($db_connection,$value);
+                $value = addslashes($value);
+                $_GET[$key] =  $value;
+            }
+            
+        }
+        foreach ($_REQUEST as $key => $value) {
+            if (gettype($value) == "array") {
+                // is an array
+                echo "array";
+                foreach ($value as $sub_key => $sub_value) {
+                    $sub_value = mysqli_real_escape_string($db_connection,$sub_value);
+                    $sub_value = addslashes($sub_value);
+                    $value[$sub_key] =  $sub_value;
+                    $_REQUEST[$key] =  $value;
+                }
+            } else {
+                // not an array
+                if(empty($value)){
+                    return false;
+                }
+                $value = mysqli_real_escape_string($db_connection,$value);
+                $value = addslashes($value);
+                $_REQUEST[$key] =  $value;
+            }
+            
+        }
+        return true;
     }
 
     function countDown($time,$hours,$showClock) {
@@ -117,32 +160,29 @@
         $db_time = ($time + ($hours*3600));
         $current_time = time();
         $time_left = $db_time - $current_time;  
-            if($showClock) {
-        echo '
-            <link rel="stylesheet" href="../assets/css/flipclock.css">
-            <div class="clock" style="margin:2em;"></div>
-            <link rel="stylesheet" href="/assets/css/flipclock.css">
-            <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-            <script src="/assets/js/flipclock.js"></script>	
-            <div id="x"></div>
-            <script type="text/javascript">
-                var clock;
-                $(document).ready(function() {
-                    // Calculate the difference in seconds between the future and current date
-                    var diff = '.$db_time.' - '.$current_time.';
-                    // Instantiate a coutdown FlipClock
-                    clock = $(\'.clock\').FlipClock(diff, {
-                        clockFace: \'DailyCounter\',
-                        countdown: true,
-                        showSeconds: true
-                    });
-                });
-            </script>';
-            }
-        if($time_left <= 0)
-            return true;
-        else
-        return false;
+        if($showClock) {
+            if($time_left <= 0){
+                return true;
+            }else{
+                echo '
+                    <div class="clock" style="margin:2em;"></div>
+                    
+                    <script type="text/javascript">
+                        var clock;
+                        $(document).ready(function() {
+                            // Calculate the difference in seconds between the future and current date
+                            var diff = '.$db_time.' - '.$current_time.';
+                            // Instantiate a coutdown FlipClock
+                            clock = $(\'.clock\').FlipClock(diff, {
+                                clockFace: \'DailyCounter\',
+                                countdown: true,
+                                showSeconds: true
+                            });
+                        });
+                    </script>';
+                    }
+            return false;
+        }
     }
 
     function is_reloaded(){

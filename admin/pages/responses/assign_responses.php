@@ -41,7 +41,8 @@
                                 $payer_package_details = mysqli_fetch_assoc($result_payer_package);
                                 
                                 //make the insert
-                                $sql_query_sub = "INSERT INTO sub_transactions (main_transaction_id, payer_id, recipient_id, amount, marked_as_paid, marked_as_recieved, status) VALUES ($main_trans_details[id],$payer_id,$reciever_id,$payer_package_details[amount],'0','0','pending')";
+                                $time = time();
+                                $sql_query_sub = "INSERT INTO sub_transactions (main_transaction_id, payer_id, recipient_id, amount, marked_as_paid, marked_as_recieved, status, time_assigned) VALUES ($main_trans_details[id],$payer_id,$reciever_id,$payer_package_details[amount],'0','0','pending', \"$time\")";
                                 $result_sub = mysqli_query($db_connection,$sql_query_sub);
                                 if (!$result_sub) {
                                     echo mysqli_error($db_connection);
