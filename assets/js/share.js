@@ -5,8 +5,8 @@ const share_web_api = ()=>{
 
     const title = window.document.title;
     // const url = window.document.location.href;
-    // const url = window.document.querySelector("#share_url").value;
-    const url = "cyriliser.co.za";
+    const url = window.document.querySelector("#share_url").value;
+    // const url = "cyriliser.co.za";
 
     // check if able to use webapi
     if (navigator.share) {

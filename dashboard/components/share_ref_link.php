@@ -10,7 +10,7 @@
             <div class="input-group-prepend">
                 <span class="input-group-text" id="inputGroup-sizing-lg">Share Link</span>
             </div>
-                <input id="share_url" type="text" readonly class="form-control " value="<?php echo "http:localhost/$base_url/login/registration.php?ref=$user_details[id] "; ?>" placeholder="<?php echo "http:localhost/$base_url/login/registration.php?ref=$user_details[id] "; ?>" aria-label="Large" aria-describedby="inputGroup-sizing-sm">
+                <input id="share_url" type="text" readonly class="form-control " value="<?php echo "$base_url/login/registration.php?ref=$user_details[id] "; ?>" placeholder="<?php echo "http:localhost/$base_url/login/registration.php?ref=$user_details[id] "; ?>" aria-label="Large" aria-describedby="inputGroup-sizing-sm">
             </div>
         </div>
 
