@@ -37,7 +37,7 @@ function validate_data($email,$username) {
 	return null;
 }
 
-if (!is_reloaded()) {
+//if (!is_reloaded()) {
   // If form submitted, insert values into the database.
   if (isset($_REQUEST['username'])){
     if(isset($_SESSION['form_data']))
@@ -94,7 +94,7 @@ if (!is_reloaded()) {
       $_SESSION['registration_successfull'] = true;
       header("Location: $base_url/login/login.php");
     }
-  }
+  //}
 }
 //header("Location: $base_url/login/registration.php");
 ?>
