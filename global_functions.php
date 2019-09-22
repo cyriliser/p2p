@@ -87,6 +87,7 @@
 
     function security_check(){
         global $db_connection;
+
         foreach ($_POST as $key => $value) {
             if (gettype($value) == "array") {
                 // is an array
