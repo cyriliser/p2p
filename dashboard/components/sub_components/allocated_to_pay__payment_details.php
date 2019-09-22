@@ -18,11 +18,17 @@ if (!$recipient_result && sqli_num_rows() == 0) {
 
 
 <!-- status -->
-<div class="status d-flex justify-content-around">
+<div class="status border px-1 ">
+        <div style="border: solid #a49797 1px;" class="bg-primary my-1 text-center w-100 username" >
+                <h5>Status</h5>
+        </div>
+        <div style="border: solid #a49797 1px;" class="my-1 d-flex justify-content-between w-100 name">
+                <strong class="mx-auto">Pending</strong>
+                <i class="fas fa-check-square text-primary fa-2x mr-5"></i>
+        </div>
 
-        <div style="border: solid #a49797 3px;" class="w-100 username" ><Strong>Status</Strong></div>
-        <div style="border: solid #a49797 3px;" class="w-100 name">Pending</div>
-        <div style="border: solid #a49797 3px;" class="w-100 cell">
+        <!-- form start -->
+        <div style="border: solid #a49797 1px;" class="my-1 w-100 cell">
                 <?php 
                 // log_alert($sub_transaction_details['marked_as_paid']);
                 if ($sub_transaction_details['marked_as_paid'] == 1) {
@@ -31,10 +37,10 @@ if (!$recipient_result && sqli_num_rows() == 0) {
                 }
                 else {
                         // if not paid display form
-                        echo "<form action=\"\" method=\"post\" class=\"d-flex\"> ";
+                        echo "<form action=\"\" method=\"post\" class=\"d-flex justify-content-between\"> ";
                 }
                 ?>
-                        <div class="custom-control custom-switch">
+                        <div class="custom-control custom-switch mx-auto">
                                 <?php 
                                         echo "<input type=\"hidden\" name=\"user_id\" value=\"$user_details[id]\">";
                                         echo "<input type=\"hidden\" name=\"main_transaction_id\" value=\"$sub_transaction_details[main_transaction_id]\">";
@@ -42,20 +48,45 @@ if (!$recipient_result && sqli_num_rows() == 0) {
                                         echo "<label class=\"custom-control-label\" for=\"customSwitch1\">Mark As Paid</label>";
                                 ?>
                         </div>
-                        <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+                        <button type="submit" class="btn btn-primary btn-sm mr-4 py-0">Submit</button>
                 </form>
 
                 <?php 
                 if ($sub_transaction_details['marked_as_paid'] == 1) {
                         // if paid display received
-                        echo "<div style=\"border: solid #a49797 3px;\" class=\"w-100 \">Marked As Recieved</div>";
+                        echo "  <div style=\"border: solid #a49797 1px;\" class=\"my-1 d-flex justify-content-between w-100 \">
+                                        <strong class=\"mx-auto\">Marked As Recieved</strong>
+                                        <i class=\"fas fa-check-square text-primary fa-2x mr-5\"></i>
+                                </div>";
                 }
                 ?>
         </div>
-        <div style="border: solid #a49797 3px;" class="w-100 surname">Marked As Recieved</div>
-        <div style="border: solid #a49797 3px;" class="w-100 email">Completed</div>
-        <div style="border: solid #a49797 3px;" class="w-100 bankname">Cancelled</div>
-</div>
+        <!-- form end -->
+
+        <div style="border: solid #a49797 1px;" class="my-1 d-flex justify-content-between w-100 name">
+                <strong class="mx-auto">Marked as Received</strong>
+                <?php
+                        $check_recieved ="";
+                        if ($sub_transaction_details['marked_as_recieved'] == 1) {
+                                $check_recieved = "text-primary";
+                        }
+                        echo "<i class=\"fas fa-check-square $check_recieved fa-2x mr-5\"></i>" ;
+                ?>
+        </div>
+        <div style="border: solid #a49797 1px;" class="my-1 d-flex justify-content-between w-100 name">
+                <strong class="mx-auto">Completed</strong>
+                <?php
+                        $check_complete ="";
+                        if ($sub_transaction_details['status'] == "completed") {
+                                $check_complete = "text-primary";
+                        }
+                        echo "<i class=\"fas fa-check-square $check_complete fa-2x mr-5\"></i>" ;
+                ?>
+        </div>        
+        <div style="border: solid #a49797 1px; display:none !important;" class="my-1 d-flex justify-content-between w-100 name">
+                <strong class="mx-auto">Cancelled</strong>
+                <i class="fas fa-check-square fa-2x mr-5"></i>
+        </div></div>
 
 <!-- clock -->
 <div>
