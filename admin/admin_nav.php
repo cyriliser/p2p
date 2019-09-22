@@ -43,9 +43,8 @@ require_once("../global_functions.php");
             <!-- top right navbar -->
             <div class="header-right">
 
-                <a href="message-task.html" class="btn btn-info" title="New Message"><b>30 </b><i class="fa fa-envelope-o fa-2x"></i></a>
-                <a href="message-task.html" class="btn btn-primary" title="New Task"><b>40 </b><i class="fa fa-bars fa-2x"></i></a>
-                <a href="admin_login.php" class="btn btn-danger" title="Logout"><i class="fa fa-exclamation-circle fa-2x"></i></a>
+    
+                <a href="admin_login.php" class="btn btn-danger" href="<?php echo $admin_url; ?>/login/logout.php" title="Logout">LogOut</a>
 
             </div>
         </nav>
@@ -61,7 +60,7 @@ require_once("../global_functions.php");
                         <div class="user-img-div">
                             <div class="user-img-div inner-text" style="display:flex !important;">
                                 <h4><i class="fa fa-sign-in "></i>   Administrator: <?php echo $_SESSION['username']; ?></h4>
-                                <a href="<?php echo $admin_url; ?>/login/logout.php" class="btn btn-primary btn-sm " style="margin-bottom:30px !important; margin-top:15px !important;" >LogOut</a>
+                                
                             </div>
                         </div>
                     </li>
@@ -84,57 +83,6 @@ require_once("../global_functions.php");
                     <!--Transactions LINK  -->
                     <li>
                         <a class="" href="<?php echo $admin_url; ?>/transactions.php"><i class="fa fa-dashboard "></i>Transactions</a>
-                    </li>
-                    <!-- SETTINGS ITEMS OPENS UP INTO MORE ITEMS -->
-                    <li>
-                        <a href="#"><i class="fa fa-desktop "></i>Settings <span class="fa arrow"></span></a>
-                         <ul class="nav nav-second-level">
-                            <li>
-                                <a href="panel-tabs.html"><i class="fa fa-toggle-on"></i>Tabs & Panels</a>
-                            </li>
-                            <li>
-                                <a href="notification.html"><i class="fa fa-bell "></i>Notifications</a>
-                            </li>
-                             <li>
-                                <a href="progress.html"><i class="fa fa-circle-o "></i>Progressbars</a>
-                            </li>
-                             <li>
-                                <a href="buttons.html"><i class="fa fa-code "></i>Buttons</a>
-                            </li>
-                             <li>
-                                <a href="icons.html"><i class="fa fa-bug "></i>Icons</a>
-                            </li>
-                             <li>
-                                <a href="wizard.html"><i class="fa fa-bug "></i>Wizard</a>
-                            </li>
-                             <li>
-                                <a href="typography.html"><i class="fa fa-edit "></i>Typography</a>
-                            </li>
-                             <li>
-                                <a href="grid.html"><i class="fa fa-eyedropper "></i>Grid</a>
-                            </li>    
-                        </ul>
-                    </li>
-                    <!-- MANAGE USERS -->
-                    <li>
-                        <a href="#"><i class="fa fa-yelp "></i>Manage Users <span class="fa arrow"></span></a>
-                         <ul class="nav nav-second-level">
-                            <li>
-                                <a href="transactions.php"><i class="fa fa-coffee"></i>Transactions</a>
-                            </li>
-                            <li>
-                                <a href="pricing.html"><i class="fa fa-flash "></i>Profits</a>
-                            </li>
-                             <li>
-                                <a href="users.php"><i class="fa fa-key "></i>Users</a>
-                            </li>
-                            
-                             <li>
-                                <a href="assign.php"><i class="fa fa-recycle "></i>Assign Users</a>
-                            </li>
-                            
-                           
-                        </ul>
                     </li>
                 </ul>
             </div>
