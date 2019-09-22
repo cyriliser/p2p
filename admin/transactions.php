@@ -42,8 +42,9 @@ if (isset($_POST["submit"])) {
 				
                 foreach ($selected_payers as  $payer_id ) {
                     // create subtransactions
-                    $trans_query_ins_sub = "INSERT INTO sub_transactions (main_transaction_id, payer_id, recipient_id, amount, marked_as_paid, marked_as_recieved, status) 
-                                                                VALUES (\"$main_trans_details[id]\", \"$payer_id\", \"$main_trans_details[recipient_id]\", \"$payer_amounts[$index]\", '0', '0', 'pending') ";
+                    $time = time();
+                    $trans_query_ins_sub = "INSERT INTO sub_transactions (main_transaction_id, payer_id, recipient_id, amount, marked_as_paid, marked_as_recieved, status, time_assigned) 
+                                                                VALUES (\"$main_trans_details[id]\", \"$payer_id\", \"$main_trans_details[recipient_id]\", \"$payer_amounts[$index]\", '0', '0', 'pending', \"$time\") ";
                     $trans_result_ins_sub = mysqli_query($db_connection,$trans_query_ins_sub) ;
                     if (!$trans_result_ins_sub) {
                         log_alert(mysqli_error($db_connection));

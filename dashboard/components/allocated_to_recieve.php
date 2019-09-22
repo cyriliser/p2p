@@ -132,19 +132,18 @@
                                                                         echo "<div class=\"time\">";
                                                                                 echo "<div>Time Left: </div>";
 
-                                                                                // $twelve_hrs = 6000;
-                                                                                $twelve_hrs = 43200;
-                                                                                $db_time = 1566381518 ;
-                                                                                $current_time = time();
-                                                                                $time_left = $db_time + $twelve_hrs - $current_time;
-
-                                                                                echo "<div id=\"time_value\" style=\"display:none;\">". $time_left  . "</div>";
-
-                                                                                echo "<div class=\"count-down row\">";
-                                                                                        echo "<div class=\"col-sm-2\"></div>";
-                                                                                        echo "<div class=\"clock_verification col-sm-8\" style=\"margin:2em;\"></div>";
-                                                                                        echo "<div class=\"col-sm-2\"></div>";
-                                                                                echo "</div>";
+                                                                echo "<!-- time -->";
+                                                                echo "<div class=\"time\">";
+                                                                        echo "<div class=\"count-down row\">";
+                                                                                $db_time = $sub_transaction_details['time_assigned'];
+                                                                                if(countDown($db_time,12,true)){
+                                                                                        echo "<div class=\"alert alert-warning\" role=\"alert\">
+                                                                                                <h1>12 hours have passed please Notify the Admins. </br> we apologize for the inconvenience</h1>
+                                                                                                </div>";
+                                                                                }
+                                                                                else{
+                                                                                        echo "Timer still running";
+                                                                                }
 
                                                                         echo "</div>";
                                                         echo "</div>";
