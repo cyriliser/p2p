@@ -30,7 +30,9 @@
         <?php 
             // pages with forms or that submit data will have that data processed here
             security_check();
-            include('responses.php'); 
+            if (!is_reloaded()) {
+                include('responses.php'); 
+            }
         ?>
         
         <!-- header -->

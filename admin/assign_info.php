@@ -342,34 +342,37 @@
 
 
     // select function to execute
-    if(isset($_POST["submit"])){
-        // array_push($message,"submit");
-        switch ($_POST["submit"]) {
-            case 'payers_to_recievers':
-                // array_push($message,"func called ");
-                payers_to_recievers();
-                break;
-            case 'payers_to_others':
-                payers_to_others();
-                break;
-
-            case 'recievers_to_payers':
-                recievers_to_payers();
-                break;
-            case 'recievers_to_others':
-                recievers_to_others();
-                break;
-            
-            case 'others_to_payers':
-                others_to_payers();
-                break;
-            case 'others_to_recievers':
-                others_to_recievers();
-                break;
-            
-            default:
-                # code...
-                break;
+    // check if page has been reloaded
+    if (!is_reloaded()) {
+        if(isset($_POST["submit"])){
+            // array_push($message,"submit");
+            switch ($_POST["submit"]) {
+                case 'payers_to_recievers':
+                    // array_push($message,"func called ");
+                    payers_to_recievers();
+                    break;
+                case 'payers_to_others':
+                    payers_to_others();
+                    break;
+    
+                case 'recievers_to_payers':
+                    recievers_to_payers();
+                    break;
+                case 'recievers_to_others':
+                    recievers_to_others();
+                    break;
+                
+                case 'others_to_payers':
+                    others_to_payers();
+                    break;
+                case 'others_to_recievers':
+                    others_to_recievers();
+                    break;
+                
+                default:
+                    # code...
+                    break;
+            }
         }
     }
 
