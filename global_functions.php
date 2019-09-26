@@ -185,6 +185,12 @@
         }
     }
 
+    function calc_time_left($db_time,$total_time){
+        $db_time = ($db_time + ($total_time*3600));
+        $time_left = $db_time -  time(); 
+        return $time_left;
+    }
+
     function is_reloaded(){
         $is_page_refreshed = (isset($_SERVER['HTTP_CACHE_CONTROL']) && $_SERVER['HTTP_CACHE_CONTROL'] == 'max-age=0');
         if($is_page_refreshed ) {
