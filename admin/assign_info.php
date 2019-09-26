@@ -550,6 +550,8 @@
                                                             echo log_alert($db_connection,"error");
                                                         } else {
                                                             $info_rec_user_details = mysqli_fetch_assoc($result_info_user_rec);
+                                                            $time_left = calc_time_left($info_main_trans_details['time_created'],5) / 86400;
+                                                            $time_left = ceil($time_left);
                                                             echo "
                                                                 <tr>
                                                                     <!-- <th scope=\"row\">1</th> -->
@@ -559,7 +561,7 @@
                                                                     <td>$info_rec_user_details[username]</td>
                                                                     <td>$info_main_trans_details[total_return_amount]</td>
                                                                     <td>$info_rec_user_details[bank_name]</td>
-                                                                    <td>6hrs</td>
+                                                                    <td>$time_left</td>
                                                                     <td>
                                                                         <button class=\"btn btn-success \">More</button>
                                                                     </td>
