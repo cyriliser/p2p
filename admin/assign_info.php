@@ -148,6 +148,12 @@
         }
     }
 
+    function calc_time_left($db_time,$total_time){
+        $db_time = ($db_time + ($total_time*3600));
+        $time_left = $db_time -  time(); 
+        return $time_left;
+    }
+
 
 
     // payers actions
@@ -466,6 +472,8 @@
                                                         echo log_alert($db_connection,"error");
                                                     } else {
                                                         $info_payer_pckg_details = mysqli_fetch_assoc($result_info_payer_pckg);
+                                                        $time_left = calc_time_left($info_payer_details['reg_time'],12) / 3600;
+                                                        $time_left = ceil($time_left);
                                                         echo "
                                                             <tr>
                                                                 <!-- <th scope=\"row\">1</th> -->
@@ -475,7 +483,7 @@
                                                                 <td>$info_payer_details[username]</td>
                                                                 <td>$info_payer_pckg_details[amount]</td>
                                                                 <td>$info_payer_details[bank_name]</td>
-                                                                <td>6hrs</td>
+                                                                <td>$time_left Hrs</td>
                                                                 <td>
                                                                     <button class=\"btn btn-success \">More</button>
                                                                 </td>
