@@ -113,7 +113,8 @@ if (isset($_POST["submit"])) {
                     }
     
                     // update main transaction
-                    $trans_query_up_main = "UPDATE transactions SET total_sub_transactions=\"$num_selected_payers\" WHERE id=\"$main_trans_details[id]\" ";
+                    $time = time();
+                    $trans_query_up_main = "UPDATE transactions SET total_sub_transactions=\"$num_selected_payers\", time_created=\"$time\" WHERE id=\"$main_trans_details[id]\" ";
                     $trans_result_up_main = mysqli_query($db_connection,$trans_query_up_main);
                     if (!$trans_result_up_main) {
                         log_alert(mysqli_error($db_connection));
@@ -165,6 +166,7 @@ if (isset($_POST["submit"])) {
 											<th>Surname</th>
 											<th>Subtrans</th>
 											<th>Total R</th>
+                                            <th>Time Created</th>
 											<th>More details</th>
                                         </tr>
                                     </thead>
@@ -189,7 +191,11 @@ if (isset($_POST["submit"])) {
 															array_push($id_array,$person['id']);
 															array_push($id_trans, $row['id']);
 															$user = $person['id'];
-															$trans = $row['id'];
+                                                            $trans = $row['id'];
+
+                                                            $time_left = calc_time_left($row['time_created'],12) / 3600;
+                                                            $time_left = ceil($time_left);
+
 															echo "<tr>
 																<td>".$row['id']."</td>
 																<td>".$person['username']."</td>
@@ -197,8 +203,8 @@ if (isset($_POST["submit"])) {
 																<td>".$person['surname']."</td>
 																<td>".$row['completed_sub_transactions']."/".$row['total_sub_transactions']."</td>
 																<td>".$row['total_return_amount']."</td>
+																<td>$time_left Hrs</td>
 																<td><a class=\"btn btn-primary btn-sm\" href=\"more_info.php?user=".$id_array[$count]."&trans=".$id_trans[$count]."\">More Details</a></td>
-																
 																</tr>";
 																$count++;
 														}
@@ -236,6 +242,7 @@ if (isset($_POST["submit"])) {
 											<th>Surname</th>
 											<th>Subtrans</th>
 											<th>Total R</th>
+											<th>Time Created</th>
 											<th>More details</th>
                                         </tr>
                                     </thead>
@@ -258,7 +265,10 @@ if (isset($_POST["submit"])) {
 															$person = mysqli_fetch_assoc($result_person);
 															array_push($id_array,$person['id']);
 															array_push($id_trans, $row['id']);
-												
+
+                                                            $time_left = calc_time_left($row['time_created'],12) / 3600;
+                                                            $time_left = ceil($time_left);
+
 															echo "<tr>
 																<td>".$row['id']."</td>
 																<td>".$person['username']."</td>
@@ -266,6 +276,7 @@ if (isset($_POST["submit"])) {
 																<td>".$person['surname']."</td>
 																<td>".$row['completed_sub_transactions']."/".$row['total_sub_transactions']."</td>
 																<td>".$row['total_return_amount']."</td>
+																<td>$time_left</td>
 																<td><a class=\"btn btn-primary btn-sm\" href=\"more_info.php?user=".$id_array[$count]."&trans=".$id_trans[$count]."\">More Details</a></td>
 																</tr>";
 																

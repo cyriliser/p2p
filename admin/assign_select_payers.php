@@ -103,6 +103,8 @@
                                                         echo log_alert($db_connection,"error");
                                                     } else {
                                                         $info_payer_pckg_details = mysqli_fetch_assoc($result_info_payer_pckg);
+                                                        $time_left = calc_time_left($info_payer_details['reg_time'],12) / 3600;
+                                                        $time_left = ceil($time_left);
                                                         echo "
                                                             <tr>
                                                                 <!-- <th scope=\"row\">1</th> -->
@@ -113,7 +115,7 @@
                                                                 <td>$info_payer_details[username]</td>
                                                                 <td>$info_payer_pckg_details[amount]</td>
                                                                 <td>$info_payer_details[bank_name]</td>
-                                                                <td>6hrs</td>
+                                                                <td>$time_left</td>
                                                                 <td>
                                                                     <button class=\"btn btn-secondary \">More</button>
                                                                 </td>

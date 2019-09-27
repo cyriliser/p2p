@@ -150,6 +150,7 @@
 
 
 
+
     // payers actions
         // payers to recievers
         function payers_to_recievers(){
@@ -466,6 +467,8 @@
                                                         echo log_alert($db_connection,"error");
                                                     } else {
                                                         $info_payer_pckg_details = mysqli_fetch_assoc($result_info_payer_pckg);
+                                                        $time_left = calc_time_left($info_payer_details['reg_time'],12) / 3600;
+                                                        $time_left = ceil($time_left);
                                                         echo "
                                                             <tr>
                                                                 <!-- <th scope=\"row\">1</th> -->
@@ -475,7 +478,7 @@
                                                                 <td>$info_payer_details[username]</td>
                                                                 <td>$info_payer_pckg_details[amount]</td>
                                                                 <td>$info_payer_details[bank_name]</td>
-                                                                <td>6hrs</td>
+                                                                <td>$time_left Hrs</td>
                                                                 <td>
                                                                     <button class=\"btn btn-success \">More</button>
                                                                 </td>
@@ -542,6 +545,8 @@
                                                             echo log_alert($db_connection,"error");
                                                         } else {
                                                             $info_rec_user_details = mysqli_fetch_assoc($result_info_user_rec);
+                                                            $time_left = calc_time_left($info_main_trans_details['time_created'],120) / 86400 ;
+                                                            $time_left = ceil($time_left);
                                                             echo "
                                                                 <tr>
                                                                     <!-- <th scope=\"row\">1</th> -->
@@ -551,7 +556,7 @@
                                                                     <td>$info_rec_user_details[username]</td>
                                                                     <td>$info_main_trans_details[total_return_amount]</td>
                                                                     <td>$info_rec_user_details[bank_name]</td>
-                                                                    <td>6hrs</td>
+                                                                    <td>$time_left Days</td>
                                                                     <td>
                                                                         <button class=\"btn btn-success \">More</button>
                                                                     </td>

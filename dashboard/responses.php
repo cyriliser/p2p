@@ -94,7 +94,8 @@
                             $user_package_details = mysqli_fetch_assoc($result_package);
 
                             // make the insert
-                            $sql_query_main_trans = "INSERT INTO transactions (recipient_id, transaction_package_id, recieved_amount, total_return_amount, completed_sub_transactions, status) VALUES ( \"$user_details_payer[id]\", \"$user_package_details[id]\", \"0\", \"$user_package_details[return_amount]\", \"0\", \"pending\" )";
+                            $time = time();
+                            $sql_query_main_trans = "INSERT INTO transactions (recipient_id, transaction_package_id, recieved_amount, total_return_amount, completed_sub_transactions, status, time_created) VALUES ( \"$user_details_payer[id]\", \"$user_package_details[id]\", \"0\", \"$user_package_details[return_amount]\", \"0\", \"pending\", $time)";
                             $result_main_trans = mysqli_query($db_connection,$sql_query_main_trans);
                             if (!$result_main_trans) {
                                 log_alert(mysqli_error($db_connection));
@@ -236,7 +237,8 @@
                                             
                                             // make insert query
                                             // add main transaction for user
-                                            $sql_query14 = "INSERT INTO transactions (recipient_id, transaction_package_id, recieved_amount, total_return_amount, completed_sub_transactions, status) VALUES ( \"$sub_transaction8_details[payer_id]\", \"$package_details[id]\", \"0\", \"$package_details[return_amount]\", \"0\", \"pending\" )";
+                                            $time = time();
+                                            $sql_query14 = "INSERT INTO transactions (recipient_id, transaction_package_id, recieved_amount, total_return_amount, completed_sub_transactions, status,time_created) VALUES ( \"$sub_transaction8_details[payer_id]\", \"$package_details[id]\", \"0\", \"$package_details[return_amount]\", \"0\", \"pending\", \"$time\" )";
                                             log_alert($sql_query14);
                                             $result14 = mysqli_query($db_connection,$sql_query14);
                                             if (!$result14) {
