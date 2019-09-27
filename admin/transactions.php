@@ -396,7 +396,7 @@ if (isset($_POST["submit"])) {
 											<th>Subtrans</th>
 											<th>Total R</th>
 											<th>Time Created</th>
-											<th>More details</th>
+											<!-- <th>More details</th> -->
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -422,18 +422,29 @@ if (isset($_POST["submit"])) {
                                                             $time_left = calc_time_left($row['time_created'],12) / 3600;
                                                             $time_left = ceil($time_left);
 
-															echo "<tr>
-																<td>".$row['id']."</td>
-																<td>".$person['username']."</td>
-																<td>".$person['name']."</td>
-																<td>".$person['surname']."</td>
-																<td>".$row['completed_sub_transactions']."/".$row['total_sub_transactions']."</td>
-																<td>".$row['total_return_amount']."</td>
-																<td>$time_left</td>
-																<td><a class=\"btn btn-primary btn-sm\" href=\"more_info.php?user=".$id_array[$count]."&trans=".$id_trans[$count]."\">More Details</a></td>
-																</tr>";
-																
-														array_pop($id_array);
+															echo "  <tr>
+                                                                        <td>".$row['id']."</td>
+                                                                        <td>".$person['username']."</td>
+                                                                        <td>".$person['name']."</td>
+                                                                        <td>".$person['surname']."</td>
+                                                                        <td>".$row['completed_sub_transactions']."/".$row['total_sub_transactions']."</td>
+                                                                        <td>".$row['total_return_amount']."</td>
+                                                                        <td>$time_left</td>
+                                                                        <td class=\"hide\"><a class=\"btn btn-primary btn-sm\" href=\"more_info.php?user=".$id_array[$count]."&trans=".$id_trans[$count]."\">More Details</a></td>
+                                                                        <td class=\"hide\"><button class=\"btn btn-primary btn-sm\" type=\"button\" data-toggle=\"collapse\" data-target=\"#more_info_$id_trans[$count]\" aria-expanded=\"true\" aria-controls=\"more_info_$id_trans[$count]\">More Details</button></td>
+                                                                    </tr>";
+                                                                
+                                                            // more info row
+                                                            $reciever_id = $id_array[$count];
+                                                            $transaction_id = $id_trans[$count];
+                                                            echo "  <tr class=\"collapse  bg-success\" id=\"more_info_$id_trans[$count]\" style=\"\">";
+                                                            ?>
+                                                                        <td colspan="8" class="card card-body  bg-secondary" >
+                                                                            heloo world
+                                                                        </td>
+                                                                    </tr>
+															<?php
+														    array_pop($id_array);
 														}
 													}
 												}
@@ -500,8 +511,200 @@ if (isset($_POST["submit"])) {
 																<td>".$row['completed_sub_transactions']."/".$row['total_sub_transactions']."</td>
 																<td>".$row['total_return_amount']."</td>
 																<td><a class=\"btn btn-primary btn-sm\" href=\"more_info.php?user=".$id_array[$count]."&trans=".$id_trans[$count]."\">More Details</a></td>
-																</tr>";
-																
+                                                                <td>
+                                                                    <button class=\"btn btn-primary btn-sm\" type=\"button\" data-toggle=\"collapse\" data-target=\"#more_info_$row[id]\" aria-expanded=\"true\" aria-controls=\"more_info_$id_trans[$count]\">More Details</button>
+                                                                </td>
+                                                                </tr>";
+                                                                
+                                                            // more info row
+                                                            $reciever_id = $person['id'];
+                                                            $transaction_id = $row['id'];
+                                                            echo "  <tr class=\"collapse  bg-success\" id=\"more_info_$row[id]\" style=\"\">";
+                                                            ?>
+                                                                        <td colspan="8" class="card card-body  bg-secondary" >
+                                                                            <!-- /. ROW  -->
+                                                                            <div class="row">
+                                                                                
+                                                                                <div class="col-md-6">
+                                                                                    <div class="panel panel-default">
+                                                                                        <div class="panel-heading" align="center">
+                                                                                            <h3 style="margin-top:0px !important; margin-bottom:0px !important;"><b>Receiver Information</b></h3>
+                                                                                        </div>
+                                                                                        <div class="panel-body">
+                                                                                            <div class="table-responsive">
+                                                                                                <table class="table table-hover">
+                                                                                                    <thead>
+                                                                                                        <tr>
+                                                                                                            <th>User ID</th>
+                                                                                                            <th>Username</th>
+                                                                                                            <th>Name</th>
+                                                                                                            <th>Surname</th>
+                                                                                                            <th>Email</th>
+                                                                                                            <th>Bank</th>
+                                                                                                            <th>Cellphone Number</th>
+                                                                                                            <th>Account Number</th>
+                                                                                                        </tr>
+                                                                                                    </thead>
+                                                                                                    <tbody>
+                                                                                                    <?php
+                                                                                                        $sql_query_reciever_comp = "SELECT * FROM users WHERE id ='".$reciever_id."' ";
+                                                                                                            $result_reciever_comp = mysqli_query($db_connection,$sql_query_reciever_comp);
+                                                                                                                if (!$result_reciever_comp) {
+                                                                                                                    echo mysqli_error($db_connection);
+                                                                                                                        } else {
+                                                                                                                            $reciever2_details = mysqli_fetch_assoc($result_reciever_comp);
+                                                                                                                            
+                                                                                                                            
+                                                                                                                            echo "<tr>
+                                                                                                                                <td>".$reciever2_details['id']."</td>
+                                                                                                                                <td>".$reciever2_details['username']."</td>
+                                                                                                                                <td>".$reciever2_details['name']."</td>
+                                                                                                                                <td>".$reciever2_details['surname']."</td>
+                                                                                                                                <td>".$reciever2_details['email']."</td>
+                                                                                                                                <td>".$reciever2_details['bank_name']."</td>
+                                                                                                                                <td>".$reciever2_details['contact_cell']."</td>
+                                                                                                                                <td>".$reciever2_details['account_no']."</td>
+                                                                                                                                </tr>";
+                                                                                                                        }
+                                                                                                    ?>
+                                                                                                    </tbody>
+                                                                                                </table>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <!-- End  Hover Rows  -->
+                                                                                </div>
+                                                                            </div>
+                                                                            <!--End of ROW -->
+                                                                            
+                                                                            <!-- /. ROW  -->
+                                                                            <div class="row">
+                                                                                
+                                                                                <div class="col-md-6">
+                                                                                    <div class="panel panel-info">
+                                                                                        <div class="panel-heading bg-info" align="center">
+                                                                                            <h3 style="margin-top:0px !important; margin-bottom:0px !important;"><b>Sub-Transaction Information</b></h3>
+                                                                                        </div>
+                                                                                        <div class="panel-body" style="padding-top:0px !important;">
+                                                                                        <?php
+                                                                                            // get all sub-transactions
+                                                                                            $sql_query_subs = "SELECT * FROM sub_transactions WHERE main_transaction_id=\"$transaction_id\" AND status=\"completed\" ";
+                                                                                            $result_subs = mysqli_query($db_connection,$sql_query_subs);
+                                                                                            if (!$result_subs) {
+                                                                                                log_alert(mysqli_error($db_connection));
+                                                                                            } else {
+                                                                                                // loop throught all of the sub-transactions
+                                                                                                while ($sub_trans_details =mysqli_fetch_assoc($result_subs)) {
+                                                                                                    ?>
+                                                                                                        <!-- sub-transaction details -->
+                                                                                                        <h4 class="text-center border">Sub-Transaction Info</h4>
+                                                                                                        <div class="table-responsive">
+                                                                                                            <table class="table table-hover">
+                                                                                                                <thead>
+                                                                                                                    <tr>
+                                                                                                                        <th>Sub-Trans ID</th>
+                                                                                                                        <th>Amount</th>
+                                                                                                                        <th>marked as paid</th>
+                                                                                                                        <th>marked as received</th>
+                                                                                                                        <th>status</th>
+                                                                                                                        <th>Time left</th>
+                                                                                                                    </tr>
+                                                                                                                </thead>
+                                                                                                                <tbody>
+                                                                                                                <?php
+                                                                                                                    // $sql_query_reciever2 = "SELECT * FROM users WHERE id ='".$reciever_id."' ";
+                                                                                                                    //     $result_reciever2 = mysqli_query($db_connection,$sql_query_reciever2);
+                                                                                                                    //         if (!$result_reciever2) {
+                                                                                                                    //             echo mysqli_error($db_connection);
+                                                                                                                    //                 } else {
+                                                                                                                    //                     $reciever2_details = mysqli_fetch_assoc($result_reciever2);
+                                                                                                                                        
+                                                                                                                    $time_left = calc_time_left($sub_trans_details['time_assigned'],12) / 3600;
+                                                                                                                    $time_left = ceil($time_left); 
+
+                                                                                                                    if ($sub_trans_details['marked_as_paid'] == 1) {
+                                                                                                                        $is_paid = "<i class=\"fas fa-check-square text-primary fa-2x mr-5\"></i>";
+                                                                                                                    } else {
+                                                                                                                        $is_paid = "<i class=\"fas fa-times fa-2x mr-5\"></i>";
+                                                                                                                    }
+
+                                                                                                                    if ($sub_trans_details['marked_as_recieved'] == 1) {
+                                                                                                                        $is_recieved = "<i class=\"fas fa-check-square text-primary fa-2x mr-5\"></i>";
+                                                                                                                    } else {
+                                                                                                                        $is_recieved = "<i class=\"fas fa-times fa-2x mr-5\"></i>";
+                                                                                                                    }
+
+                                                                                                                    echo "<tr>
+                                                                                                                        <td>".$sub_trans_details['id']."</td>
+                                                                                                                        <td>".$sub_trans_details['amount']."</td>
+                                                                                                                        <td>".$is_paid."</td>
+                                                                                                                        <td>".$is_recieved."</td>
+                                                                                                                        <td>".$sub_trans_details['status']."</td>
+                                                                                                                        <td>".$time_left."</td>
+
+                                                                                                                        </tr>";
+                                                                                                                                    // }
+                                                                                                                ?>
+                                                                                                                </tbody>
+                                                                                                            </table>
+                                                                                                        </div>
+
+                                                                                                        <!-- payer information -->
+                                                                                                        <h4 class="text-center border">Payer Info</h4>
+                                                                                                        <div class="table-responsive">
+                                                                                                            <table class="table table-hover">
+                                                                                                                <thead>
+                                                                                                                    <tr>
+                                                                                                                        <th>User ID</th>
+                                                                                                                        <th>Username</th>
+                                                                                                                        <th>Name</th>
+                                                                                                                        <th>Surname</th>
+                                                                                                                        <th>Email</th>
+                                                                                                                        <th>Bank</th>
+                                                                                                                        <th>Cellphone Number</th>
+                                                                                                                        <th>Account Number</th>
+                                                                                                                    </tr>
+                                                                                                                </thead>
+                                                                                                                <tbody>
+                                                                                                                <?php
+                                                                                                                    $sql_query_reciever2 = "SELECT * FROM users WHERE id ='".$sub_trans_details['payer_id']."' ";
+                                                                                                                        $result_reciever2 = mysqli_query($db_connection,$sql_query_reciever2);
+                                                                                                                            if (!$result_reciever2) {
+                                                                                                                                echo mysqli_error($db_connection);
+                                                                                                                                    } else {
+                                                                                                                                        $reciever2_details = mysqli_fetch_assoc($result_reciever2);
+                                                                                                                                        
+                                                                                                                                        
+                                                                                                                                        echo "<tr>
+                                                                                                                                            <td>".$reciever2_details['id']."</td>
+                                                                                                                                            <td>".$reciever2_details['username']."</td>
+                                                                                                                                            <td>".$reciever2_details['name']."</td>
+                                                                                                                                            <td>".$reciever2_details['surname']."</td>
+                                                                                                                                            <td>".$reciever2_details['email']."</td>
+                                                                                                                                            <td>".$reciever2_details['bank_name']."</td>
+                                                                                                                                            <td>".$reciever2_details['contact_cell']."</td>
+                                                                                                                                            <td>".$reciever2_details['account_no']."</td>
+                                                                                                                                            </tr>";
+                                                                                                                                    }
+                                                                                                                ?>
+                                                                                                                </tbody>
+                                                                                                            </table>
+                                                                                                        </div>
+                                                                                                    <?php
+                                                                                                }
+                                                                                                 
+                                                                                            }
+                                                                                            
+                                                                                        ?>
+                                                                                            
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <!-- End  Hover Rows  -->
+                                                                                </div>
+                                                                            </div>
+                                                                            <!--End of ROW -->                                                                        </td>
+                                                                    </tr>
+                                                            <?php
 															array_pop($id_array);
 														}
 													}
