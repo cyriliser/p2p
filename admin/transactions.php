@@ -271,14 +271,28 @@ if (isset($_POST["submit"])) {
                                                                                                                     //                 } else {
                                                                                                                     //                     $reciever2_details = mysqli_fetch_assoc($result_reciever2);
                                                                                                                                         
-                                                                                                                                        
+                                                                                                                    $time_left = calc_time_left($sub_trans_details['time_assigned'],12) / 3600;
+                                                                                                                    $time_left = ceil($time_left); 
+
+                                                                                                                    if ($sub_trans_details['marked_as_paid'] == 1) {
+                                                                                                                        $is_paid = "<i class=\"fas fa-check-square text-primary fa-2x mr-5\"></i>";
+                                                                                                                    } else {
+                                                                                                                        $is_paid = "<i class=\"fas fa-times fa-2x mr-5\"></i>";
+                                                                                                                    }
+
+                                                                                                                    if ($sub_trans_details['marked_as_recieved'] == 1) {
+                                                                                                                        $is_recieved = "<i class=\"fas fa-check-square text-primary fa-2x mr-5\"></i>";
+                                                                                                                    } else {
+                                                                                                                        $is_recieved = "<i class=\"fas fa-times fa-2x mr-5\"></i>";
+                                                                                                                    }
+
                                                                                                                     echo "<tr>
                                                                                                                         <td>".$sub_trans_details['id']."</td>
                                                                                                                         <td>".$sub_trans_details['amount']."</td>
-                                                                                                                        <td>".$sub_trans_details['marked_as_paid']."</td>
-                                                                                                                        <td>".$sub_trans_details['marked_as_recieved']."</td>
+                                                                                                                        <td>".$is_paid."</td>
+                                                                                                                        <td>".$is_recieved."</td>
                                                                                                                         <td>".$sub_trans_details['status']."</td>
-                                                                                                                        <td>".$sub_trans_details['time_assigned']."</td>
+                                                                                                                        <td>".$time_left."</td>
 
                                                                                                                         </tr>";
                                                                                                                                     // }
@@ -305,7 +319,7 @@ if (isset($_POST["submit"])) {
                                                                                                                 </thead>
                                                                                                                 <tbody>
                                                                                                                 <?php
-                                                                                                                    $sql_query_reciever2 = "SELECT * FROM users WHERE id ='".$reciever_id."' ";
+                                                                                                                    $sql_query_reciever2 = "SELECT * FROM users WHERE id ='".$sub_trans_details['payer_id']."' ";
                                                                                                                         $result_reciever2 = mysqli_query($db_connection,$sql_query_reciever2);
                                                                                                                             if (!$result_reciever2) {
                                                                                                                                 echo mysqli_error($db_connection);
