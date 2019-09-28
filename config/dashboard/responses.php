@@ -3,11 +3,12 @@
 
     // package selection responses
     if(isset($_POST['selected_package'])){
-        log_alert($_POST['selected_package']);
         $selected_package_id = $_POST['selected_package'];
         $user_id1 = $_POST['user_id'];
+        $verification_time = time();//to be used for the 12hr verification
         $reg_time = time();//to be used for the 12hr verification
         $sql_query = "UPDATE users SET selected_package=\"$selected_package_id\", status=1, reg_time=\"$reg_time\" WHERE id=\"$user_id1\""; 
+        // $sql_query = "UPDATE users SET selected_package=\"$selected_package_id\", status=1, verification_time=\"$verification_time\" WHERE id=\"$user_id1\""; 
         $result1 = mysqli_query($db_connection,$sql_query);
         
 
@@ -93,7 +94,8 @@
                             $user_package_details = mysqli_fetch_assoc($result_package);
 
                             // make the insert
-                            $sql_query_main_trans = "INSERT INTO transactions (recipient_id, transaction_package_id, recieved_amount, total_return_amount, completed_sub_transactions, status) VALUES ( \"$user_details_payer[id]\", \"$user_package_details[id]\", \"0\", \"$user_package_details[return_amount]\", \"0\", \"pending\" )";
+                            $time = time();
+                            $sql_query_main_trans = "INSERT INTO transactions (recipient_id, transaction_package_id, recieved_amount, total_return_amount, completed_sub_transactions, status, time_created) VALUES ( \"$user_details_payer[id]\", \"$user_package_details[id]\", \"0\", \"$user_package_details[return_amount]\", \"0\", \"pending\", $time)";
                             $result_main_trans = mysqli_query($db_connection,$sql_query_main_trans);
                             if (!$result_main_trans) {
                                 log_alert(mysqli_error($db_connection));
@@ -235,7 +237,8 @@
                                             
                                             // make insert query
                                             // add main transaction for user
-                                            $sql_query14 = "INSERT INTO transactions (recipient_id, transaction_package_id, recieved_amount, total_return_amount, completed_sub_transactions, status) VALUES ( \"$sub_transaction8_details[payer_id]\", \"$package_details[id]\", \"0\", \"$package_details[return_amount]\", \"0\", \"pending\" )";
+                                            $time = time();
+                                            $sql_query14 = "INSERT INTO transactions (recipient_id, transaction_package_id, recieved_amount, total_return_amount, completed_sub_transactions, status,time_created) VALUES ( \"$sub_transaction8_details[payer_id]\", \"$package_details[id]\", \"0\", \"$package_details[return_amount]\", \"0\", \"pending\", \"$time\" )";
                                             log_alert($sql_query14);
                                             $result14 = mysqli_query($db_connection,$sql_query14);
                                             if (!$result14) {

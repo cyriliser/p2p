@@ -5,23 +5,6 @@
     connect_to_db(); //connects to database defined in global_funtions.php
     require_once('../login/auth.php');
 ?>
-<?php 
-  
-
-  $user_id = $_SESSION['user_id'];
-
-  $sql_query = "SELECT * FROM users WHERE id='$user_id'";
-    $user_result = mysqli_query($db_connection,$sql_query);
-    if (!$user_result) {
-      echo "<div class=\"alert alert-danger mt-5\" role=\"alert\">";
-              echo mysqli_error($db_connection);
-          echo "</div>";
-    }else{
-      $user_details = mysqli_fetch_assoc($user_result);
-      $username = $user_details['username'];
-    }
-
-?>
 
 <html lang="en">
     <head>
@@ -47,16 +30,18 @@
         <?php 
             // pages with forms or that submit data will have that data processed here
             security_check();
-            include('responses.php'); 
+            if (!is_reloaded()) {
+                include('responses.php'); 
+            }
         ?>
         
         <!-- header -->
-        <!-- <div class="" id="dashboard-header">
-             <?php// include('navbar.php'); ?>      
-        </div> -->
+        <div class="" id="dashboard-header">
+            <?php include('navbar.php'); ?>     
+        </div>
 
         <!-- body content -->
-        <div class="container">
+        <div class="container bg-secondary">
             <?php 
                 if(isset($_SESSION['referenced'])) { //user has not payed referrer
                     $sql_query = "SELECT * FROM refs WHERE id='$user_id'";
