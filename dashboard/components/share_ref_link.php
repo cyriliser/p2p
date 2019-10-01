@@ -6,23 +6,36 @@
 	<script src="/assets/js/clipboard.min.js"></script>
 	<script src="https://kit.fontawesome.com/6e4574c2a7.js" crossorigin="anonymous"></script>
 
+<?php 
+// Facebook string
+$link = htmlspecialchars_decode("http:localhost/$base_url/login/registration.php?ref=$user_details[id]");
 
-<!-- Modal -->
-<div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <h1 class="text-success">Copied to clipboard</h1>
-      </div>
-    </div>
-  </div>
-</div>
+// Email stuff
+
+function getEmail() {
+	// Let's use the html characteristics of emails
+	?>
+	<p>You have been referenced to join cashbankers</p>
+	<?php
+}
+
+?>
+	<!-- Modal -->
+	<div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-centered" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	        <h1 class="text-success">Copied to clipboard</h1>
+	      </div>
+	    </div>
+	  </div>
+	</div>
 	
     <div class="card">
     <div class="card-body">
@@ -32,17 +45,17 @@
         Copy the link below to Recruit others to join
         </p>
         <div class="input-group input-group-lg">
-        		<input type="text" readonly class="form-control" id="theLink" value="<?php echo "http:localhost/$base_url/login/registration.php?ref=$user_details[id] "; ?>" placeholder="<?php echo "http:localhost/$base_url/login/registration.php?ref=$user_details[id] "; ?>" aria-label="Large" aria-describedby="inputGroup-sizing-sm">
+        		<input type="text" readonly class="form-control" id="theLink" value="<?php echo $link; ?>" placeholder="<?php echo $link; ?>" aria-label="Large" aria-describedby="inputGroup-sizing-sm">
             <div class="input-group-append">
                 <button type="button" class="btn btn-primary" id="copyBtn"  data-toggle="tooltip" data-placement="bottom" title="Copy Link to ClipBoard" data-clipboard-action="copy" data-clipboard-target="#theLink">
 						  Copy
 						</button>
             </div>
         </div>
-        <div class="w-100 m-1 row text-center" style="border: 1px solid red">
+        <div class="w-100 m-1 py-5 row text-center">
 				<div id="facebook" class="col-2">
 				<!--Facebook-->
-					<iframe src="https://www.facebook.com/plugins/share_button.php?href=https%3A%2F%2Fwww.cashbankers.com%2Flogin%2Fregistration.php%3Fref%3D36%20&layout=button&size=large&appId=1716134951786163&width=59&height=20"
+					<iframe src="https://www.facebook.com/plugins/share_button.php?href=<?php echo $link;?>&layout=button&size=large&appId=1716134951786163&width=59&height=20"
 						width="100"
 					  	height="100"
 					  	style="border:none;overflow:hidden"
@@ -58,7 +71,11 @@
 				</div>
 
 				<div id="email" class="col-2">
-					<a class="btn btn-secondary fas fa-envelope p-0" style="font-size: 25px" href="mailto:?subject=CashBankers%20Reference%20Link&body=Checkout%20Cashbankers%20and%20improve%20your%20capital%20now" rel="EMAIL">Mail</a>
+					<button
+					class="btn btn-success"
+					style="width: 100px;height: 30px;color: white;border-radius: 5px"
+					onclick="window.open('mailto:?subject=CashBankers%20Reference%20Link&body=Checkout%20Cashbankers%20and%20improve%20your%20capital%20now','popup','width=600,height=600'); return false;"
+					><p class="text-sm fas fa-envelope">Email</p></button>
 				</div>
         </div>
         </div>
