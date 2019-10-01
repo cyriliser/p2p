@@ -2,6 +2,7 @@
 	<!-- FACEBOOK STUFF-->
 	<div id="fb-root"></div>
 	<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v4.0&appId=1716134951786163&autoLogAppEvents=1"></script>
+	<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 	<!-- Modal -->
 	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	  <div class="modal-dialog modal-dialog-centered" role="document">
