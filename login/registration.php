@@ -6,6 +6,8 @@ if(isset($_SESSION['username']))
 	header("Location: $base_url/dashboard");
 connect_to_db();
 
+$_SESSION['lastpage'] = $base_url.$_SERVER['REQUEST_URI'];
+
 if(isset($_SESSION['form_data'])) {
 	if(!(strpos($_SESSION['form_data']['name'],"=") !== false)) { // Check if we've modified the form_data before
 		foreach($_SESSION['form_data'] as $key => $value)
@@ -24,6 +26,7 @@ if(isset($_SESSION['form_data'])) {
 	$_SESSION['form_data']['bank_name'] = "";
 	
 }
+
 ?>
 <html lang="en">
 

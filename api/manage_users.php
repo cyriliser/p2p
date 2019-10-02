@@ -7,28 +7,8 @@ function displayError($msg){
 	if(isset($_GET['api'])) {
 		
 	}else {
-		echo "
-		<html>
-			<head>
-					<link rel=\"stylesheet\" href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css\" integrity=\"sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T\" crossorigin=\"anonymous\">
-					<script src=\"https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js\" integrity=\"sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM\" crossorigin=\"anonymous\"></script>
-			</head>			
-			<body style='height=100%'>
-				<div class='container'>
-					<div class=\"card text-white bg-info mb-3\" style='margin-top:25%'>
-						  <div class=\"card-header text-center\">Error</div>
-						  <div class=\"card-body\">
-						    <h5 class=\"card-title text-center \">Error processing request</h5>
-						    <p class=\"card-text text-center \">$msg</p>
-						  </div>
-					</div>
-					<div>
-						<a href='/admin'><button class='btn btn-danger w-100'>Back</button></a>
-					</div>
-				<div>
-			</body>
-		</html>
-		";
+		$_SESSION['activateError'] = $msg;
+		header("Location: ".$base_url."/dashboard?inbox");
 	}
 }
 
@@ -51,13 +31,14 @@ if(isset($_GET['activate_ref'])) {
 			// get new id
 			$new_id = mysqli_fetch_row(mysqli_query($db_connection,"select id from users where email = '$data[2]' and password = '$data[3]'"))[0];
 			// Move messages
-			mysqli_query($db_connection,"update inbox set user_sender = $new_id, ref_sender = NULL where ref_sender = $id");
+			mysqli_query($db_connection,"update inbox set user_sender = $new_id, ref_sender = NULL, opened = 1 where ref_sender = $id");
 			if(!mysqli_query($db_connection,"delete from refs where id = ".$id)) {
 				displayError("Error removing user from references, please delete user using delete button");
 			}else {
 				// Send confirmation to user
 				$msg = "Account successfuly activated, now select a package to start scheming hehe";
 				mysqli_query($db_connection,"insert into inbox (owner,user_sender,msg,opened,date_received) values (".$new_id.",".$_SESSION['user_id'].",'$msg',0,'".date("Y-m-d H:i:s")."')");
+				header("Location: ".$base_url."/dashboard?inbox");
 			}
 		}else {
 			displayError("Error activating account, please try again");

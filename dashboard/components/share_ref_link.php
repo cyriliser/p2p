@@ -22,7 +22,7 @@ box-shadow: 0;
 </style>
 <?php 
 // Facebook string
-$link = "https://localhost/$base_url/login/registration.php?ref=$user_details[id]";
+$link = $_SERVER['HTTP_HOST']."/login/registration.php?ref=$user_details[id]";
 // Email stuff
 $subject = htmlspecialchars("CashBankers Reference Link");
 $body = htmlspecialchars("Checkout Cashbankers and improve your capital now");

@@ -6,7 +6,11 @@ connect_to_db();
 if(!security_check()) {
 	// We are working with forms if we arrive at this page, might as well secure them
 	$_SESSION['security_check'] = false;
-	header("Location: $base_url/login/registration.php");
+	if(isset($_SESSION['lastpage'])) {
+		header("Location: ".$_SESSION['lastpage']);
+	}else {
+		header("Location: $base_url/login/registration.php");
+	}
 }
 function validate_data($email,$username) {
 	// check if username  or email is taken
@@ -50,9 +54,13 @@ function validate_data($email,$username) {
       $email = $_REQUEST['email'];
       $valid = validate_data($email,$username);
       if($valid != null) {
-      $_SESSION['taken'] = $valid;
-      header("Location: $base_url/login/registration.php");		
-        die();
+      	$_SESSION['taken'] = $valid;
+      	if(isset($_SESSION['lastpage'])) {
+				header("Location: ".$_SESSION['lastpage']);
+			}else {
+				header("Location: $base_url/login/registration.php");
+			}	
+         die();
       }
       $password = $_REQUEST['password'];
       $name = $_REQUEST['name'];
@@ -71,7 +79,11 @@ function validate_data($email,$username) {
       $valid = validate_data($email,$username);
       if($valid != null){
         $_SESSION['taken'] = $valid;
-        header("Location: $base_url/login/registration.php");
+        if(isset($_SESSION['lastpage'])) {
+				header("Location: ".$_SESSION['lastpage']);
+			}else {
+				header("Location: $base_url/login/registration.php");
+			}
         die();
       }
       $password = $_REQUEST['password'];
@@ -89,8 +101,11 @@ function validate_data($email,$username) {
     $result = mysqli_query($db_connection,$query);
     if(!$result){
       $_SESSION['registration_failed'] = true;
-      echo $query;
-      //header("Location: $base_url/login/registration.php");
+      if(isset($_SESSION['lastpage'])) {
+			header("Location: ".$_SESSION['lastpage']);
+		}else {
+			header("Location: $base_url/login/registration.php");
+		}
     }else{
       $_SESSION['registration_successfull'] = true;
       header("Location: $base_url/login/login.php");

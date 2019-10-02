@@ -2,21 +2,40 @@
 <?php
 	$query = "select * from inbox where owner = ".$_SESSION['user_id']." order by date_received desc";
 	$msgs = mysqli_query($db_connection,$query);
+	
+	if(isset($_SESSION['activateError'])) {
+		echo "
+		<div class='container'>
+			<div class=\"card text-white bg-info mb-3\" style='margin-top:25%'>
+				  <div class=\"card-header text-center\">Error</div>
+				  <div class=\"card-body\">
+				    <h5 class=\"card-title text-center \">Error processing request</h5>
+				    <p class=\"card-text text-center \">".$_SESSION['activateError']."</p>
+				  </div>
+			</div>
+			<div>
+				<a href='/admin'><button class='btn btn-danger w-100'>Back</button></a>
+			</div>
+		<div>
+		";		
+		unset($_SESSION['activateError']);
+	}
+	
 ?>
 <section class="min-vh-50 mt-5 pt-3">
 	<div class="my-5"></div>
 	<div class="card d-flex text-center">
 		<h4 class="card-header">Inbox</h4>
-		<div class="card-body">
+		<div class="card-body" style="background-color:wheat">
 			<?php
 			if(mysqli_num_rows($msgs) > 0) {
 				while($row = mysqli_fetch_assoc($msgs)) {
 					$header = $row["date_received"];
 					if(!$row['opened']) {
-						$header = "<strong> New - ".$row["date_received"]."</strong>";
+						$header = "<strong style='color: lime;'> New - ".$row["date_received"]."</strong>";
 					}
 					echo "
-						<div class=\"card d-flex text-center\">
+						<div class=\"card d-flex my-2 text-center\" style='background-color:red;'>
 							<h4 class='card-header'>$header</h4>
 							<div class='card-body'>
 							".$row['msg']."
