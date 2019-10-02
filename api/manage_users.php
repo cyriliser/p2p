@@ -22,7 +22,7 @@ if(isset($_GET['activate_ref'])) {
 		/*We now have referer id (current logged in user and refered user id)*/
 		if($_SESSION['user_id'] != $data[11]) {
 			// They don't have autorisation to activate the user
-			header("Location: ".$base_url."/dashboard?inbox");
+			displayError("Invalid user requested");
 		}
 		// Move user to users table
 		$query = "INSERT into users (username, email, password, name, surname, date_of_birth, contact_cell, bank_name, account_no, linked_cell) 

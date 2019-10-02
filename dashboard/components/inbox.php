@@ -6,15 +6,11 @@
 	if(isset($_SESSION['activateError'])) {
 		echo "
 		<div class='container'>
-			<div class=\"card text-white bg-info mb-3\" style='margin-top:25%'>
-				  <div class=\"card-header text-center\">Error</div>
+			<div class=\"card text-white bg-info\">
 				  <div class=\"card-body\">
 				    <h5 class=\"card-title text-center \">Error processing request</h5>
 				    <p class=\"card-text text-center \">".$_SESSION['activateError']."</p>
 				  </div>
-			</div>
-			<div>
-				<a href='/admin'><button class='btn btn-danger w-100'>Back</button></a>
 			</div>
 		<div>
 		";		
@@ -22,7 +18,7 @@
 	}
 	
 ?>
-<section class="min-vh-50 mt-5 pt-3">
+<section class="min-vh-50 mt-3 pt-1">
 	<div class="my-5"></div>
 	<div class="card d-flex text-center">
 		<h4 class="card-header">Inbox</h4>
