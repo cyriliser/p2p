@@ -3,26 +3,29 @@
     <div class="my-5"></div>
     
     <div class="card d-flex text-center">
-        <h1 class="card-title">past Transactions</h1>
+        <h1 class="card-title">Previous Transactions</h1>
         <div class="card-body">
             
         <table class="table table-striped">
             <thead>
-                <tr>
-                <th>#</th>
+                <div class="hearder-background">
+                <tr class="roww">
+                <!-- <th>#</th> -->
                 <th>Type</th>
                 <th>UserName</th>
                 <th>Amount</th>
                 <th>Status</th>
                 <th>Details</th>
                 </tr>
+                    </div>
             </thead>
-            <tbody>
+            <body>
                 <?php 
-
-                    $amount_paid = 0;
-                    $amount_recieved = 0;
-                    $total_earnings = 0;
+                    echo "<table>";
+                   echo "<tr>";
+                 $amount_paid = 0;  echo "</tr>";
+                 echo "<td>";echo "</td>"; $amount_recieved=0; echo "</tr>";
+                 echo "<tr>";$total_earnings = 0;  echo "</tr>";
                     // get transactions where user was recieving
                     $sql_pt_received = "SELECT * FROM transactions WHERE recipient_id=\"$user_id\" and status!=\"pending\"";
                     $result_pt_recieved = mysqli_query($db_connection,$sql_pt_received);
@@ -71,7 +74,7 @@
                     $total_earnings = $amount_recieved - $amount_paid;
                 ?>
                 
-            </tbody>
+            </body>
         </table>
 
         <div>

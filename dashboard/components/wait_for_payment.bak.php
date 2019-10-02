@@ -25,18 +25,31 @@
                 ?>
 
                 <!-- clock -->
-                <?php 
-                        // $twelve_hrs = 6000;
-                        $five_days = 432000;
-                        $db_time = 1566381518 ;
-                        $current_time = time();
-                        $time_left = $db_time + $five_days - $current_time;
-                        echo "<div id=\"time_value\" style=\"display:none;\">". $time_left  . "</div>";
-                ?>
+
                 <div class="count-down row">
-                        <div class="col-sm-2"></div>
-                        <div class="clock-allocation col-sm-8" style="margin:2em;"></div>
-                        <div class="col-sm-2"></div>
+                        <?php
+
+                                // get transaction details
+                                $sql_main_trans = "SELECT * FROM transactions WHERE recipient_id=\"$user_details[id]\" and status='pending' ";
+                                $result_main_trans = mysqli_query($db_connection,$sql_main_trans);
+                                if (!$result_main_trans) {
+                                        log_alert(mysqli_error($db_connection),"danger");
+                                } else {
+                                        $transaction_details = mysqli_fetch_assoc($result_main_trans);
+                                        $db_time = $transaction_details['time_created'];
+                                        if(countDown($db_time,120,true)){
+                                                echo "<div class=\"alert alert-warning\" role=\"alert\">
+                                                        <h1>5 days have passed please Notify the Admins. </br> we apologize for the inconvenience</h1>
+                                                        </div>";
+                                        }
+                                        else{
+                                                echo "Timer still running";
+                                        }
+                                        
+                                }
+                                
+
+                        ?>
                 </div>
                 <p>
                         Should The 5 Days Period End <br>

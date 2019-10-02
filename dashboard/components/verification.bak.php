@@ -7,17 +7,24 @@
         <div class="card-body">
             <h4 class="card-title">Please Allow A Period Of 12hours or Less</h4>
             <h4 class="card-title">For Your Account To Be Approved</h4>
-            <?php 
-                // $twelve_hrs = 6000;
-                $twelve_hrs = 43200;
-                $db_time = 1566381518 ;
-                $current_time = time();
-                $time_left = $db_time + $twelve_hrs - $current_time;
-                echo "<div id=\"time_value\" style=\"display:none;\">". $time_left  . "</div>";
-            ?>
-            <div class="count-down row">
+
+            <div class="count-down row col-12">
                 <div class="col-sm-2"></div>
-                <div class="clock_verification col-sm-8" style="margin:2em;"></div>
+                <div class="col-sm-8">
+                    <?php
+                        $db_time = $user_details['reg_time'];
+                        if(countDown($db_time,12,true)){
+                            echo "<div class=\"alert alert-warning\" role=\"alert\">
+                                    <h1>12 hours have passed please Notify the Admins. </br> we apologize for the inconvenience</h1>
+                                    </div>";
+                        }
+                        else{
+                            echo "Timer still running";
+                        }
+
+                    ?>
+                </div>
+                <!-- <div class="clock_verification col-sm-8" style="margin:2em;"></div> -->
                 <div class="col-sm-2"></div>
             </div>
             <p>

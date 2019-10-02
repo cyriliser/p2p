@@ -156,7 +156,7 @@
             // including section containing ref link
             require_once('./components/share_ref_link.php');
             //past transactions
-            // include('./components/past_transactions.php');
+            include('./components/past_transactions.php');
         }
     }
     
