@@ -1,10 +1,10 @@
 <!-- past Transactions -->
-<section id="past-transactions" class="min-vh-100 mt-5 pt-3">
-    <div class="my-5"></div>
+<section id="past-transactions" class="mt-3 px-1">
+    <!-- <div class="my-5"></div> -->
     
     <div class="card d-flex text-center">
-        <h1 class="card-title">past Transactions</h1>
-        <div class="card-body">
+        <h4 class="card-title">past Transactions</h4>
+        <div class="card-body pt-0">
 
         <div class="past-transactions">
             <!-- column titles -->
