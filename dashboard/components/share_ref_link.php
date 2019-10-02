@@ -5,17 +5,31 @@
 	<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 	<script src="/assets/js/clipboard.min.js"></script>
 	<script src="https://kit.fontawesome.com/6e4574c2a7.js" crossorigin="anonymous"></script>
-
+	<style type="text/css">
+ 
+#share-buttons img {
+width: 45px;
+padding: 5px;
+border: 0;
+box-shadow: 0;
+display: inline;
+}
+#share-buttons button {
+background: rgba(0,0,0,0);
+border: none;
+box-shadow: 0;
+}
+</style>
 <?php 
 // Facebook string
-$link = htmlspecialchars_decode("http:localhost/$base_url/login/registration.php?ref=$user_details[id]");
-
+$link = "https://localhost/$base_url/login/registration.php?ref=$user_details[id]";
 // Email stuff
-
+$subject = htmlspecialchars("CashBankers Reference Link");
+$body = htmlspecialchars("Checkout Cashbankers and improve your capital now");
 function getEmail() {
 	// Let's use the html characteristics of emails
 	?>
-	<p>You have been referenced to join cashbankers</p>
+	
 	<?php
 }
 
@@ -38,8 +52,11 @@ function getEmail() {
 	</div>
 	
     <div class="card">
+    <div class="modal-header">
+    	<h4 class="card-title text-center">Refere Others</h4>
+    </div>
     <div class="card-body">
-        <h4 class="card-title">Refere Others</h4>
+        
         <!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> -->
         <p class="card-text">
         Copy the link below to Recruit others to join
@@ -52,34 +69,51 @@ function getEmail() {
 						</button>
             </div>
         </div>
-        <div class="w-100 m-1 py-5 row text-center">
-				<div id="facebook" class="col-2">
-				<!--Facebook-->
-					<iframe src="https://www.facebook.com/plugins/share_button.php?href=<?php echo $link;?>&layout=button&size=large&appId=1716134951786163&width=59&height=20"
-						width="100"
-					  	height="100"
-					  	style="border:none;overflow:hidden"
-					  	scrolling="no"
-					  	frameborder="0"
-					  	allowTransparency="true"
-					  	allow="encrypted-media">
-					</iframe>
-				</div> 
-				<!--Twitter-->
-				<div id="twitter" class="col-2">
-					<a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-size="large" data-show-count="false">Tweet</a>
-				</div>
-
-				<div id="email" class="col-2">
-					<button
-					class="btn btn-success"
-					style="width: 100px;height: 30px;color: white;border-radius: 5px"
-					onclick="window.open('mailto:?subject=CashBankers%20Reference%20Link&body=Checkout%20Cashbankers%20and%20improve%20your%20capital%20now','popup','width=600,height=600'); return false;"
-					><p class="text-sm fas fa-envelope">Email</p></button>
-				</div>
-        </div>
-        </div>
+    	  <!-- I got these buttons from simplesharebuttons.com -->
+			<div id="share-buttons">
+			    <!-- Facebook -->
+			    <button onclick="openWindow(this);" href="https://www.facebook.com/plugins/share_button.php?href=<?php echo $link;?>" target="_blank">
+			        <img src="https://simplesharebuttons.com/images/somacro/facebook.png" alt="Facebook" />
+			    </button>
+			     
+			    <!-- Twitter -->
+			    <button onclick="openWindow(this);" href="https://twitter.com/share?url=<?php echo $link;?>&amp;text=Register%20to%20Bankers&amp;hashtags=cashbankers" target="_blank">
+			        <img src="https://simplesharebuttons.com/images/somacro/twitter.png" alt="Twitter" />
+			    </button>
+			    
+			    <!-- LinkedIn -->
+			    <button onclick="openWindow(this);" href="http://www.linkedin.com/shareArticle?mini=true&url=https://system.cashbankers.co.za" target="_blank">
+			        <img src="https://simplesharebuttons.com/images/somacro/linkedin.png" alt="LinkedIn" />
+			    </button>
+			    
+			    <!-- Google+ -->
+			    <button onclick="openWindow(this);" href="https://plus.google.com/share?url=https://simplesharebuttons.com" target="_blank">
+			        <img src="https://simplesharebuttons.com/images/somacro/google.png" alt="Google" />
+			    </button>
+			    
+			    <!-- Email -->
+			    <button onclick="openWindow(this);" href='mailto:?subject=CashBankers%20Reference%20Link&body=Checkout%20Cashbankers%20and%20improve%20your%20capital%20now'>
+			        <img src="https://simplesharebuttons.com/images/somacro/email.png" alt="Email" />
+			    </button>
+			    
+			    <!-- Tumblr-->
+			    <button onclick="openWindow(this);" href="http://www.tumblr.com/share/link?url=<? echo $link;?>&amp;title=Register to CashBankers!" target="_blank">
+			        <img src="https://simplesharebuttons.com/images/somacro/tumblr.png" alt="Tumblr" />
+			    </button>
+			    
+			    <!-- Print -->
+			    <button href="javascript:;" onclick="window.print()">
+			        <img src="https://simplesharebuttons.com/images/somacro/print.png" alt="Print" />
+			    </button>
+			
+			</div>
     </div>
+    </div>
+    	
+    <!-- For sharing icons -->
+    <script async src="https://static.addtoany.com/menu/page.js"></script>
+    
+    
     <script type="text/javascript" >
     	var clipboard = new ClipboardJS('#copyBtn');
 		clipboard.on('success', function(e) {
@@ -100,5 +134,11 @@ function getEmail() {
 		        }, 1000));
 		    });
 		});
+		
+		// For opening in new window
+		function openWindow(element) {
+			window.open(element.getAttribute('href'),'MyWindow','width=600,height=300');
+			return false;
+		}
     </script>
 </section>
