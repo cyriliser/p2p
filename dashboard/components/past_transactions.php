@@ -140,12 +140,21 @@
             </tbody>
         </table>
 
-        <div>
+        <div class="border border-primary py-1 px-1">
             <?php 
                 echo "
-                    <h1>Amount Paid <span class=\"badge badge-secondary\">R$amount_paid</span></h1>
-                    <h1>Amount received <span class=\"badge badge-secondary\">R$amount_recieved</span></h1>
-                    <h1>Total Earnings <span class=\"badge badge-secondary\">R$total_earnings</span></h1>
+                    <div class=\"row mx-1\">
+                        <h5 class=\"col-8 px-0\">Amount Paid</h5> 
+                        <h5 class=\"col-3\"><span class=\"badge badge-secondary\">R$amount_paid</span></h5>
+                    </div>
+                    <div class=\"row ml-1\">
+                        <h5 class=\"col-8 px-0\">Amount received</h5> 
+                        <h5 class=\"col-3\"> <span class=\"badge badge-secondary\">R$amount_recieved</span></h5>
+                    </div>
+                    <div class=\"row mx-1\">
+                        <h5 class=\"col-8 px-0\">Total Earnings</h5> 
+                        <h5 class=\"col-3\"> <span class=\"badge badge-secondary\">R$total_earnings</span></h5>
+                    </div>
                 ";
             ?>
             
