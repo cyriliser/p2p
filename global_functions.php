@@ -159,11 +159,13 @@
         // This function return true or false. true if count down has run out
         $db_time = ($time + ($hours*3600));
         $current_time = time();
-        $time_left = $db_time - $current_time;  
+        $time_left = $db_time - $current_time;
+        // echo $showClock; 
         if($showClock) {
             if($time_left <= 0){
                 return true;
             }else{
+                // echo "showing";
                 echo '
                     <div class="clock" style="margin:2em;"></div>
                     

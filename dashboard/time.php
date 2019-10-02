@@ -22,7 +22,7 @@
         $db_time = 1566685950 ;
         $current_time = time();
         $time_left = $twelve_hrs -  $db_time + $current_time;
-        echo "<div id=\"time_value\" style=\"display:none2;\">". $time_left  . "</div>";
+        echo "<div id=\"time_value\" style=\"display:none2;\">". time()  . "</div>";
     ?>
     <div class="count-down row">
         <div class="col-sm-2"></div>

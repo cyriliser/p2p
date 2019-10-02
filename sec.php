@@ -45,6 +45,10 @@
     </div>
 
     <form action="" method="post">
+        <div class="row">
+            <input type="number" name="" class="col-10" value="100" id="">
+        </div>
+        
         <div class="checkboxes">
             <div class="form-check">
                 <input class="form-check-input" type="checkbox" name="checked[]" value="1" id="defaultCheck1">

@@ -31,7 +31,7 @@
                                         ?>
                                 </div>
 
-                                <button type="submit" class="btn btn-primary mb-2">Submit</button>
+                                <button type="submit" class="btn btn-primary mx-3 mb-2">Submit</button>
                         </form>
 
                 </div>

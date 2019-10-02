@@ -21,6 +21,10 @@
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
 
+  <!-- flip clock -->
+  <link rel="stylesheet" href="../assets/css/flipclock.css">
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
   <!-- Theme CSS -->
   <link href="../assets/css/freelancer.min.css" rel="stylesheet">
   <link href="../assets/css/style.css" rel="stylesheet">
@@ -560,6 +564,11 @@
   <!-- Contact Form JavaScript -->
   <script src="../assets/js/jqBootstrapValidation.js"></script>
   <script src="../assets/js/contact_me.js"></script>
+
+  <!-- flip clock -->
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script src="../assets/js/flipclock.min.js"></script>
+  <script src="../assets/js/clock.js"></script>
 
   <!-- Custom scripts for this template -->
   <script src="../assets/js/freelancer.min.js"></script>
