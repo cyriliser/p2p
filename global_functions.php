@@ -160,7 +160,7 @@
         $db_time = ($time + ($hours*3600));
         $current_time = time();
         $time_left = $db_time - $current_time;
-        // echo $showClock; 
+        // echo $current_time; 
         if($showClock) {
             if($time_left <= 0){
                 return true;
