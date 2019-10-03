@@ -14,7 +14,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Freelancer - Start Bootstrap Theme</title>
+  <title><?php echo $site_name;?> | Dashboard</title>
 
   <!-- Custom fonts for this theme -->
   <link href="../assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -31,7 +31,7 @@
 
 </head>
 
-<body id="page-top">
+<body id="page-top ">
 
 <!-- responses -->
 <?php 
@@ -63,7 +63,7 @@
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
     <div class="container">
-      <a class="navbar-brand js-scroll-trigger" href="#page-top">Start Bootstrap</a>
+      <a class="navbar-brand js-scroll-trigger" href="<?php echo $base_url;?>"><?php echo $site_name;?></a>
       <button class="navbar-toggler navbar-toggler-right text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         Menu
         <i class="fas fa-bars"></i>
@@ -90,8 +90,8 @@
   </nav>
 
   <!-- Masthead -->
-  <header class="masthead bg-primary text-white text-center">
-    <div class="container d-flex align-items-center flex-column">
+  <header class="masthead bg-primary text-white text-center pt-5 pb-0 bg-white">
+    <div class="container d-flex align-items-center flex-column hide">
 
       <!-- Masthead Avatar Image -->
       <img class="masthead-avatar mb-5" src="../assets/img/avataaars.svg" alt="">
@@ -112,8 +112,13 @@
       <p class="masthead-subheading font-weight-light mb-0">Graphic Artist - Web Designer - Illustrator</p>
 
     </div>
-  </header>
 
+    <div class="username bg-info pt-5 pb-3">
+      <h1><?php echo $username;?></h1>
+    </div>
+  </header>
+  
+<div class="bg-primary">
   <?php 
     if(isset($_SESSION['referenced'])) { //user has not payed referrer
         $sql_query = "SELECT * FROM refs WHERE id='$user_id'";
@@ -123,7 +128,7 @@
                 echo mysqli_error($db_connection);
             echo "</div>";
         }else { //include details to pay referrer
-            include('./components/pay_reference.php'); 
+            include('./components/pay_reference1.php'); 
         }
     }else { //user has payed referrer
         $sql_query = "SELECT * FROM users WHERE id='$user_id'";
@@ -139,35 +144,35 @@
             //including dashboard components based on user status
             switch($user_details['status']) {
                 case 0://if user needs to select package
-                    include('./components/package_selection.php');
+                    include('./components/package_selection1.php');
                     break;
                 case 1://if user needs to wait for verification
-                    include('./components/verification.php'); 
+                    include('./components/verification1.php'); 
                     break;
                 case 2://if user has been allocated to pay another user
-                    include('./components/allocated_to_pay.php'); 
+                    include('./components/allocated_to_pay1.php'); 
                     break;
                 case 3://if user has paid and is waiting for allocatiion to be paid
-                    include('./components/wait_for_payment.php'); 
+                    include('./components/wait_for_payment1.php'); 
                     break;
                 case 4://if user has been allocated to recieve payment
-                    include('./components/allocated_to_recieve.php'); 
+                    include('./components/allocated_to_recieve1.php'); 
                     break;
                 default:
                 
             }
 
             // including section containing ref link
-            require_once('./components/share_ref_link.php');
+            require_once('./components/share_ref_link1.php');
             //past transactions
-            include('./components/past_transactions.php');
+            include('./components/past_transactions1.php');
         }
     }
     
 ?>
-
+</div>
   <!-- About Section -->
-  <section class="page-section bg-primary text-white mb-0" id="about">
+  <section class="page-section bg-primary text-white mb-0 hide" id="about">
     <div class="container">
 
       <!-- About Section Heading -->
@@ -204,7 +209,7 @@
   </section>
 
   <!-- Contact Section -->
-  <section class="page-section" id="contact">
+  <section class="page-section hide" id="contact">
     <div class="container">
 
       <!-- Contact Section Heading -->
@@ -265,7 +270,7 @@
   </section>
 
   <!-- Footer -->
-  <footer class="footer text-center">
+  <footer class="footer text-center hide">
     <div class="container">
       <div class="row">
 
@@ -305,7 +310,7 @@
   </footer>
 
   <!-- Copyright Section -->
-  <section class="copyright py-4 text-center text-white">
+  <section class="copyright py-4 text-center text-white hide">
     <div class="container">
       <small>Copyright &copy; Your Website 2019</small>
     </div>

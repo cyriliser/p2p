@@ -1,8 +1,8 @@
 <!-- Allocated to pay section -->
-<section id="allocated-to-pay" class="min-vh-100 mt-5 pt-3">
-        <div class="my-5"></div>
+<section id="allocated-to-pay" class="bg-primary mx-2 pt-3">
+        <!-- <div class="my-5"></div> -->
            
-        <div class="card d-flex text-center">
+        <div class="card bg-secondary text-white d-flex text-center">
 
                 <?php 
                         //get details about the sub transaction
@@ -22,7 +22,7 @@
                                 
                                 log_alert("No Matching Details Were Found","warning");
                         }else{
-                                require_once("sub_components/allocated_to_pay__payment_details.php");
+                                require_once("sub_components/allocated_to_pay__payment_details1.php");
                                 // log_alert("no error");
                                 // log_alert($sub_transaction_details['id']);
                         }
