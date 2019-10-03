@@ -1,12 +1,12 @@
 <!-- wait for payment section -->
-<section id="wait-for-payment" class="min-vh-100 mt-5 pt-3">
-        <div class="my-5"></div>
+<section id="wait-for-payment" class="px-2 pt-3">
+        <!-- <div class="my-5"></div> -->
                    
         <div class="card  d-flex text-center">
-        <h1 class="card-header">Wait For Allocation</h1>
-        <div class="card-body">
-                <h4 class="card-title">Please Allow A Period Of 5days or Less</h4>
-                <h4 class="card-title">To Be Allocated Someone To Pay You</h4>
+        <h4 class="card-header">Wait For Allocation</h4>
+        <div class="card-body px-1">
+                <h6 class="card-title">Please Allow A Period Of <br> 5days or Less</h6>
+                <h6 class="card-title">To Be Allocated Someone <br> To Pay You</h6>
 
                 <?php 
                         // get user details and package ID
@@ -25,19 +25,37 @@
                 ?>
 
                 <!-- clock -->
-                <?php 
-                        // $twelve_hrs = 6000;
-                        $five_days = 432000;
-                        $db_time = 1566381518 ;
-                        $current_time = time();
-                        $time_left = $db_time + $five_days - $current_time;
-                        echo "<div id=\"time_value\" style=\"display:none;\">". $time_left  . "</div>";
-                ?>
-                <div class="count-down row">
-                        <div class="col-sm-2"></div>
-                        <div class="clock-allocation col-sm-8" style="margin:2em;"></div>
-                        <div class="col-sm-2"></div>
+                <div>
+                        <div class="count-down row border border-primary mb-4 py-2 mx-auto">
+                                <div class=" col-1 col-sm-1"></div>
+                                
+                                <div class=" col-10 col-sm-8">
+                                        <?php
+                                        $sql_main_tran = "SELECT * FROM transactions WHERE recipient_id=\"$user_id\" and status=\"pending\" ";
+                                        $result_main_tran = mysqli_query($db_connection,$sql_main_tran);
+                                        if (!$result_main_tran) {
+                                                log_alert(mysqli_error($db_connection),"error");
+                                        } else {
+                                                $transaction_details = mysqli_fetch_assoc($result_main_tran);
+                                        }
+                                        $db_time = $transaction_details['time_created'];
+                                        if(countDown($db_time,12,true)){
+                                                // echo "timer gone";
+                                                echo "<div class=\"alert alert-warning mb-0\" role=\"alert\">
+                                                        <h6>12 hours have passed please Notify the Admins. </br> we apologize for the inconvenience</h6>
+                                                        </div>";
+                                        }
+                                        else{
+                                                // echo "Timer still running";
+                                        }
+
+                                        ?>
                 </div>
+                
+                <!-- <div class="clock_verification col-sm-8" style="margin:2em;"></div> -->
+                <div class=" col-1 col-sm-1"></div>
+        </div>
+</div>
                 <p>
                         Should The 5 Days Period End <br>
                         Without Being Approved Please Contact <br>
