@@ -8,7 +8,7 @@
 
         <div class="past-transactions">
             <!-- column titles -->
-            <div class="row mb-1 border border-info">
+            <div class="row mb-1 border border-primary">
                 <div class="col-1 px-0">#</div>
                 <div class="col-2 px-0">Type</div>
                 <div class="col-2 px-0">UserName</div>
@@ -145,15 +145,15 @@
                 echo "
                     <div class=\"row mx-1\">
                         <h5 class=\"col-8 px-0\">Amount Paid</h5> 
-                        <h5 class=\"col-3\"><span class=\"badge badge-info\">R$amount_paid</span></h5>
+                        <h5 class=\"col-3\"><span class=\"badge badge-primary\">R$amount_paid</span></h5>
                     </div>
                     <div class=\"row ml-1\">
                         <h5 class=\"col-8 px-0\">Amount received</h5> 
-                        <h5 class=\"col-3\"> <span class=\"badge badge-info\">R$amount_recieved</span></h5>
+                        <h5 class=\"col-3\"> <span class=\"badge badge-primary\">R$amount_recieved</span></h5>
                     </div>
                     <div class=\"row mx-1\">
                         <h5 class=\"col-8 px-0\">Total Earnings</h5> 
-                        <h5 class=\"col-3\"> <span class=\"badge badge-info\">R$total_earnings</span></h5>
+                        <h5 class=\"col-3\"> <span class=\"badge badge-primary\">R$total_earnings</span></h5>
                     </div>
                 ";
             ?>

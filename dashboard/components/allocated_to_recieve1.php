@@ -3,7 +3,7 @@
         <!-- <div class="my-5"></div> -->
            
         <div class="card bg-secondary text-white d-flex text-center">
-                <h1 class="card-header">allocated to Receive</h1>
+                <h4 class="card-header">Allocated To Receive</h4>
                 <div class="card-body">
 
                         <?php 
@@ -14,17 +14,17 @@
                                         log_alert(mysqli_error($db_connection),"error");
                                 } else {
                                        $main_transaction1_details = mysqli_fetch_assoc($main_transaction1_result);
-                                       echo "<h3 class=\"card-title\">You Have Been Allocated To Recieve: <strong>R$main_transaction1_details[total_return_amount]</strong></h3>";
+                                //        echo "<h6 class=\"card-title\">You Have Been Allocated To Recieve: <strong>R$main_transaction1_details[total_return_amount]</strong></h6>";
 
-                                       echo "<h4>Completed Payments: <strong>$main_transaction1_details[completed_sub_transactions]/$main_transaction1_details[total_sub_transactions]</strong></h4>";
+                                       echo "<h6>Completed Payments: <strong>$main_transaction1_details[completed_sub_transactions]/$main_transaction1_details[total_sub_transactions]</strong></h6>";
 
-                                       echo "<h4>Amount Revieved: <strong>R$main_transaction1_details[recieved_amount]/ R$main_transaction1_details[total_return_amount]</strong></h4>";
+                                       echo "<h6>Amount Revieved: <strong>R$main_transaction1_details[recieved_amount]/ R$main_transaction1_details[total_return_amount]</strong></h6>";
 
                                 }
                                 
                         ?>
 
-                        <div class="w-100 ">
+                        <div class="w-100 border border-primary ">
                                 <div class="progress row bg-info">
                                 <?php
                                         $percentage = $main_transaction1_details['completed_sub_transactions']  / $main_transaction1_details['total_sub_transactions'] * 100;
@@ -35,7 +35,7 @@
                         </div>
                         
                         <div class="payers">
-                                <h3>Payer Details</h3>
+                                <h5>Payer Details</h5>
                                 <?php 
                                         $sql_query_subs1 = "SELECT * FROM sub_transactions WHERE main_transaction_id=\"$main_transaction1_details[id]\"";
                                         $subs1_result = mysqli_query($db_connection,$sql_query_subs1);
@@ -45,7 +45,7 @@
                                                 while ($sub_transaction_details = mysqli_fetch_assoc($subs1_result)) {
                                                         echo "<!-- payer 1 -->";
                                                         echo "<div class=\"payer-details my-1 my-3\" >";
-                                                        echo "     <div class=\"details border border-info \" >
+                                                        echo "     <div class=\"details border border-primary text-left \" >
                                                                    <!-- details -->";
 
                                                         // get payer details   
@@ -87,32 +87,39 @@
                                                                         echo "</div>";
 
                                                                 echo "<!-- status -->";
-                                                                echo "<div class=\"border border-info mt-4 px-1 py-1\">";
-                                                                        echo "  <div style=\"border: solid #a49797 1px;\" class=\"bg-primary my-1 text-center w-100 username\" >
+                                                                echo "<div class=\" mt-4 px-1 py-1\">";
+                                                                        echo "  <div  class=\"bg-primary my-1 text-center w-100 border border-primary username\" >
                                                                                         <h5>Status</h5>
                                                                                 </div>";
 
-                                                                        echo "  <div style=\"border: solid #a49797 1px;\" class=\"my-1 d-flex justify-content-between w-100 name\">
+                                                                        echo "  <div  class=\"my-1 d-flex justify-content-between w-100 border border-primary name\">
                                                                                         <strong class=\"mx-auto\">Pending</strong>
                                                                                         <i class=\"fas fa-check-square text-primary fa-2x mr-5\"></i>
                                                                                 </div>";
                                                                         
                                                                         $check_payed = ($sub_transaction_details['marked_as_paid']) ? "text-primary" : "" ;
-                                                                        echo "  <div style=\"border: solid #a49797 1px;\" class=\"my-1 d-flex justify-content-between w-100 name\">
+                                                                        echo "  <div  class=\"my-1 d-flex justify-content-between w-100 border border-primary name\">
                                                                                         <strong class=\"mx-auto\">Marked As Paid</strong>
                                                                                         <i class=\"fas fa-check-square $check_payed fa-2x mr-5\"></i>
                                                                                 </div>";
                                                                                 
-                                                                        echo "<!-- form start -->";
+                                                                        
+                                                                        $check_completed = ($sub_transaction_details['marked_as_paid']) ? "text-primary" : "" ;
+                                                                        echo "  <div  class=\"my-1 d-flex justify-content-between w-100 border border-primary name\">
+                                                                                        <strong class=\"mx-auto\">Completed</strong>
+                                                                                        <i class=\"fas fa-check-square $check_completed fa-2x mr-5\"></i>
+                                                                                </div>";
+
+                                                                                echo "<!-- form start -->";
 
                                                                                 if ($sub_transaction_details['marked_as_recieved'] == 1) {
-                                                                                        echo "  <div style=\"border: solid #a49797 1px;\" class=\"my-1 d-flex justify-content-between w-100 name\">
+                                                                                        echo "  <div  class=\"my-1 d-flex justify-content-between w-100 border border-primary name\">
                                                                                                         <strong class=\"mx-auto\">Marked As Paid</strong>
                                                                                                         <i class=\"fas fa-check-square text-primary fa-2x mr-5\"></i>
                                                                                                 </div>";
                                                                                 } else {
-                                                                                        echo "<div style=\"border: solid #a49797 1px;\"  class=\" px-auto py-1  cell\">";
-                                                                                                echo "<form action=\"\" method=\"post\" class=\"row mx-auto px-auto\">";
+                                                                                        echo "<div   class=\" px-auto py-1  cell\">";
+                                                                                                echo "<form action=\"\" method=\"post\" class=\"row mx-auto px-auto border border-primary\">";
                 
                                                                                                         echo "<div class=\"custom-control custom-switch col-8 px-auto pr-0\">";
                                                                                                                 echo "<input type=\"hidden\" name=\"user_id\" value=\"$user_details[id]\">";
@@ -132,13 +139,8 @@
                                                                                 
                 
                                                                         echo "<!-- form end -->";
-                                                                        
-                                                                        $check_completed = ($sub_transaction_details['marked_as_paid']) ? "text-primary" : "" ;
-                                                                        echo "  <div style=\"border: solid #a49797 1px;\" class=\"my-1 d-flex justify-content-between w-100 name\">
-                                                                                        <strong class=\"mx-auto\">Completed</strong>
-                                                                                        <i class=\"fas fa-check-square $check_completed fa-2x mr-5\"></i>
-                                                                                </div>";
-                                                                        echo "  <div style=\"border: solid #a49797 1px;\" class=\"my-1 d-flex justify-content-between w-100 name hide\">
+
+                                                                        echo "  <div  class=\"my-1 d-flex justify-content-between w-100 border border-primary name hide\">
                                                                                         <strong class=\"mx-auto\">Cancelled</strong>
                                                                                         <i class=\"fas fa-check-square text-primary fa-2x mr-5\"></i>
                                                                                 </div>";

@@ -20,7 +20,7 @@
 
                                                 while ($package = mysqli_fetch_assoc($packages_result)) {
                                                         echo "
-                                                                <div class=\"custom-control custom-radio col-5 font-weight-bold btn  bg-info text-white mx-auto my-1\">
+                                                                <div class=\"custom-control custom-radio col-5 font-weight-bold btn  bg-primary text-white mx-auto my-1\">
                                                                         <input type=\"hidden\" name=\"user_id\" value=\"$user_details[id]\">
                                                                         <input type=\"radio\" id=\"$package[id]\" value=\"$package[id]\" name=\"selected_package\" class=\"custom-control-input\">
                                                                         <label class=\"custom-control-label\" for=\"$package[id]\">R$package[amount]</label>

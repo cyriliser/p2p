@@ -48,10 +48,10 @@
                 Loyoala @ <a href="tel:0123456789">0123456789</a>
             </p>
 
-            <div class="row border bg-info text-white">
-                <a class="btn btn-primary col-3 mx-auto my-auto">Edit Profile</a>
+            <div class="row  bg-primary text-white">
+                <a class="btn btn-primary col-3 mx-auto my-auto hide">Edit Profile</a>
 
-                <div class="col-8" >
+                <div class="col-12" >
 
                 <form class="form-inline row pl-1" method="post">
                     <label class="col-6 pt-3 pl-1 ml-2 mb-0 " for="inlineFormInputName2"><p>Amount Invested:</p></label>
@@ -69,7 +69,7 @@
                             <input type=\"number\" max=\"5000\" min=\"500\" step=\"500\" name=\"new_investment_amount\" value=\"$invested_amount\" class=\"form-control col-4 my-auto\" id=\"inlineFormInputName2\" placeholder=\"500\" >";
                         }
                     ?>
-                    <button type="submit" class="btn btn-primary col-7 mx-auto mb-2">Change</button>
+                    <button type="submit" class="btn btn-secondary col-7 mx-auto mb-2">Change</button>
                 </form>
 
                 </div>

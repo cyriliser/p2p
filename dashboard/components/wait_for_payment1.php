@@ -3,8 +3,8 @@
         <!-- <div class="my-5"></div> -->
                    
         <div class="card bg-secondary text-white  d-flex text-center">
-        <h4 class="card-header">Wait For Allocation</h4>
-        <div class="card-body px-1">
+        <h4 class="card-header bg-primary w-100">Wait For Allocation</h4>
+        <div class="card-body px-0">
                 <h6 class="card-title">Please Allow A Period Of <br> 5days or Less</h6>
                 <h6 class="card-title">To Be Allocated Someone <br> To Pay You</h6>
 
@@ -19,7 +19,7 @@
                         } else {
                                 $wp_package_details = mysqli_fetch_assoc($result_wp_package);
                                 // log_alert($wp_package_details['return_amount']);
-                                echo "<h1> <strong> R$wp_package_details[return_amount] </strong></h1>";
+         `                       echo "<h1> <strong> R$wp_package_details[return_amount] </strong></h1>";
                         }
                         
                 ?>

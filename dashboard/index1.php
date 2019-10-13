@@ -80,8 +80,10 @@
             <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#contact">Contact</a>
           </li>
           <li class="nav-item mx-0 mx-lg-1 d-flex">
-            <span class="text-white"><?php echo $username;?></span>
-            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="<?php echo $base_url; ?>/login/logout.php">Logout</a>
+            <span class="text-white nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger px-1 py-1"><?php echo $username;?></span>
+          </li>
+          <li>
+            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger px-1 py-1" href="<?php echo $base_url; ?>/login/logout.php">Logout</a>
           </li>
 
         </ul>
@@ -113,7 +115,7 @@
 
     </div>
 
-    <div class="username bg-info pt-5 pb-3">
+    <div class="username pt-5 pb-3 bg-primary text-primary hide">
       <h1><?php echo $username;?></h1>
     </div>
   </header>
@@ -163,6 +165,8 @@
             }
 
             // including section containing ref link
+            require_once('./components/inbox1.php');
+            // including section containing ref link
             require_once('./components/share_ref_link1.php');
             //past transactions
             include('./components/past_transactions1.php');
@@ -171,6 +175,13 @@
     
 ?>
 </div>
+
+
+
+
+
+
+
   <!-- About Section -->
   <section class="page-section bg-primary text-white mb-0 hide" id="about">
     <div class="container">
