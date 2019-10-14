@@ -19,7 +19,7 @@
                         } else {
                                 $wp_package_details = mysqli_fetch_assoc($result_wp_package);
                                 // log_alert($wp_package_details['return_amount']);
-         `                       echo "<h1> <strong> R$wp_package_details[return_amount] </strong></h1>";
+                                echo "<h1> <strong> R$wp_package_details[return_amount] </strong></h1>";
                         }
                         
                 ?>
