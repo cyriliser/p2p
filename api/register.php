@@ -6,7 +6,11 @@ connect_to_db();
 if(!security_check()) {
 	// We are working with forms if we arrive at this page, might as well secure them
 	$_SESSION['security_check'] = false;
-	header("Location: $base_url/login/registration.php");
+	if(isset($_SESSION['lastpage'])) {
+		header("Location: ".$_SESSION['lastpage']);
+	}else {
+		header("Location: $base_url/login/registration.php");
+	}
 }
 function validate_data($email,$username) {
 	// check if username  or email is taken
@@ -50,9 +54,13 @@ function validate_data($email,$username) {
       $email = $_REQUEST['email'];
       $valid = validate_data($email,$username);
       if($valid != null) {
-      $_SESSION['taken'] = $valid;
-      header("Location: $base_url/login/registration.php");		
-        die();
+      	$_SESSION['taken'] = $valid;
+      	if(isset($_SESSION['lastpage'])) {
+				header("Location: ".$_SESSION['lastpage']);
+			}else {
+				header("Location: $base_url/login/registration.php");
+			}	
+         die();
       }
       $password = $_REQUEST['password'];
       $name = $_REQUEST['name'];
@@ -63,15 +71,19 @@ function validate_data($email,$username) {
       $account_no = $_REQUEST['account_no'];
       $cellno2 = $_REQUEST['cellphone2'];
       $trn_date = date("Y-m-d H:i:s");
-      $query = "INSERT into refs (username, email, password, name, surname, date_of_birth, contact_cell, bank_name, account_no, linked_cell,referer_id) 
-                VALUES ('$username', '$email', '".md5($password)."', '$name', '$surname', '$date','$cellno', '$bank_name', '$account_no', '$cellno2','".$_SESSION['ref']."')";
+      $query = "INSERT into refs (username, email, password, name, surname, date_of_birth, contact_cell, bank_name, account_no, linked_cell,reg_time,referer_id) 
+                VALUES ('$username', '$email', '".md5($password)."', '$name', '$surname', '$date','$cellno', '$bank_name', '$account_no', '$cellno2', '".time()."' ,'".$_SESSION['ref']."')";
     }else{
       $username = $_REQUEST['username'];
       $email = $_REQUEST['email'];
       $valid = validate_data($email,$username);
       if($valid != null){
         $_SESSION['taken'] = $valid;
-        header("Location: $base_url/login/registration.php");
+        if(isset($_SESSION['lastpage'])) {
+				header("Location: ".$_SESSION['lastpage']);
+			}else {
+				header("Location: $base_url/login/registration.php");
+			}
         die();
       }
       $password = $_REQUEST['password'];
@@ -89,7 +101,11 @@ function validate_data($email,$username) {
     $result = mysqli_query($db_connection,$query);
     if(!$result){
       $_SESSION['registration_failed'] = true;
-      header("Location: $base_url/login/registration.php");
+      if(isset($_SESSION['lastpage'])) {
+			header("Location: ".$_SESSION['lastpage']);
+		}else {
+			header("Location: $base_url/login/registration.php");
+		}
     }else{
       $_SESSION['registration_successfull'] = true;
       header("Location: $base_url/login/login.php");

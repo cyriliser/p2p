@@ -86,6 +86,12 @@
             <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger px-1 py-1" href="<?php echo $base_url; ?>/login/logout.php">Logout</a>
           </li>
 
+          <li class="nav-item mx-0 mx-lg-1">
+	           <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="<?php echo $dashboard_url.'?inbox'; ?>">Inbox</a>
+           </li>
+          <li class="nav-item mx-0 mx-lg-1">
+           <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger">user: <?php echo $_SESSION['username']; ?></a></li>
+ 
         </ul>
       </div>
     </div>
@@ -180,7 +186,6 @@
 
 
 
-
     <!-- content is hidden -->
   <div class="hide"></div>
     <!-- About Section -->
@@ -198,7 +203,6 @@
           </div>
           <div class="divider-custom-line"></div>
         </div>
-
         <!-- About Section Content -->
         <div class="row">
           <div class="col-lg-4 ml-auto">
