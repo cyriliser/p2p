@@ -1,0 +1,9 @@
+.hide{
+    display: none !important;
+}
+
+/* past transactions */
+.past-transactions{
+    font-size: 0.6rem;
+    font-weight: bolder;
+}
