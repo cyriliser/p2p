@@ -53,13 +53,13 @@ if(isset($_SESSION['username']))
     </div>
   </nav>
    <!-- Masthead -->
-  <header class="masthead bg-primary text-white text-center">
-    <div class="container d-flex align-items-center flex-column">
+  <!-- <header class="masthead bg-primary text-white text-center hide">
+    <div class="container d-flex align-items-center flex-column"> -->
       <!-- Masthead Heading -->
-      <h1 class="masthead-heading text-uppercase mb-0">Welcome!</h1>
+      <!-- <h1 class="masthead-heading text-uppercase mb-0">Welcome!</h1> -->
 
       <!-- Icon Divider -->
-      <div class="divider-custom divider-light">
+      <!-- <div class="divider-custom divider-light">
         <div class="divider-custom-line"></div>
         <div class="divider-custom-icon">
           <i class="fas fa-star"></i>
@@ -68,7 +68,7 @@ if(isset($_SESSION['username']))
       </div>
 
     </div>
-  </header>
+  </header> -->
   
 	
 	<?php 
@@ -90,7 +90,7 @@ if(isset($_SESSION['username']))
 	?>
 
 	<!-- log in form -->
-	<section class="page-section" id="register">
+	<section class="page-section bg-primary" id="register">
 		<div class="container">
 
 		<!-- Registration Section Heading -->
@@ -110,20 +110,20 @@ if(isset($_SESSION['username']))
 					<div class="form">
 						<form action="../api/login.php" method="post" name="login">
 							<div class="control-group">
-								<div class="form-group floating-label-form-group controls mb-0 pb-10">
+								<div class="form-group floating-label-form-group1 controls mb-0 pb-10">
 									<label>Username</label>
 									<input class="form-control" id="name" name="username" type="text" placeholder="Username" required="required" data-validation-required-message="Please enter your name.">
 									<p class="help-block text-danger"></p>
 								</div>
 							</div>
 							<div class="control-group">
-								<div class="form-group floating-label-form-group controls mb-0 pb-2">
+								<div class="form-group floating-label-form-group1 controls mb-0 pb-2">
 									<label>Password</label>
 									<input class="form-control" id="password" name= "password"type="password" placeholder="Password" required="required" data-validation-required-message="Please enter your name.">
 									<p class="help-block text-danger"></p>
 								</div>
 							</div>
-							<input name="submit" class="btn btn-primary btn-xl" type="submit" value="Login" />
+							<input name="submit" class="btn btn-secondary btn-xl" type="submit" value="Login" />
 						</form>
 						<p>Not registered yet? <a href="<?php echo $base_url; ?>/login/registration.php">Register Here</a></p>
 					</div>

@@ -1,5 +1,6 @@
 <?php
 
+$site_name = "CASH BANKERS";
 // local version (xampp)(comment out when uploading to server)
 $base_url = "/sites/p2p"; ////// homepage
 $dashboard_url = "/sites/p2p/dashboard"; ////// userdashboard

@@ -145,7 +145,8 @@ CREATE TABLE `refs` (
   `bank_name` varchar(50) DEFAULT NULL,
   `account_no` int(11) DEFAULT NULL,
   `linked_cell` int(11) DEFAULT NULL,
-  `referer_id` int(11) NOT NULL
+  `referer_id` int(11) NOT NULL,
+  `reg_time` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
