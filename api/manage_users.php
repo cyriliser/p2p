@@ -37,15 +37,16 @@ if(isset($_GET['activate_ref'])) {
 	$id = $_GET['user_id']; // The user to be activated
 	$query = "select * from refs where id=$id";
 	$result = mysqli_query($db_connection,$query);
+	echo mysqli_num_rows($result);
 	if($result){
 		$data = mysqli_fetch_row($result);
 		/*We now have referer id (current logged in user and refered user id)*/
-		// print_r($data);
-		// echo "data";
+		print_r($data);
+		echo "data";
 		if($_SESSION['user_id'] != $data[11]) {
 			// They don't have autorisation to activate the user
-			// echo $data[11];
-			header("Location: ".$base_url."/dashboard/index1.php?inbox");
+			echo $data[11];
+			// header("Location: ".$base_url."/dashboard/index1.php?inbox");
 		}
 		// Move user to users table
 		$query = "INSERT into users (username, email, password, name, surname, date_of_birth, contact_cell, bank_name, account_no, linked_cell) 
