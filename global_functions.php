@@ -43,9 +43,9 @@
                 $type = 'primary';
                 break;
         }
-        echo "<div class=\"fixed-bottom alert alert-$type\" role=\"alert\">";
-            echo $message;
-        echo "</div>";
+        // echo "<div class=\"fixed-bottom alert alert-dismissible fade show alert-$type\" role=\"alert\">";
+        //     echo $message;
+        // echo "</div>";
     }
 
 
@@ -73,7 +73,7 @@
                 $type = 'primary';
                 break;
         }
-        echo "<div class=\"fixed-bottom alert alert-$type\" role=\"alert\">";
+        echo "<div class=\"fixed-bottom alert alert-dismissible fade show alert-$type\" role=\"alert\">";
             echo $message;
         echo "</div>";
     }

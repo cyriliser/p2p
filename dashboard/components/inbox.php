@@ -3,10 +3,10 @@
 	$query = "select * from inbox where owner = ".$_SESSION['user_id']." order by date_received desc";
 	$msgs = mysqli_query($db_connection,$query);
 ?>
-<section class="min-vh-50 mt-5 pt-3">
-	<div class="my-5"></div>
-	<div class="card d-flex text-center">
+<section class="pt-3 ">
+	<div class="card bg-secondary text-white d-flex text-center">
 		<h4 class="card-header">Inbox</h4>
+		<h4 class="card-title">confirm if someone you shared your link with has paid you the referral fee</h4>
 		<div class="card-body">
 			<?php
 			if(mysqli_num_rows($msgs) > 0) {
@@ -15,14 +15,21 @@
 					if(!$row['opened']) {
 						$header = "<strong> New - ".$row["date_received"]."</strong>";
 					}
+					// $row['msg']
+					$str_arr = explode (" ", $row['msg']); 
+					$id = $str_arr[0];
+					$usernme = $str_arr[1] ;
+					$url = "<a class=\"btn btn-secondary\" href='$base_url/api/reference_manager.php?confirm=$id'>Confirm payment for $usernme</a>";
 					echo "
-						<div class=\"card d-flex text-center\">
+						<div class=\"card bg-primary text-white d-flex text-center\">
 							<h4 class='card-header'>$header</h4>
 							<div class='card-body'>
-							".$row['msg']."
+								$url
 							</div>
 						</div>
 					";
+
+					// <a href='/api/reference_manager.php?confirm=4'>Confirm payment for lolly_ref1</a>
 				}
 			}else {
 				echo "<h4 class='card-header'>You have no messages</h4>";
