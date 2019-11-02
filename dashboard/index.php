@@ -84,6 +84,9 @@ include("../login/auth.php");
             <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="<?php echo "$base_url/login/logout.php";?>" >Logout</a>
           </li>
           <li class="nav-item mx-0 mx-lg-1">
+	           <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="<?php echo $dashboard_url.'?inbox'; ?>">Inbox</a>
+           </li>
+          <li class="nav-item mx-0 mx-lg-1">
            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger">user: <?php echo $_SESSION['username']; ?></a></li>
  
         </ul>
@@ -134,8 +137,10 @@ include("../login/auth.php");
 
         <!-- body content -->
         <div class="container">
-            <?php 
-                if(isset($_SESSION['referenced'])) { //user has not payed referrer
+            <?php
+            	 if(isset($_GET['inbox'])) {
+                 		include('./components/inbox.php');
+                }elseif(isset($_SESSION['referenced'])) { //user has not payed referrer
                     $sql_query = "SELECT * FROM refs WHERE id='$user_id'";
                     $user_result = mysqli_query($db_connection,$sql_query);
                     if (!$user_result) { //if error
@@ -145,7 +150,7 @@ include("../login/auth.php");
                     }else { //include details to pay referrer
                         include('./components/pay_reference.php'); 
                     }
-                }else { //user has payed referrer
+                }else { //user is activated referrer
                     $sql_query = "SELECT * FROM users WHERE id='$user_id'";
                     $user_result = mysqli_query($db_connection,$sql_query);
                     if (!$user_result) { //if error
