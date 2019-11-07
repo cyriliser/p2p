@@ -105,7 +105,8 @@ if (isset($_POST["submit"])) {
                 </div>
                 <!-- /. ROW  -->
             
-            <!-- assigned transactions -->
+
+            <!--pending assigned transactions -->
             <div class="row">
                 <div class="col-md-6">
                      <!--    Hover Rows  -->
@@ -115,7 +116,7 @@ if (isset($_POST["submit"])) {
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
-                                <table class="table table-hover">
+                                <table class="table ">
                                     <thead>
                                         <tr>
                                             <th>Trans ID</th>
@@ -162,7 +163,7 @@ if (isset($_POST["submit"])) {
 																<td>".$pending_trans_details['recieved_amount']."</td>
 																<td>".$pending_trans_details['total_return_amount']."</td>
 																<td>$time_left Hrs</td>
-																<td><a class=\"btn btn-primary btn-sm\" href=\"more_info.php?user=".$id_array[$count]."&trans=".$id_trans[$count]."\">More Details</a></td>
+																<td class=\"btn btn-primary hide btn-sm\"><a class=\"btn btn-primary btn-sm \" href=\"more_info.php?user=".$id_array[$count]."&trans=".$id_trans[$count]."\">More Details</a></td>
                                                                 <td>
                                                                     <button class=\"btn btn-primary btn-sm\" type=\"button\" data-toggle=\"collapse\" data-target=\"#more_info_$id_trans[$count]\" aria-expanded=\"true\" aria-controls=\"more_info_$id_trans[$count]\">More Details</button>
                                                                 </td>
@@ -171,14 +172,14 @@ if (isset($_POST["submit"])) {
                                                             // more info row
                                                             $reciever_id = $id_array[$count];
                                                             $transaction_id = $id_trans[$count];
-                                                            echo "  <tr class=\"collapse  bg-success\" id=\"more_info_$id_trans[$count]\" style=\"\">";
+                                                            echo "  <tr class=\"collapse  bg-danger border border-primary\" id=\"more_info_$id_trans[$count]\" >";
                                                             ?>
-                                                                        <td colspan="8" class="card card-body  bg-secondary" >
+                                                                        <td colspan="8" class="card card-body " style="border:solid grey 1px;">
                                                                             <!-- /. ROW  -->
                                                                             <div class="row">
                                                                                 
                                                                                 <div class="col-md-6">
-                                                                                    <div class="panel panel-default">
+                                                                                    <div class="panel panel-default " style="background-color:inherit !important;">
                                                                                         <div class="panel-heading" align="center">
                                                                                             <h3 style="margin-top:0px !important; margin-bottom:0px !important;"><b>Receiver Information</b></h3>
                                                                                         </div>
@@ -376,7 +377,7 @@ if (isset($_POST["submit"])) {
 				
 			</div>
 
-            <!-- Unassigned transactions -->
+            <!--pending Unassigned transactions -->
             <div class="row">
                 <div class="col-md-6">
                      <!--    Hover Rows  -->
@@ -386,7 +387,7 @@ if (isset($_POST["submit"])) {
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
-                                <table class="table table-hover">
+                                <table class="table ">
                                     <thead>
                                         <tr>
                                             <th>Trans ID</th>
@@ -461,6 +462,7 @@ if (isset($_POST["submit"])) {
 				
 			</div>
 			
+            <!-- completed transactions -->
 			<div class="row">
 				
                 <div class="col-md-6">
@@ -470,7 +472,7 @@ if (isset($_POST["submit"])) {
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
-                                <table class="table table-hover">
+                                <table class="table ">
                                     <thead>
                                         <tr>
                                             <th>Trans ID</th>
@@ -510,7 +512,7 @@ if (isset($_POST["submit"])) {
 																<td>".$person['surname']."</td>
 																<td>".$row['completed_sub_transactions']."/".$row['total_sub_transactions']."</td>
 																<td>".$row['total_return_amount']."</td>
-																<td><a class=\"btn btn-primary btn-sm\" href=\"more_info.php?user=".$id_array[$count]."&trans=".$id_trans[$count]."\">More Details</a></td>
+																<td class=\"hide\"><a class=\"btn btn-primary btn-sm\" href=\"more_info.php?user=".$id_array[$count]."&trans=".$id_trans[$count]."\">More Details</a></td>
                                                                 <td>
                                                                     <button class=\"btn btn-primary btn-sm\" type=\"button\" data-toggle=\"collapse\" data-target=\"#more_info_$row[id]\" aria-expanded=\"true\" aria-controls=\"more_info_$id_trans[$count]\">More Details</button>
                                                                 </td>
@@ -521,11 +523,11 @@ if (isset($_POST["submit"])) {
                                                             $transaction_id = $row['id'];
                                                             echo "  <tr class=\"collapse  bg-success\" id=\"more_info_$row[id]\" style=\"\">";
                                                             ?>
-                                                                        <td colspan="8" class="card card-body  bg-secondary" >
+                                                                        <td colspan="8" class="card card-body  bg-secondary" style="border:solid grey 1px;" >
                                                                             <!-- /. ROW  -->
                                                                             <div class="row">
                                                                                 
-                                                                                <div class="col-md-6">
+                                                                                <div class="col-md-6" >
                                                                                     <div class="panel panel-default">
                                                                                         <div class="panel-heading" align="center">
                                                                                             <h3 style="margin-top:0px !important; margin-bottom:0px !important;"><b>Receiver Information</b></h3>
@@ -720,7 +722,7 @@ if (isset($_POST["submit"])) {
                     <!-- End  Hover Rows  -->
                 </div>
             </div>
-                <!-- /. ROW  -->
+            <!-- /. ROW  -->
 
             </div>
             <!-- /. PAGE INNER  -->
@@ -728,6 +730,9 @@ if (isset($_POST["submit"])) {
         <!-- /. PAGE WRAPPER  -->
     </div>
     <!-- /. WRAPPER  -->
+
+
+
     <div id="footer-sec">
         &copy; 2014 YourCompany | Design By : <a href="http://www.binarytheme.com/" target="_blank">BinaryTheme.com</a>
     </div>
