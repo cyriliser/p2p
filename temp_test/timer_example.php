@@ -9,7 +9,8 @@
 	
 	<?php
 		include_once "../global_functions.php";
-		$db_time = 1568905738;
+		$db_time = time();
+		echo $db_time;
 		if(countDown($db_time,12,true)){
 			echo "timer has run out";
 		}

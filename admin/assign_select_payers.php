@@ -41,8 +41,8 @@
                     } else {
                         $main_trans_details = mysqli_fetch_assoc($payer_result_main);
 
-                        echo "<!-- display info about the payer --> ";
-                        echo "<section class=\"mt-5 text-center\">";
+                        echo "<!-- display info about the Receiver --> ";
+                        echo "<section class=\"mt-5 text-center hide\">";
                         echo "<div class=\"alert alert-success\" role=\"alert\">";
                         echo "  <h4 class=\"alert-heading\">Reciever Details</h4>";
                         echo "  <div class=\"row\">";
@@ -54,6 +54,96 @@
                         echo "  </div>";
                         echo " </div>";
                         echo "</section>";
+
+                        // display info about the Receiver
+                        ?>
+                        <!-- /. ROW  -->
+                        <div class="row ">                             
+                                <div class="col-md-6">
+                                    <div class="panel panel-default ">
+                                        <div class="panel-heading bg-primary" align="center">
+                                            <h3 style="margin-top:0px !important; margin-bottom:0px !important;"><b>Receiver Information</b></h3>
+                                        </div>
+                                        <div class="panel-body bg-success">
+                                            <div class="table-responsive">
+                                                <table class="table table-hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Username</th>
+                                                            <th>Amount</th>
+                                                            <th>Bank</th>
+                                                            <th>Time Left</th>
+                                                            <th>More</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td><?php echo "$payer_reciever_details[username]"; ?></td>
+                                                            <td><?php echo "$main_trans_details[total_return_amount]"; ?></td>
+                                                            <td><?php echo "$payer_reciever_details[bank_name]"; ?></td>
+                                                            <td><?php echo "Time left"; ?></td>
+                                                            <td>
+                                                                <?php echo "<button class=\"btn btn-primary btn-sm\" type=\"button\" data-toggle=\"collapse\" data-target=\"#more_info_rec\" aria-expanded=\"true\" aria-controls=\"more_info_rec\">More Details</button>" ; ?>
+                                                            </td>
+                                                        </tr>
+
+                                                        <!-- <tr class="collapse  bg-danger border border-primary" id="more_info_rec" >";
+                                                        
+                                                        </tr> -->
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- End  Hover Rows  -->
+                                </div>
+                            </div>
+                            <!--End of ROW -->
+
+                            <!-- /. ROW  -->
+                            <div class="row collapse  bg-danger border border-primary" id="more_info_rec">
+                                
+                                <div class="col-md-6">
+                                    <div class="panel panel-default " style="background-color:inherit !important;">
+                                        <div class="panel-heading" align="center">
+                                            <h3 style="margin-top:0px !important; margin-bottom:0px !important;"><b>Receiver Information</b></h3>
+                                        </div>
+                                        <div class="panel-body">
+                                            <div class="table-responsive">
+                                                <table class="table table-hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>User ID</th>
+                                                            <th>Username</th>
+                                                            <th>Name</th>
+                                                            <th>Surname</th>
+                                                            <th>Email</th>
+                                                            <th>Bank</th>
+                                                            <th>Cellphone Number</th>
+                                                            <th>Account Number</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td><?php echo "$payer_reciever_details[id]"; ?></td>
+                                                            <td><?php echo "$payer_reciever_details[username]"; ?></td>
+                                                            <td><?php echo "$payer_reciever_details[name]"; ?></td>
+                                                            <td><?php echo "$payer_reciever_details[surname]"; ?></td>
+                                                            <td><?php echo "$payer_reciever_details[email]"; ?></td>
+                                                            <td><?php echo "$payer_reciever_details[bank_name]"; ?></td>
+                                                            <td><?php echo "$payer_reciever_details[contact_cell]"; ?></td>
+                                                            <td><?php echo "$payer_reciever_details[account_no]"; ?></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- End  Hover Rows  -->
+                                </div>
+                            </div>
+                            <!--End of ROW -->
+                            <?php
 
                     }
                     
@@ -103,6 +193,8 @@
                                                         echo log_alert($db_connection,"error");
                                                     } else {
                                                         $info_payer_pckg_details = mysqli_fetch_assoc($result_info_payer_pckg);
+                                                        $time_left = calc_time_left($info_payer_details['reg_time'],12) / 3600;
+                                                        $time_left = ceil($time_left);
                                                         echo "
                                                             <tr>
                                                                 <!-- <th scope=\"row\">1</th> -->
@@ -113,12 +205,68 @@
                                                                 <td>$info_payer_details[username]</td>
                                                                 <td>$info_payer_pckg_details[amount]</td>
                                                                 <td>$info_payer_details[bank_name]</td>
-                                                                <td>6hrs</td>
+                                                                <td>$time_left</td>
+                                                                <td class=\"hide\">
+                                                                    <button class=\"btn btn-success \">More</button>
+                                                                </td>
                                                                 <td>
-                                                                    <button class=\"btn btn-secondary \">More</button>
+                                                                    <button class=\"btn btn-primary btn-sm\" type=\"button\" data-toggle=\"collapse\" data-target=\"#more_info_$info_payer_details[id]\" aria-expanded=\"true\" aria-controls=\"more_info_$info_payer_details[id]\">More Details</button>
                                                                 </td>
                                                             </tr>
                                                             ";
+
+                                                            // more info row
+                                                            echo "<tr class=\"collapse  bg-danger border border-primary\" id=\"more_info_$info_payer_details[id]\" >";
+                                                            ?>
+                                                            <td colspan="8" class="card card-body " style="border:solid grey 1px;">
+                                                                            <!-- /. ROW  -->
+                                                                            <div class="row">
+                                                                                
+                                                                                <div class="col-md-6">
+                                                                                    <div class="panel panel-default " style="background-color:inherit !important;">
+                                                                                        <div class="panel-heading" align="center">
+                                                                                            <h3 style="margin-top:0px !important; margin-bottom:0px !important;"><b>Payer Information</b></h3>
+                                                                                        </div>
+                                                                                        <div class="panel-body">
+                                                                                            <div class="table-responsive">
+                                                                                                <table class="table table-hover">
+                                                                                                    <thead>
+                                                                                                        <tr>
+                                                                                                            <th>User ID</th>
+                                                                                                            <th>Username</th>
+                                                                                                            <th>Name</th>
+                                                                                                            <th>Surname</th>
+                                                                                                            <th>Email</th>
+                                                                                                            <th>Bank</th>
+                                                                                                            <th>Cellphone Number</th>
+                                                                                                            <th>Account Number</th>
+                                                                                                        </tr>
+                                                                                                    </thead>
+                                                                                                    <tbody>
+                                                                                                        <tr>
+                                                                                                            <td><?php echo "$info_payer_details[id]"; ?></td>
+                                                                                                            <td><?php echo "$info_payer_details[username]"; ?></td>
+                                                                                                            <td><?php echo "$info_payer_details[name]"; ?></td>
+                                                                                                            <td><?php echo "$info_payer_details[surname]"; ?></td>
+                                                                                                            <td><?php echo "$info_payer_details[email]"; ?></td>
+                                                                                                            <td><?php echo "$info_payer_details[bank_name]"; ?></td>
+                                                                                                            <td><?php echo "$info_payer_details[contact_cell]"; ?></td>
+                                                                                                            <td><?php echo "$info_payer_details[account_no]"; ?></td>
+                                                                                                        </tr>
+                                                                                                    </tbody>
+                                                                                                </table>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <!-- End  Hover Rows  -->
+                                                                                </div>
+                                                                            </div>
+                                                                            <!--End of ROW -->
+                                                                            
+
+
+                                                            </tr>
+                                                            <?php
                                                     }   
                                                 }
                                             }

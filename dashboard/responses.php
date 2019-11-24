@@ -3,12 +3,11 @@
 
     // package selection responses
     if(isset($_POST['selected_package'])){
+        log_alert($_POST['selected_package']);
         $selected_package_id = $_POST['selected_package'];
         $user_id1 = $_POST['user_id'];
-        $verification_time = time();//to be used for the 12hr verification
         $reg_time = time();//to be used for the 12hr verification
         $sql_query = "UPDATE users SET selected_package=\"$selected_package_id\", status=1, reg_time=\"$reg_time\" WHERE id=\"$user_id1\""; 
-        // $sql_query = "UPDATE users SET selected_package=\"$selected_package_id\", status=1, verification_time=\"$verification_time\" WHERE id=\"$user_id1\""; 
         $result1 = mysqli_query($db_connection,$sql_query);
         
 

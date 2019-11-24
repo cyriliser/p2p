@@ -150,6 +150,7 @@
 
 
 
+
     // payers actions
         // payers to recievers
         function payers_to_recievers(){
@@ -438,7 +439,7 @@
                     <div class="panel-body">
                         <div class="table-responsive">
                             <form class="" action="" method="post">
-                                <table class="table table-striped table-hover">
+                                <table class="table table-striped ">
                                     <thead class="thead-dark">
                                         <tr>
                                         <th>Select</th>
@@ -466,6 +467,8 @@
                                                         echo log_alert($db_connection,"error");
                                                     } else {
                                                         $info_payer_pckg_details = mysqli_fetch_assoc($result_info_payer_pckg);
+                                                        $time_left = calc_time_left($info_payer_details['reg_time'],12) / 3600;
+                                                        $time_left = ceil($time_left);
                                                         echo "
                                                             <tr>
                                                                 <!-- <th scope=\"row\">1</th> -->
@@ -475,12 +478,68 @@
                                                                 <td>$info_payer_details[username]</td>
                                                                 <td>$info_payer_pckg_details[amount]</td>
                                                                 <td>$info_payer_details[bank_name]</td>
-                                                                <td>6hrs</td>
-                                                                <td>
+                                                                <td>$time_left Hrs</td>
+                                                                <td class=\"hide\">
                                                                     <button class=\"btn btn-success \">More</button>
+                                                                </td>
+                                                                <td>
+                                                                    <button class=\"btn btn-primary btn-sm\" type=\"button\" data-toggle=\"collapse\" data-target=\"#more_info_$info_payer_details[id]\" aria-expanded=\"true\" aria-controls=\"more_info_$info_payer_details[id]\">More Details</button>
                                                                 </td>
                                                             </tr>
                                                             ";
+
+                                                            // more info row
+                                                            echo "<tr class=\"collapse  bg-danger border border-primary\" id=\"more_info_$info_payer_details[id]\" >";
+                                                            ?>
+                                                            <td colspan="8" class="card card-body " style="border:solid grey 1px;">
+                                                                            <!-- /. ROW  -->
+                                                                            <div class="row">
+                                                                                
+                                                                                <div class="col-md-6">
+                                                                                    <div class="panel panel-default " style="background-color:inherit !important;">
+                                                                                        <div class="panel-heading" align="center">
+                                                                                            <h3 style="margin-top:0px !important; margin-bottom:0px !important;"><b>Payer Information</b></h3>
+                                                                                        </div>
+                                                                                        <div class="panel-body">
+                                                                                            <div class="table-responsive">
+                                                                                                <table class="table table-hover">
+                                                                                                    <thead>
+                                                                                                        <tr>
+                                                                                                            <th>User ID</th>
+                                                                                                            <th>Username</th>
+                                                                                                            <th>Name</th>
+                                                                                                            <th>Surname</th>
+                                                                                                            <th>Email</th>
+                                                                                                            <th>Bank</th>
+                                                                                                            <th>Cellphone Number</th>
+                                                                                                            <th>Account Number</th>
+                                                                                                        </tr>
+                                                                                                    </thead>
+                                                                                                    <tbody>
+                                                                                                        <tr>
+                                                                                                            <td><?php echo "$info_payer_details[id]"; ?></td>
+                                                                                                            <td><?php echo "$info_payer_details[username]"; ?></td>
+                                                                                                            <td><?php echo "$info_payer_details[name]"; ?></td>
+                                                                                                            <td><?php echo "$info_payer_details[surname]"; ?></td>
+                                                                                                            <td><?php echo "$info_payer_details[email]"; ?></td>
+                                                                                                            <td><?php echo "$info_payer_details[bank_name]"; ?></td>
+                                                                                                            <td><?php echo "$info_payer_details[contact_cell]"; ?></td>
+                                                                                                            <td><?php echo "$info_payer_details[account_no]"; ?></td>
+                                                                                                        </tr>
+                                                                                                    </tbody>
+                                                                                                </table>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <!-- End  Hover Rows  -->
+                                                                                </div>
+                                                                            </div>
+                                                                            <!--End of ROW -->
+                                                                            
+
+
+                                                            </tr>
+                                                            <?php
                                                     }   
                                                 }
                                             }
@@ -542,6 +601,8 @@
                                                             echo log_alert($db_connection,"error");
                                                         } else {
                                                             $info_rec_user_details = mysqli_fetch_assoc($result_info_user_rec);
+                                                            $time_left = calc_time_left($info_main_trans_details['time_created'],120) / 86400 ;
+                                                            $time_left = ceil($time_left);
                                                             echo "
                                                                 <tr>
                                                                     <!-- <th scope=\"row\">1</th> -->
@@ -551,12 +612,68 @@
                                                                     <td>$info_rec_user_details[username]</td>
                                                                     <td>$info_main_trans_details[total_return_amount]</td>
                                                                     <td>$info_rec_user_details[bank_name]</td>
-                                                                    <td>6hrs</td>
-                                                                    <td>
+                                                                    <td>$time_left Days</td>
+                                                                    <td class=\"hide\">
                                                                         <button class=\"btn btn-success \">More</button>
+                                                                    </td>
+                                                                    <td>
+                                                                        <button class=\"btn btn-primary btn-sm\" type=\"button\" data-toggle=\"collapse\" data-target=\"#more_info_$info_rec_user_details[id]\" aria-expanded=\"true\" aria-controls=\"more_info_$info_rec_user_details[id]\">More Details</button>
                                                                     </td>
                                                                 </tr>
                                                                 ";
+                                                            
+                                                                // more info row
+                                                                echo "<tr class=\"collapse  bg-danger border border-primary\" id=\"more_info_$info_rec_user_details[id]\" >";
+                                                                ?>
+                                                                <td colspan="8" class="card card-body " style="border:solid grey 1px;">
+                                                                                <!-- /. ROW  -->
+                                                                                <div class="row">
+                                                                                    
+                                                                                    <div class="col-md-6">
+                                                                                        <div class="panel panel-default " style="background-color:inherit !important;">
+                                                                                            <div class="panel-heading" align="center">
+                                                                                                <h3 style="margin-top:0px !important; margin-bottom:0px !important;"><b>Payer Information</b></h3>
+                                                                                            </div>
+                                                                                            <div class="panel-body">
+                                                                                                <div class="table-responsive">
+                                                                                                    <table class="table table-hover">
+                                                                                                        <thead>
+                                                                                                            <tr>
+                                                                                                                <th>User ID</th>
+                                                                                                                <th>Username</th>
+                                                                                                                <th>Name</th>
+                                                                                                                <th>Surname</th>
+                                                                                                                <th>Email</th>
+                                                                                                                <th>Bank</th>
+                                                                                                                <th>Cellphone Number</th>
+                                                                                                                <th>Account Number</th>
+                                                                                                            </tr>
+                                                                                                        </thead>
+                                                                                                        <tbody>
+                                                                                                            <tr>
+                                                                                                                <td><?php echo "$info_rec_user_details[id]"; ?></td>
+                                                                                                                <td><?php echo "$info_rec_user_details[username]"; ?></td>
+                                                                                                                <td><?php echo "$info_rec_user_details[name]"; ?></td>
+                                                                                                                <td><?php echo "$info_rec_user_details[surname]"; ?></td>
+                                                                                                                <td><?php echo "$info_rec_user_details[email]"; ?></td>
+                                                                                                                <td><?php echo "$info_rec_user_details[bank_name]"; ?></td>
+                                                                                                                <td><?php echo "$info_rec_user_details[contact_cell]"; ?></td>
+                                                                                                                <td><?php echo "$info_rec_user_details[account_no]"; ?></td>
+                                                                                                            </tr>
+                                                                                                        </tbody>
+                                                                                                    </table>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <!-- End  Hover Rows  -->
+                                                                                    </div>
+                                                                                </div>
+                                                                                <!--End of ROW -->
+                                                                                
+    
+    
+                                                                </tr>
+                                                                <?php
                                                         }   
                                                     }
                                                 }
@@ -619,11 +736,67 @@
                                                         <td>$info_other_user_details[username]</td>
                                                         <td>$info_other_user_details[bank_name]</td>
                                                         <td>$num_investments</td>
-                                                        <td>
+                                                        <td class=\"hide\">
                                                             <button class=\"btn btn-success \">More</button>
+                                                        </td>
+                                                        <td>
+                                                            <button class=\"btn btn-primary btn-sm\" type=\"button\" data-toggle=\"collapse\" data-target=\"#more_info_$info_other_user_details[id]\" aria-expanded=\"true\" aria-controls=\"more_info_$info_other_user_details[id]\">More Details</button>
                                                         </td>
                                                     </tr>
                                                     ";
+
+                                                    // more info row
+                                                    echo "<tr class=\"collapse  bg-danger border border-primary\" id=\"more_info_$info_other_user_details[id]\" >";
+                                                    ?>
+                                                    <td colspan="8" class="card card-body " style="border:solid grey 1px;">
+                                                                    <!-- /. ROW  -->
+                                                                    <div class="row">
+                                                                        
+                                                                        <div class="col-md-6">
+                                                                            <div class="panel panel-default " style="background-color:inherit !important;">
+                                                                                <div class="panel-heading" align="center">
+                                                                                    <h3 style="margin-top:0px !important; margin-bottom:0px !important;"><b>Payer Information</b></h3>
+                                                                                </div>
+                                                                                <div class="panel-body">
+                                                                                    <div class="table-responsive">
+                                                                                        <table class="table table-hover">
+                                                                                            <thead>
+                                                                                                <tr>
+                                                                                                    <th>User ID</th>
+                                                                                                    <th>Username</th>
+                                                                                                    <th>Name</th>
+                                                                                                    <th>Surname</th>
+                                                                                                    <th>Email</th>
+                                                                                                    <th>Bank</th>
+                                                                                                    <th>Cellphone Number</th>
+                                                                                                    <th>Account Number</th>
+                                                                                                </tr>
+                                                                                            </thead>
+                                                                                            <tbody>
+                                                                                                <tr>
+                                                                                                    <td><?php echo "$info_other_user_details[id]"; ?></td>
+                                                                                                    <td><?php echo "$info_other_user_details[username]"; ?></td>
+                                                                                                    <td><?php echo "$info_other_user_details[name]"; ?></td>
+                                                                                                    <td><?php echo "$info_other_user_details[surname]"; ?></td>
+                                                                                                    <td><?php echo "$info_other_user_details[email]"; ?></td>
+                                                                                                    <td><?php echo "$info_other_user_details[bank_name]"; ?></td>
+                                                                                                    <td><?php echo "$info_other_user_details[contact_cell]"; ?></td>
+                                                                                                    <td><?php echo "$info_other_user_details[account_no]"; ?></td>
+                                                                                                </tr>
+                                                                                            </tbody>
+                                                                                        </table>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <!-- End  Hover Rows  -->
+                                                                        </div>
+                                                                    </div>
+                                                                    <!--End of ROW -->
+                                                                    
+
+
+                                                    </tr>
+                                                    <?php
                                             }
                                         }
                                         

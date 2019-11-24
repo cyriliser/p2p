@@ -43,9 +43,9 @@
                 $type = 'primary';
                 break;
         }
-        echo "<div class=\"fixed-bottom alert alert-$type\" role=\"alert\">";
-            echo $message;
-        echo "</div>";
+        // echo "<div class=\"fixed-bottom alert alert-dismissible fade show alert-$type\" role=\"alert\">";
+        //     echo $message;
+        // echo "</div>";
     }
 
 
@@ -73,7 +73,7 @@
                 $type = 'primary';
                 break;
         }
-        echo "<div class=\"fixed-bottom alert alert-$type\" role=\"alert\">";
+        echo "<div class=\"fixed-bottom alert alert-dismissible fade show alert-$type\" role=\"alert\">";
             echo $message;
         echo "</div>";
     }
@@ -159,11 +159,13 @@
         // This function return true or false. true if count down has run out
         $db_time = ($time + ($hours*3600));
         $current_time = time();
-        $time_left = $db_time - $current_time;  
+        $time_left = $db_time - $current_time;
+        // echo $current_time; 
         if($showClock) {
             if($time_left <= 0){
                 return true;
             }else{
+                // echo "showing";
                 echo '
                     <div class="clock" style="margin:2em;"></div>
                     
@@ -183,6 +185,12 @@
                     }
             return false;
         }
+    }
+
+    function calc_time_left($db_time,$total_time){
+        $db_time = ($db_time + ($total_time*3600));
+        $time_left = $db_time -  time(); 
+        return $time_left;
     }
 
     function is_reloaded(){
