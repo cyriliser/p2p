@@ -94,8 +94,8 @@
  
         </ul>
       </div>
-    </div>
-  </nav>
+    </nav>
+    
 
   <!-- Masthead -->
   <header class="masthead bg-primary text-white text-center pt-5 pb-0 bg-white">
@@ -124,6 +124,12 @@
     <!-- not hidden -->
     <div class="username pt-5 pb-3 bg-primary text-white ">
       <h1><?php echo $username;?></h1>
+    </div>
+
+    
+    <div class="bg-primary">
+        <button class="btn btn-secondary btn-lg justify-content-around mx-auto my-2">Refresh</button>
+      </div>
     </div>
   </header>
   
@@ -594,6 +600,9 @@
 
   <!-- Custom scripts for this template -->
   <script src="../assets/js/freelancer.min.js"></script>
+  <!-- refresh -->
+  <script src="../refresh.js"></script>
+
 
 </body>
 
