@@ -9,6 +9,8 @@ require_once("../global_functions.php");
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cash Bankers</title>
 
+    <!-- fontawsome  -->
+  <link href="../assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <!-- BOOTSTRAP STYLES-->
     <link href="assets/css/bootstrap.css" rel="stylesheet" />
     <!-- FONTAWESOME STYLES-->
