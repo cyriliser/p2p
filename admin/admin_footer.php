@@ -16,5 +16,7 @@
     <script src="assets/js/custom.js"></script>
     <!-- main js -->
     <script src="./assets/js/main.js"></script>
+    <!-- refresh -->
+    <script src="../refresh.js"></script>
 </body>
 </html>

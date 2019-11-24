@@ -26,10 +26,7 @@
                 <div class="col-sm-8">
                     <?php
                         $db_time = $user_details['reg_time'];
-<<<<<<< HEAD
-=======
                         // echo $db_time;
->>>>>>> master
                         if(countDown($db_time,12,true)){
                             echo "<div class=\"alert alert-warning\" role=\"alert\">
                                     <h1>12 hours have passed please Notify the Admins. </br> we apologize for the inconvenience</h1>

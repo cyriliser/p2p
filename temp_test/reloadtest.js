@@ -1,0 +1,29 @@
+function refreshed() {
+  if (window.performance) {
+    console.info("window.performance works fine on this browser");
+  }
+  if (performance.navigation.type == 1) {
+    console.info("This page is reloaded");
+    return true;
+  } else {
+    console.info("This page is not reloaded");
+    return false;
+  }
+}
+
+document.querySelector("#refresh").addEventListener("click", myreload);
+if (refreshed()) {
+  document.querySelector("#response").textContent = "Refreshed";
+} else {
+  document.querySelector("#response").textContent = "Not Refreshed";
+}
+
+function myreload() {
+  document.querySelector("#response").textContent = "Refreshed by btn";
+  window.location.href = window.location.href;
+}
+
+window.addEventListener("unload", e => {
+  e.preventDefault();
+  alert("hy");
+});

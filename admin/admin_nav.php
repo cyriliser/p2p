@@ -22,7 +22,7 @@ require_once("../global_functions.php");
     <!-- GOOGLE FONTS-->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
     <!-- custome css -->
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 <body>
     <div id="wrapper">
@@ -42,9 +42,14 @@ require_once("../global_functions.php");
                 <a class="navbar-brand" href="<?php echo $admin_url; ?>">Cash Bankers</a>
             </div>
 
+            <!-- top navbar middle -->
+
+            
+            
             <!-- top right navbar -->
             <div class="header-right">
-
+                
+                <button id="refresh" class="btn btn-primary refresh-btn">Refresh</button>
     
                 <a href="admin_login.php" class="btn btn-danger" href="<?php echo $admin_url; ?>/login/logout.php" title="Logout">LogOut</a>
 
