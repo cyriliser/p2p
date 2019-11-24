@@ -194,11 +194,12 @@
     }
 
     function is_reloaded(){
-        $is_page_refreshed = (isset($_SERVER['HTTP_CACHE_CONTROL']) && $_SERVER['HTTP_CACHE_CONTROL'] == 'max-age=0');
-        if($is_page_refreshed ) {
-            return !true;
-        } else {
-            return false;
-        }
+
+        // $is_page_refreshed = (isset($_SERVER['HTTP_CACHE_CONTROL']) && $_SERVER['HTTP_CACHE_CONTROL'] == 'max-age=0');
+        // if($is_page_refreshed ) {
+        //     return !true;
+        // } else {
+        //     return false;
+        // }
     }
 ?>
