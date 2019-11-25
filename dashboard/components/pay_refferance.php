@@ -37,7 +37,7 @@
                                             <strong class="mx-auto">Marked As Received</strong>
                                             <?php
                                                     $check_recieved ="";
-                                                    if ($referrer_details['reference_paid'] == 1) {
+                                                    if ($user_details['reference_received'] == 1) {
                                                             $check_recieved = "text-primary";
                                                     }
                                                     echo "<i class=\"fas fa-check-square $check_recieved fa-2x mr-5\"></i>" ;
@@ -47,7 +47,7 @@
                                             <strong class="mx-auto">Completed</strong>
                                             <?php
                                                     $check_complete ="";
-                                                    if ($referrer_details['reference_received'] == 1 and $referrer_details['reference_paid'] == 1) {
+                                                    if ($user_details['reference_received'] == 1 and $user_details['reference_paid'] == 1) {
                                                             $check_complete = "text-primary";
                                                     }
                                                     echo "<i class=\"fas fa-check-square $check_complete fa-2x mr-5\"></i>" ;
@@ -59,7 +59,7 @@
                                     <div class="my-1 w-100 border border-primary cell">
                                             <?php 
                                             // log_alert($sub_transaction_details['marked_as_paid']);
-                                            if ($referrer_details['reference_received'] == 1) {
+                                            if ($user_details['reference_paid'] == 1) {
                                                     // if markrd as paid hide form
                                                     echo "<form action=\"\" method=\"post\" class=\"d-flex\" style=\"display:none !important;\">  ";
                                             }
@@ -76,14 +76,14 @@
                                                                     echo "<label class=\"custom-control-label\" for=\"customSwitch1\">Mark As Paid</label>";
                                                             ?>
                                                     </div>
-                                                    <button type="submit" class="btn btn-primary btn-sm mr-4 py-0">Submit</button>
+                                                    <button type="submit" name="paid_submit" value="reference_paid" class="btn btn-primary btn-sm mr-4 py-0">Submit</button>
                                             </form>
 
                                             <?php 
-                                            if ($referrer_details['reference_received'] == 1) {
+                                            if ($user_details['reference_paid'] == 1) {
                                                     // if paid display received
                                                     echo "  <div style=\"border: solid #a49797 1px;\" class=\"my-1 d-flex justify-content-between w-100 border border-primary \">
-                                                                    <strong class=\"mx-auto\">Marked As Recieved</strong>
+                                                                    <strong class=\"mx-auto\">Marked As paid</strong>
                                                                     <i class=\"fas fa-check-square text-primary fa-2x mr-5\"></i>
                                                             </div>";
                                             }

@@ -299,4 +299,91 @@
             
         }
     }
-?>
+
+    // referral functions
+    function mark_paid($user_id){
+        global $db_connection;
+        $sql_query = "UPDATE users SET reference_paid =\"1\" WHERE id=\"$user_id\" ";
+        $result = mysqli_query($db_connection,$sql_query);
+        if (!$result) {
+            log_alert(mysqli_error($db_connection));
+            return false;
+        }else {
+            return true;
+        }
+    }
+
+    function mark_received($user_id){
+        global $db_connection;
+        $sql_query = "UPDATE users SET reference_received =\"1\" WHERE id=\"$user_id\" ";
+        $result = mysqli_query($db_connection,$sql_query);
+        if (!$result) {
+            log_alert(mysqli_error($db_connection));
+            return false;
+        }else {
+            return true;
+        }
+    }
+    
+    function get_user_details($user_id){
+        global $db_connection;
+        $sql_query = "SELECT * FROM users WHERE id=\"$user_id\" ";
+        $result = mysqli_query($db_connection,$sql_query);
+        if (!$result) {
+            log_alert(mysqli_error($db_connection));
+            return false;
+        } else {
+            return mysqli_fetch_assoc($result);
+        }
+        
+    }
+
+    function both_marked($user_id){
+        $user_details = get_user_details($user_id);
+        if ($user_details['reference_paid'] == 1 and $user_details['reference_received'] == 1) { 
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    function update_user_status($user_id,$new_status){
+        global $db_connection;
+        $sql_query = "UPDATE users SET status=\"$new_status\" WHERE id=\"$user_id\" ";
+        $result = mysqli_query($db_connection, $sql_query);
+        if (!$result) {
+            log_alert(mysqli_query($db_connection));
+            return false;
+        }else {
+            return true;
+        }
+    }
+
+    //referral responses
+        // mark reference paid
+        if (isset($_POST['paid_submit']) and $_POST['reference_paid']) {
+            $user_id = $_POST['user_id'];
+            // mark paid
+            if (mark_paid($user_id)) {
+                // check if both marked
+                if(both_marked($user_id)){
+                    // update user status
+                    update_user_status($user_id, 0);
+                }
+            }
+        }
+
+        // mark reference recieved
+        if (isset($_POST['received_submit']) and $_POST['reference_received']) {
+            $user_id = $_POST['user_id'];
+            // mark received
+            if (mark_received($user_id)) {
+                // check if both marked
+                if(both_marked($user_id)){
+                    // update user status
+                    update_user_status($user_id, 0);
+                }
+            }
+        }
+    ?>
