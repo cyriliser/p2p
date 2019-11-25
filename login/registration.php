@@ -268,7 +268,7 @@ if(isset($_SESSION['form_data'])) {
 					<button type="submit" class="btn btn-primary btn-xl" id="sendMessageButton">Register</button>
 					<?php
 					
-	unset($_SESSION['form_data']);
+	              unset($_SESSION['form_data']);
 								if(isset($_GET['ref'])) {
 									$_SESSION['ref'] = $_GET['ref'];
 									// Let's check if the reference exists

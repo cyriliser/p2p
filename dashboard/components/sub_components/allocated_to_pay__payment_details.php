@@ -91,6 +91,7 @@ if (!$recipient_result && sqli_num_rows() == 0) {
                 <i class="fas fa-check-square fa-2x mr-5"></i>
         </div></div>
 
+
 <!-- clock -->
 <div>
         <div class="mt-3"><h3>Time Left To Pay:</h3></div>

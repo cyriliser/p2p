@@ -173,6 +173,9 @@
                 case 4://if user has been allocated to recieve payment
                     include('./components/allocated_to_recieve.php'); 
                     break;
+                case 5://if user has just registerd using referal link
+                    include('./components/pay_refferance.php'); 
+                    break;
                 default:
                 
             }

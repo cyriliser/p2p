@@ -20,7 +20,9 @@ function validate_data($email,$username) {
 	if($result){
 		if(mysqli_num_rows($result) == 1)
 			return $append.$username."'";
-	}
+  }
+  
+  // TODO remove
 	$result = mysqli_query($db_connection,"select username from refs where username = '$username'");
 	if($result){
 		if(mysqli_num_rows($result) == 1)
@@ -32,7 +34,9 @@ function validate_data($email,$username) {
 	if($result){
 		if(mysqli_num_rows($result) == 1)
 			return $append.$email."'";
-	}
+  }
+  
+  // TODO remove
 	$result = mysqli_query($db_connection,"select email from refs where email = '$email'");
 	if($result){
 		if(mysqli_num_rows($result) == 1)
@@ -71,8 +75,13 @@ function validate_data($email,$username) {
       $account_no = $_REQUEST['account_no'];
       $cellno2 = $_REQUEST['cellphone2'];
       $trn_date = date("Y-m-d H:i:s");
-      $query = "INSERT into refs (username, email, password, name, surname, date_of_birth, contact_cell, bank_name, account_no, linked_cell,reg_time,referer_id) 
-                VALUES ('$username', '$email', '".md5($password)."', '$name', '$surname', '$date','$cellno', '$bank_name', '$account_no', '$cellno2', '".time()."' ,'".$_SESSION['ref']."')";
+
+      // $query = "INSERT into refs (username, email, password, name, surname, date_of_birth, contact_cell, bank_name, account_no, linked_cell,reg_time,referer_id) 
+      //           VALUES ('$username', '$email', '".md5($password)."', '$name', '$surname', '$date','$cellno', '$bank_name', '$account_no', '$cellno2', '".time()."' ,'".$_SESSION['ref']."')";
+
+      $query = "INSERT into users (username, email, password, name, surname, date_of_birth, contact_cell, bank_name, account_no, linked_cell,status, reg_time,referrer_id) 
+      VALUES ('$username', '$email', '".md5($password)."', '$name', '$surname', '$date','$cellno', '$bank_name', '$account_no', '$cellno2', '5', '".time()."' ,'".$_SESSION['ref']."')";
+
     }else{
       $username = $_REQUEST['username'];
       $email = $_REQUEST['email'];
