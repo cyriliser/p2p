@@ -184,8 +184,10 @@
             // require_once('./components/inbox.php');
             // including section containing ref link
             require_once('./components/share_ref_link.php');
+            // Referrals
+            require_once('./components/referrals.php');
             //past transactions
-            include('./components/past_transactions.php');
+            require_once('./components/past_transactions.php');
         }
     }
     

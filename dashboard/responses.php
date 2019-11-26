@@ -362,7 +362,7 @@
 
     //referral responses
         // mark reference paid
-        if (isset($_POST['paid_submit']) and $_POST['reference_paid']) {
+        if (isset($_POST['paid_submit']) and $_POST['paid_submit'] = "reference_paid") {
             $user_id = $_POST['user_id'];
             // mark paid
             if (mark_paid($user_id)) {
@@ -375,7 +375,7 @@
         }
 
         // mark reference recieved
-        if (isset($_POST['received_submit']) and $_POST['reference_received']) {
+        if (isset($_POST['received_submit']) and $_POST['received_submit'] = "reference_received") {
             $user_id = $_POST['user_id'];
             // mark received
             if (mark_received($user_id)) {

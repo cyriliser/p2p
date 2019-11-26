@@ -72,7 +72,7 @@
                                                             <?php 
                                                                     echo "<input type=\"hidden\" name=\"user_id\" value=\"$user_details[id]\">";
                                                                     // echo "<input type=\"hidden\" name=\"main_transaction_id\" value=\"$sub_transaction_details[main_transaction_id]\">";
-                                                                    echo "<input type=\"checkbox\" name=\"reference_paid\" value=\"1\" class=\"custom-control-input\" id=\"customSwitch1\">";
+                                                                    echo "<input type=\"checkbox\" name=\"reference_received\" value=\"1\" class=\"custom-control-input\" id=\"customSwitch1\">";
                                                                     echo "<label class=\"custom-control-label\" for=\"customSwitch1\">Mark As Paid</label>";
                                                             ?>
                                                     </div>
