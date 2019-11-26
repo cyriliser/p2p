@@ -2,7 +2,7 @@
 
 $site_name = "CASH BANKERS";
 // local version (xampp)(comment out when uploading to server)
-$base_url = "/sites/p2p"; ////// homepage
+$base_url = "http://localhost/sites/p2p"; ////// homepage
 $dashboard_url = "/sites/p2p/dashboard"; ////// userdashboard
 $admin_url = "/sites/p2p/admin"; ////// Admin Panel URL
 $dbname = "cyrilise_p2p"; //name of the database
