@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 19, 2019 at 11:37 PM
+-- Generation Time: Nov 26, 2019 at 10:15 AM
 -- Server version: 10.3.16-MariaDB
 -- PHP Version: 7.2.20
 
@@ -96,7 +96,15 @@ CREATE TABLE `inbox` (
 
 INSERT INTO `inbox` (`id`, `owner`, `ref_sender`, `user_sender`, `msg`, `opened`, `date_received`) VALUES
 (1, 8, 2, NULL, '<a href=\'/api/reference_manager.php?confirm=2\'>Confirm payment for yaya_ref4</a>', b'0', '2019-09-10'),
-(2, 8, 2, NULL, '<a href=\'/api/reference_manager.php?confirm=2\'>Confirm payment for yaya_ref4</a>', b'0', '2019-09-10');
+(2, 8, 2, NULL, '<a href=\'/api/reference_manager.php?confirm=2\'>Confirm payment for yaya_ref4</a>', b'0', '2019-09-10'),
+(3, 42, NULL, 44, '<a href=\'/api/reference_manager.php?confirm=3\'>Confirm payment for mixref1</a>', b'0', '2019-10-01'),
+(4, 35, NULL, 45, '4 lolly_ref1', b'0', '2019-10-12'),
+(5, 35, NULL, 61, '5 lolly_ref2', b'0', '2019-10-12'),
+(6, 61, NULL, 35, 'Account successfuly activated, now select a package to start scheming hehe', b'0', '2019-10-12'),
+(7, 35, NULL, 64, '6 lolly_ref3', b'0', '2019-10-12'),
+(8, 64, NULL, 35, 'Account successfuly activated, now select a package to start scheming hehe', b'0', '2019-10-12'),
+(9, 35, NULL, 67, '7 lolly_ref4', b'0', '2019-10-15'),
+(10, 67, NULL, 35, 'Account successfuly activated, now select a package to start scheming hehe', b'0', '2019-10-15');
 
 -- --------------------------------------------------------
 
@@ -145,8 +153,7 @@ CREATE TABLE `refs` (
   `bank_name` varchar(50) DEFAULT NULL,
   `account_no` int(11) DEFAULT NULL,
   `linked_cell` int(11) DEFAULT NULL,
-  `referer_id` int(11) NOT NULL,
-  `reg_time` int(11) NOT NULL
+  `referer_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -205,11 +212,18 @@ INSERT INTO `sub_transactions` (`id`, `main_transaction_id`, `payer_id`, `recipi
 (30, 60, 34, 25, 2000, 1, 1, 'completed', 0),
 (31, 60, 35, 25, 2000, 1, 1, 'completed', 0),
 (32, 64, 27, 35, 4000, 1, 1, 'completed', 0),
-(33, 62, 35, 8, 4000, 0, 0, 'pending', 0),
+(33, 62, 35, 8, 4000, 1, 1, 'completed', 0),
 (34, 73, 36, 14, 1000, 1, 1, 'completed', 0),
 (35, 61, 38, 26, 4000, 1, 1, 'completed', 0),
 (36, 80, 38, 37, 1000, 0, 0, 'pending', 1568923510),
-(37, 81, 40, 2, 1000, 1, 1, 'completed', 1568923510);
+(37, 81, 40, 2, 1000, 1, 1, 'completed', 1568923510),
+(38, 88, 42, 8, 1000, 1, 1, 'completed', 1569179043),
+(39, 89, 41, 42, 1500, 1, 1, 'completed', 1569497358),
+(40, 90, 43, 41, 1500, 0, 0, 'pending', 1569499788),
+(41, 75, 8, 1, 1000, 1, 1, 'completed', 1570091686),
+(42, 92, 1, 8, 2000, 1, 1, 'completed', 1570109443),
+(43, 94, 8, 35, 1000, 1, 1, 'completed', 1571002837),
+(44, 95, 35, 8, 2000, 1, 1, 'completed', 1572685149);
 
 -- --------------------------------------------------------
 
@@ -237,7 +251,7 @@ INSERT INTO `transactions` (`id`, `recipient_id`, `transaction_package_id`, `rec
 (1, 2, 2, 2000, 2000, 1, 1, 'completed', 0),
 (2, 1, 4, 4000, 4000, 1, 1, 'completed', 0),
 (24, 3, 4, 4000, 4000, 1, 1, 'completed', 0),
-(25, 1, 2, 2000, 2000, 1, 1, 'complete', 0),
+(25, 1, 2, 2000, 2000, 1, 1, 'complete', 1570039029),
 (26, 2, 4, 4000, 4000, 1, 1, 'completed', 0),
 (30, 3, 8, 1000, 8000, 1, 1, 'completed', 0),
 (42, 16, 2, 1000, 2000, 1, 1, 'completed', 0),
@@ -258,9 +272,9 @@ INSERT INTO `transactions` (`id`, `recipient_id`, `transaction_package_id`, `rec
 (57, 25, 8, 2000, 8000, 1, 1, 'completed', 0),
 (58, 34, 2, 2000, 2000, 1, 1, 'completed', 0),
 (59, 8, 4, 4000, 4000, 2, 2, 'completed', 0),
-(60, 25, 4, 4000, 4000, 2, 2, 'completed', 0),
+(60, 25, 4, 4000, 4000, 2, 2, 'completed', 1570103286),
 (61, 26, 4, 16000, 4000, 4, 2, 'completed', 0),
-(62, 8, 4, 0, 4000, 0, 1, 'pending', 0),
+(62, 8, 4, 4000, 4000, 1, 1, 'completed', 0),
 (63, 34, 4, 0, 4000, 0, 0, 'pending', 0),
 (64, 35, 4, 4000, 4000, 1, 1, 'completed', 0),
 (65, 27, 8, 0, 8000, 0, 0, 'pending', 0),
@@ -272,14 +286,42 @@ INSERT INTO `transactions` (`id`, `recipient_id`, `transaction_package_id`, `rec
 (72, 39, 2, 0, 2000, 0, 0, 'pending', 0),
 (73, 14, 1, 1000, 1000, 1, 3, 'pending', 0),
 (74, 36, 2, 0, 2000, 0, 0, 'pending', 0),
-(75, 1, 1, 0, 1000, 0, 0, 'pending', 0),
+(75, 1, 1, 2000, 1000, 2, 1, 'completed', 1570091686),
 (76, 38, 8, 0, 8000, 0, 0, 'canceled', 0),
 (77, 38, 8, 0, 8000, 0, 0, 'canceled', 0),
-(78, 38, 8, 0, 8000, 0, 0, 'pending', 0),
+(78, 38, 8, 0, 8000, 0, 0, 'canceled', 0),
 (79, 38, 8, 0, 8000, 0, 0, 'pending', 0),
 (80, 37, 1, 0, 1000, 0, 2, 'pending', 0),
 (81, 2, 1, 1000, 1000, 1, 1, 'completed', 0),
-(82, 40, 2, 0, 2000, 0, 0, 'pending', 1568923510);
+(82, 40, 2, 0, 2000, 0, 0, 'canceled', 1568923510),
+(83, 24, 1, 0, 1000, 0, 0, 'canceled', 0),
+(84, 26, 1, 0, 1000, 0, 0, 'pending', 0),
+(85, 24, 1, 0, 1000, 0, 0, 'pending', 0),
+(86, 26, 1, 0, 1000, 0, 0, 'pending', 0),
+(87, 35, 8, 0, 8000, 0, 0, 'canceled', 0),
+(88, 8, 1, 1000, 1000, 1, 1, 'completed', 0),
+(89, 42, 2, 1500, 2000, 1, 1, 'completed', 0),
+(90, 41, 3, 0, 3000, 0, 1, 'pending', 1570039029),
+(92, 8, 2, 2000, 2000, 1, 1, 'completed', 1570109444),
+(93, 1, 4, 0, 4000, 0, 0, 'pending', 1570109444),
+(94, 35, 1, 1000, 1000, 1, 1, 'completed', 1571002837),
+(95, 8, 2, 2000, 2000, 1, 1, 'completed', 1572685149),
+(96, 35, 4, 0, 4000, 0, 0, 'pending', 0),
+(97, 8, 2, 0, 2000, 0, 0, 'canceled', 1573221898),
+(98, 67, 1, 0, 1000, 0, 0, 'pending', 1573222170),
+(99, 66, 2, 0, 2000, 0, 0, 'canceled', 1573222695),
+(100, 66, 1, 0, 1000, 0, 0, 'canceled', 1573222756),
+(101, 66, 1, 0, 1000, 0, 0, 'pending', 1573222787),
+(102, 64, 1, 0, 1000, 0, 0, 'canceled', 1573223628),
+(103, 61, 1, 0, 1000, 0, 0, 'pending', 1573223845),
+(104, 45, 1, 0, 1000, 0, 0, 'pending', 1573223932),
+(105, 44, 1, 0, 1000, 0, 0, 'pending', 1573223975),
+(106, 42, 1, 0, 1000, 0, 0, 'pending', 1573224268),
+(107, 21, 1, 0, 1000, 0, 0, 'pending', 1573224384),
+(108, 20, 1, 0, 1000, 0, 0, 'pending', 1573224642),
+(109, 19, 2, 0, 2000, 0, 0, 'pending', 1573224812),
+(110, 64, 1, 0, 1000, 0, 0, 'pending', 0),
+(111, 40, 1, 0, 1000, 0, 0, 'pending', 0);
 
 -- --------------------------------------------------------
 
@@ -301,44 +343,59 @@ CREATE TABLE `users` (
   `linked_cell` varchar(10) NOT NULL,
   `selected_package` int(11) DEFAULT NULL,
   `status` int(11) NOT NULL DEFAULT 0,
-  `reg_time` int(11) NOT NULL
+  `reg_time` int(11) NOT NULL,
+  `referrer_id` int(11) NOT NULL,
+  `reference_paid` int(11) NOT NULL DEFAULT 0,
+  `reference_received` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `email`, `password`, `name`, `surname`, `date_of_birth`, `contact_cell`, `bank_name`, `account_no`, `linked_cell`, `selected_package`, `status`, `reg_time`) VALUES
-(1, 'username1', 'username1@gmail.com', '92877af70a45fd6a2ed7fe81e1236b78', 'user1', 'user1', '1997-12-04', '123469874', 'capitec', '123467896', '0123469874', 1, 3, 1566673990),
-(2, 'username2', 'username2@gmail.com', '1a1dc91c907325c69271ddf0c944bc72', 'user2', 'user2', '1997-12-04', '123469874', 'capitec', '123467896', '0123469874', 1, 0, 1566679320),
-(3, 'username3', 'username3@gmail.com', '92877af70a45fd6a2ed7fe81e1236b78', 'user3', 'user3', '1997-12-04', '123469874', 'capitec', '123467896', '0123469874', 8, 0, 1566679684),
-(4, 'username4', 'username4@gmail.com', '92877af70a45fd6a2ed7fe81e1236b78', 'user4', 'user4', '1997-12-04', '123469874', 'capitec', '123467896', '0123469874', 7, 0, 1566383573),
-(5, 'username5', 'username5@gmail.com', '92877af70a45fd6a2ed7fe81e1236b78', 'user5', 'user5', '1997-12-04', '123469874', 'capitec', '123467896', '0123469874', 7, 0, 1566383573),
-(7, 'siya', 'siya@gmail.com', 'd8578edf8458ce06fbc5bb76a58c5ca4', 'sya', 'mbatha', '1997-04-12', '0648818573', 'capitec', '21321621634', '3231681422', NULL, 0, 0),
-(8, 'yaya', 'yaya@gmail.com', '4409eae53c2e26a65cfc24b3a2359eb9', 'yaya', 'dee', '0000-00-00', '2163464', 'capitec', '6444464', '4124424', 4, 4, 1568143317),
-(9, 'sma', 'sma@gmail.com', 'a289fa4252ed5af8e3e9f9bee545c172', 'sma', 'sma', '1998-02-10', '0123467898', 'capitec', '64649874468', '1321461321', NULL, 0, 0),
-(12, 'mpilo', 'mpilo@gmail.com', '237ae5d9b8dcac0cda36f5621f5f4d18', 'mpilo', 'mpilo', '1998-02-10', '0123467898', 'capitec', '64649874468', '1321461321', NULL, 0, 0),
-(13, 'rose', 'rose@gmail.com', 'fcdc7b4207660a1372d0cd5491ad856e', '', '', '0000-00-00', '', 'capitec', '', '', NULL, 0, 0),
-(14, 'user1', 'user1@gmail.com', 'd8578edf8458ce06fbc5bb76a58c5ca4', 'user1', 'user1', '1997-04-12', '123467896', 'capitec', '123467896', '1234698710', 1, 4, 1568492246),
-(15, 'user2', 'user2', 'd8578edf8458ce06fbc5bb76a58c5ca4', 'user2', 'user2', '0000-00-00', '1234768124', 'capitec', '87324659837', '9328746592', 8, 0, 1567546694),
-(16, 'user3', 'user3', '92877af70a45fd6a2ed7fe81e1236b78', 'user3', 'user3', '0000-00-00', 'user3', 'capitec', 'user3', 'user3', 4, 0, 1567200964),
-(17, 'user4', 'user4', '3f02ebe3d7929b091e3d8ccfde2f3bc6', 'user4', 'user4', '0000-00-00', 'user4', 'capitec', 'user4', 'user4', 2, 0, 1567093490),
-(18, 'user5', 'user5', '0a791842f52a0acfbb3a783378c066b8', 'user5', 'user5', '0000-00-00', 'user5', 'capitec', 'user5', 'user5', 2, 0, 1567093546),
-(19, 'test', 'test@gmail.com', '098f6bcd4621d373cade4e832627b4f6', 'test', 'test', '0000-00-00', 'test', 'capitec', 'test', 'test', NULL, 0, 0),
-(20, 'test1', 'test1@gmail.com', '5a105e8b9d40e1329780d62ea2265d8a', 'test1', 'test1', '0000-00-00', 'test1', 'capitec', 'test1', 'test1', 6, 0, 1567558221),
-(21, 'test2', 'test2@gmail.com', 'c52ecd93c1ec34fd0dfde14de883c3a2', '', '', '0000-00-00', '', 'capitec', '', '', NULL, 0, 0),
-(23, 'test3', 'test3@gmail.com', '8ad8757baa8564dc136c1e07507f4a98', 'test3', 'test3', '0000-00-00', 'test3', 'capitec', 'test3', 'test3', 1, 4, 1568492037),
-(24, 'refered1_y', 'refered1_yaya@gmail.com', '1a1dc91c907325c69271ddf0c944bc72', 'refered1_y', 'refered1_y', '0000-00-00', 'refered1_y', 'capitec', 'refered1_ya', 'refered1_y', NULL, 0, 0),
-(25, 'yaya_ref2', 'yaya_ref2@gmail.com', '1a1dc91c907325c69271ddf0c944bc72', 'yaya_ref2', 'yaya_ref2', '0000-00-00', 'yaya_ref2', 'capitec', 'yaya_ref2', 'yaya_ref2', 4, 4, 1568404425),
-(26, 'yaya_ref3', 'yaya_ref3@gmail.com', '1a1dc91c907325c69271ddf0c944bc72', 'yaya_ref3', 'yaya_ref3', '0000-00-00', 'yaya_ref3', 'capitec', 'yaya_ref3', 'yaya_ref3', 4, 0, 1568103920),
-(27, 'test4', 'test4@gmail.com', '1a1dc91c907325c69271ddf0c944bc72', 'test4', 'test4', '0000-00-00', 'test4', 'capitec', 'test4', 'test4', 8, 3, 1568355776),
-(34, 'test6', 'test6@gmail.com', '1a1dc91c907325c69271ddf0c944bc72', 'test6', 'test6', '0000-00-00', 'test6', 'capitec', 'test6', 'test6', 4, 3, 1568147111),
-(35, 'lolly', 'lolly@gmail.com', '1a1dc91c907325c69271ddf0c944bc72', 'lolly', 'lolly', '0000-00-00', 'lolly', 'capitec', 'lolly', 'lolly', 8, 2, 1568355959),
-(36, 'user6', 'user6@gmail.com', '1a1dc91c907325c69271ddf0c944bc72', 'user6', 'user6', '0000-00-00', 'user6', 'capitec', 'user6', 'user6', 2, 3, 1568495017),
-(37, 'user7', 'user7@gmail.com', '3e0469fb134991f8f75a2760e409c6ed', 'user7', 'user7', '0000-00-00', 'user7', 'capitec', 'user7', 'user7', 1, 4, 1568494687),
-(38, 'user8', 'user8@gmail.com', '1a1dc91c907325c69271ddf0c944bc72', 'user8', 'user8', '0000-00-00', 'user8', 'capitec', 'user8', 'user8', 2, 2, 1568853995),
-(39, 'user9', 'user9@gmail.com', '1a1dc91c907325c69271ddf0c944bc72', 'user9', 'user9', '0000-00-00', 'user9', 'capitec', 'user9', 'user9', 2, 3, 1568505131),
-(40, 'user10', 'user10@gmail.com', '1a1dc91c907325c69271ddf0c944bc72', 'user10', 'user10', '0000-00-00', 'user10', 'capitec', 'user10', 'user10', 2, 3, 1568905738);
+INSERT INTO `users` (`id`, `username`, `email`, `password`, `name`, `surname`, `date_of_birth`, `contact_cell`, `bank_name`, `account_no`, `linked_cell`, `selected_package`, `status`, `reg_time`, `referrer_id`, `reference_paid`, `reference_received`) VALUES
+(1, 'username1', 'username1@gmail.com', '2af9b1ba42dc5eb01743e6b3759b6e4b', 'user1', 'user1', '1997-12-04', '123469874', 'capitec', '123467896', '0123469874', 4, 3, 1570107743, 0, 0, 0),
+(2, 'username2', 'username2@gmail.com', '1a1dc91c907325c69271ddf0c944bc72', 'user2', 'user2', '1997-12-04', '123469874', 'capitec', '123467896', '0123469874', 1, 0, 1566679320, 0, 0, 0),
+(3, 'username3', 'username3@gmail.com', '92877af70a45fd6a2ed7fe81e1236b78', 'user3', 'user3', '1997-12-04', '123469874', 'capitec', '123467896', '0123469874', 8, 0, 1566679684, 0, 0, 0),
+(4, 'username4', 'username4@gmail.com', '92877af70a45fd6a2ed7fe81e1236b78', 'user4', 'user4', '1997-12-04', '123469874', 'capitec', '123467896', '0123469874', 7, 0, 1566383573, 0, 0, 0),
+(5, 'username5', 'username5@gmail.com', '92877af70a45fd6a2ed7fe81e1236b78', 'user5', 'user5', '1997-12-04', '123469874', 'capitec', '123467896', '0123469874', 7, 0, 1566383573, 0, 0, 0),
+(7, 'siya', 'siya@gmail.com', 'd8578edf8458ce06fbc5bb76a58c5ca4', 'sya', 'mbatha', '1997-04-12', '0648818573', 'capitec', '21321621634', '3231681422', NULL, 0, 0, 0, 0, 0),
+(8, 'yaya', 'yaya@gmail.com', '4409eae53c2e26a65cfc24b3a2359eb9', 'yaya', 'dee', '0000-00-00', '2163464', 'capitec', '6444464', '4124424', 1, 1, 1573222630, 0, 0, 0),
+(9, 'sma', 'sma@gmail.com', 'a289fa4252ed5af8e3e9f9bee545c172', 'sma', 'sma', '1998-02-10', '0123467898', 'capitec', '64649874468', '1321461321', NULL, 0, 0, 0, 0, 0),
+(12, 'mpilo', 'mpilo@gmail.com', '237ae5d9b8dcac0cda36f5621f5f4d18', 'mpilo', 'mpilo', '1998-02-10', '0123467898', 'capitec', '64649874468', '1321461321', NULL, 0, 0, 0, 0, 0),
+(13, 'rose', 'rose@gmail.com', 'fcdc7b4207660a1372d0cd5491ad856e', '', '', '0000-00-00', '', 'capitec', '', '', NULL, 0, 0, 0, 0, 0),
+(14, 'user1', 'user1@gmail.com', 'd8578edf8458ce06fbc5bb76a58c5ca4', 'user1', 'user1', '1997-04-12', '123467896', 'capitec', '123467896', '1234698710', 1, 4, 1568492246, 0, 0, 0),
+(15, 'user2', 'user2', 'd8578edf8458ce06fbc5bb76a58c5ca4', 'user2', 'user2', '0000-00-00', '1234768124', 'capitec', '87324659837', '9328746592', 8, 0, 1567546694, 0, 0, 0),
+(16, 'user3', 'user3', '92877af70a45fd6a2ed7fe81e1236b78', 'user3', 'user3', '0000-00-00', 'user3', 'capitec', 'user3', 'user3', 4, 0, 1567200964, 0, 0, 0),
+(17, 'user4', 'user4', '3f02ebe3d7929b091e3d8ccfde2f3bc6', 'user4', 'user4', '0000-00-00', 'user4', 'capitec', 'user4', 'user4', 2, 0, 1567093490, 0, 0, 0),
+(18, 'user5', 'user5', '0a791842f52a0acfbb3a783378c066b8', 'user5', 'user5', '0000-00-00', 'user5', 'capitec', 'user5', 'user5', 2, 0, 1567093546, 0, 0, 0),
+(19, 'test', 'test@gmail.com', '098f6bcd4621d373cade4e832627b4f6', 'test', 'test', '0000-00-00', 'test', 'capitec', 'test', 'test', 2, 3, 1573224812, 0, 0, 0),
+(20, 'test1', 'test1@gmail.com', '5a105e8b9d40e1329780d62ea2265d8a', 'test1', 'test1', '0000-00-00', 'test1', 'capitec', 'test1', 'test1', 1, 3, 1573224643, 0, 0, 0),
+(21, 'test2', 'test2@gmail.com', 'c52ecd93c1ec34fd0dfde14de883c3a2', '', '', '0000-00-00', '', 'capitec', '', '', 1, 3, 1573224384, 0, 0, 0),
+(23, 'test3', 'test3@gmail.com', '8ad8757baa8564dc136c1e07507f4a98', 'test3', 'test3', '0000-00-00', 'test3', 'capitec', 'test3', 'test3', 1, 4, 1568492037, 0, 0, 0),
+(24, 'refered1_y', 'refered1_yaya@gmail.com', '1a1dc91c907325c69271ddf0c944bc72', 'refered1_y', 'refered1_y', '0000-00-00', 'refered1_y', 'capitec', 'refered1_ya', 'refered1_y', 1, 1, 0, 0, 0, 0),
+(25, 'yaya_ref2', 'yaya_ref2@gmail.com', '1a1dc91c907325c69271ddf0c944bc72', 'yaya_ref2', 'yaya_ref2', '0000-00-00', 'yaya_ref2', 'capitec', 'yaya_ref2', 'yaya_ref2', 4, 4, 1568404425, 0, 0, 0),
+(26, 'yaya_ref3', 'yaya_ref3@gmail.com', '1a1dc91c907325c69271ddf0c944bc72', 'yaya_ref3', 'yaya_ref3', '0000-00-00', 'yaya_ref3', 'capitec', 'yaya_ref3', 'yaya_ref3', 1, 3, 1568103920, 0, 0, 0),
+(27, 'test4', 'test4@gmail.com', '1a1dc91c907325c69271ddf0c944bc72', 'test4', 'test4', '0000-00-00', 'test4', 'capitec', 'test4', 'test4', 8, 3, 1568355776, 0, 0, 0),
+(34, 'test6', 'test6@gmail.com', '1a1dc91c907325c69271ddf0c944bc72', 'test6', 'test6', '0000-00-00', 'test6', 'capitec', 'test6', 'test6', 4, 3, 1568147111, 0, 0, 0),
+(35, 'lolly', 'lolly@gmail.com', '1a1dc91c907325c69271ddf0c944bc72', 'lolly', 'lolly', '0000-00-00', '012346789', 'capitec', '123467890', '012346789', 4, 3, 1572684861, 0, 0, 0),
+(36, 'user6', 'user6@gmail.com', '1a1dc91c907325c69271ddf0c944bc72', 'user6', 'user6', '0000-00-00', 'user6', 'capitec', 'user6', 'user6', 2, 3, 1568495017, 0, 0, 0),
+(37, 'user7', 'user7@gmail.com', '3e0469fb134991f8f75a2760e409c6ed', 'user7', 'user7', '0000-00-00', 'user7', 'capitec', 'user7', 'user7', 1, 4, 1568494687, 0, 0, 0),
+(38, 'user8', 'user8@gmail.com', '1a1dc91c907325c69271ddf0c944bc72', 'user8', 'user8', '0000-00-00', 'user8', 'capitec', 'user8', 'user8', 1, 1, 1568853995, 0, 0, 0),
+(39, 'user9', 'user9@gmail.com', '1a1dc91c907325c69271ddf0c944bc72', 'user9', 'user9', '0000-00-00', 'user9', 'capitec', 'user9', 'user9', 2, 3, 1568505131, 0, 0, 0),
+(40, 'user10', 'user10@gmail.com', '1a1dc91c907325c69271ddf0c944bc72', 'user10', 'user10', '0000-00-00', 'user10', 'capitec', 'user10', 'user10', 1, 3, 1568905738, 0, 0, 0),
+(41, 'thokzin', 'thokzin@gmail.com', '2af9b1ba42dc5eb01743e6b3759b6e4b', 'thokzin', 'thokzin', '1997-12-07', '0123467896', 'capitec', '87324659837', '9328746592', 3, 4, 1569495201, 0, 0, 0),
+(42, 'littlemix', 'littlemix@gmail.com', '2af9b1ba42dc5eb01743e6b3759b6e4b', 'littlemix', 'littlemix', '1997-12-07', '0123469876', 'capitec', '12233686323', '9328746592', 1, 3, 1573224268, 0, 0, 0),
+(43, 'freelancer', 'freelancer@gmail.com', '2af9b1ba42dc5eb01743e6b3759b6e4b', 'freelancer', 'freelancer', '1997-12-07', '0123467896', 'capitec', '12233686323', '9328746592', 3, 2, 1569496481, 0, 0, 0),
+(44, 'mixref1', 'mixref1@gmail.com', '2af9b1ba42dc5eb01743e6b3759b6e4b', 'mixref1', 'mixref1', '1997-12-07', '123467896', 'capitec', '2147483647', '2147483647', 1, 3, 1573223975, 0, 0, 0),
+(45, 'lolly_ref1', 'lolly_ref1@gmail.com', '2af9b1ba42dc5eb01743e6b3759b6e4b', 'lolly_ref1', 'lolly_ref1', '1997-12-07', '123469876', 'capitec', '2147483647', '2147483647', 1, 3, 1573223932, 0, 0, 0),
+(46, '', '', '', '', '', '0000-00-00', '', '', '', '', NULL, 0, 0, 0, 0, 0),
+(61, 'lolly_ref2', 'lolly_ref2@gmail.com', '2af9b1ba42dc5eb01743e6b3759b6e4b', 'lolly_ref2', 'lolly_ref2', '1997-12-07', '123467896', 'capitec', '2147483647', '2147483647', 1, 3, 1573223845, 0, 0, 0),
+(64, 'lolly_ref3', 'lolly_ref3@gmail.com', '2af9b1ba42dc5eb01743e6b3759b6e4b', 'lolly_ref3', 'lolly_ref3', '1997-12-07', '123467896', 'capitec', '2147483647', '2147483647', 1, 3, 1573223761, 0, 0, 0),
+(66, 'slidlomo', 'slidlomo@gmail.com', '2af9b1ba42dc5eb01743e6b3759b6e4b', 'slidlomo', 'slidlomo', '1997-12-07', '1234768124', 'capitec', '87324659837', '9328746592', 1, 3, 1573222788, 0, 0, 0),
+(67, 'lolly_ref4', 'lolly_ref4@gmail.com', '2af9b1ba42dc5eb01743e6b3759b6e4b', 'lolly_ref4', 'lolly_ref4', '1997-12-07', '2147483647', 'capitec', '2147483647', '2147483647', 1, 3, 0, 0, 0, 0),
+(84, 'lolly_ref5', 'lolly_ref5@gmail.com', '2af9b1ba42dc5eb01743e6b3759b6e4b', 'lolly_ref5', 'lolly_ref5', '1997-12-07', '0123467896', 'capitec', '12233686323', '9328746592', NULL, 0, 1574696330, 35, 1, 1),
+(85, 'lolly_ref6', 'lolly_ref6@gmail.com', '2af9b1ba42dc5eb01743e6b3759b6e4b', 'lolly_ref6', 'lolly_ref6', '1997-12-07', '0123456789', 'capitec', '12354965479', '0123456789', NULL, 0, 1574757261, 35, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -361,7 +418,8 @@ INSERT INTO `users_statuses` (`id`, `value`, `description`) VALUES
 (1, 'await_verification', 'first state user is in after registration'),
 (2, 'allocated_to_pay', 'when the user has been allocated to pay another user'),
 (3, 'wait_for_payer', 'when a user has to wait to be allocated another user to pay them'),
-(4, 'wait_to_receive', 'when a user has been allocated and is waiting to confirm receiving of payment');
+(4, 'wait_to_receive', 'when a user has been allocated and is waiting to confirm receiving of payment'),
+(5, 'pay_referral', 'when a user has just registered using referral link');
 
 --
 -- Indexes for dumped tables
@@ -469,7 +527,7 @@ ALTER TABLE `adminusercomplaints`
 -- AUTO_INCREMENT for table `inbox`
 --
 ALTER TABLE `inbox`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `packages`
@@ -481,31 +539,31 @@ ALTER TABLE `packages`
 -- AUTO_INCREMENT for table `refs`
 --
 ALTER TABLE `refs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `sub_transactions`
 --
 ALTER TABLE `sub_transactions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT for table `transactions`
 --
 ALTER TABLE `transactions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=112;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
 
 --
 -- AUTO_INCREMENT for table `users_statuses`
 --
 ALTER TABLE `users_statuses`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables
