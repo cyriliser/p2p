@@ -173,6 +173,9 @@
                 case 4://if user has been allocated to recieve payment
                     include('./components/allocated_to_recieve.php'); 
                     break;
+                case 5://if user has just registerd using referal link
+                    include('./components/pay_refferance.php'); 
+                    break;
                 default:
                 
             }
@@ -181,8 +184,10 @@
             // require_once('./components/inbox.php');
             // including section containing ref link
             require_once('./components/share_ref_link.php');
+            // Referrals
+            require_once('./components/referrals.php');
             //past transactions
-            include('./components/past_transactions.php');
+            require_once('./components/past_transactions.php');
         }
     }
     
